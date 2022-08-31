@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using NS_Conference.StrongTypesNS;
+using NS_System.StrongTypesNS;
+using Utilities;
+
+namespace ConferenceSys
+{
+    public partial class BookingDetails : Form
+    {
+        string _folio;
+        int _beds;
+
+        public BookingDetails(string folio, int beds)
+        {
+            InitializeComponent();
+
+            dgvMeals.AutoGenerateColumns = false;
+
+            _folio = folio;
+            _beds = beds;
+        }
+
+        private void BookingDetails_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                //int index = new BindingSource(Global.Global.ds_bookings, "tt_booking").Find("folio", _folio);
+                int index = new BindingSource(Global.Global.ds_single_booking, "tt_booking").Find("folio", _folio);
+                if (index < 0) throw new ApplicationException("Could not find folio number in bookings dataset.");
+
+                //ds_bookingsDataSet.tt_bookingRow booking = Global.Global.ds_bookings.tt_booking[index];
+                ds_bookingsDataSet.tt_bookingRow booking = Global.Global.ds_single_booking.tt_booking[index];
+
+                //index = new BindingSource(Global.Global.ds_bookings, "tt_reservation").Find("folio", _folio);
+                index = new BindingSource(Global.Global.ds_single_booking, "tt_reservation").Find("folio", _folio);
+                if (index < 0) throw new ApplicationException("Could not find folio number in reservations.");
+
+                //ds_bookingsDataSet.tt_reservationRow reservation = Global.Global.ds_bookings.tt_reservation[index];
+                ds_bookingsDataSet.tt_reservationRow reservation = Global.Global.ds_single_booking.tt_reservation[index];
+
+                txtFolio.Text = _folio;
+                txtName.Text = string.Format("{0} {1}, {2}", reservation.titl, reservation.surn, reservation.names);
+                txtStudentStaffOther.Text = reservation.type;
+                txtGroup.Text = reservation.gcode;
+                txtStudentStuffNo.Text = reservation.type.Trim().Equals("S") ? reservation.stuno : reservation.type.Trim().Equals("E") ? reservation.staffno : string.Empty;
+
+                PopulateReservationDetails(reservation);
+                PopulateBookingDetails(booking);
+                PopulateMeals();
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        void PopulateBookingDetails(ds_bookingsDataSet.tt_bookingRow booking)
+        {
+            dtpArrive.Value = booking.start_dte;
+            dtpLeave.Value = booking.end_dte;
+            txtMatresses.Text = booking.mattress.ToString();
+            txtRoom.Text = string.Format("{0} - {1}", booking.room_no, _beds == 1 ? "Single" : "Double");
+
+            int index = new BindingSource(Global.Global.ds_rescodes, "TT_RES").Find("RES", booking.res);
+            if (index >= 0)
+            {
+                DS_RESCODESDataSet.TT_RESRow res = Global.Global.ds_rescodes.TT_RES[index];
+                txtRes.Text = string.Format("{0} - {1}", booking.res, res.RESNAME);
+
+                index = new BindingSource(Global.Global.ds_rescodes, "TT_HALL").Find("SHALL", res.HALL);
+                if (index >= 0)
+                {
+                    txtHall.Text = Global.Global.ds_rescodes.TT_HALL[index].DETAIL;
+                }
+            }
+        }
+
+        void PopulateMeals()
+        {
+            ds_mealsDataSet ds_meals = Proxy.ConferenceSystem.Get_Reservation_Meals(_folio);
+            dgvMeals.DataSource = ds_meals.TT_MEALS;
+        }
+
+        void PopulateReservationDetails(ds_bookingsDataSet.tt_reservationRow reservation)
+        {
+            txtConference.Text = reservation.ccode;
+            txtBookType.Text = reservation.book_type;
+            txtMatressBooking.Text = reservation.matress_booking ? "YES" : "NO";
+            txtDiscount.Text = reservation.discount.ToString("0,0.00");
+            txtGroupDetail.Text = reservation.gcode;
+            txtAgency.Text = reservation.agency ? "YES" : "NO";
+            txtInstitution.Text = reservation.institution;
+            txtMonument.Text = reservation.monument ? "YES" : "NO";
+            //txtBalance.Text = reservation.b; TODO: Get calculated balance
+            txtAddressLine1.Text = reservation.addr1;
+            txtAddressLine2.Text = reservation.addr2;
+            txtAddressLine3.Text = reservation.addr3;
+            txtAddressLine4.Text = reservation.addr4;
+            txtAddressLine5.Text = reservation.addr5;
+            txtHomePhone.Text = reservation.phone1;
+            txtWorkPhone.Text = reservation.phone2;
+            txtFax.Text = reservation.fax;
+            txtCell.Text = reservation.cell_phone;
+            txtEmail.Text = reservation.email;
+            txtDiet.Text = string.Format("{0} - ", reservation.diet);
+
+            //Append code descriptions
+            int index = new BindingSource(Global.Global.ds_conference_lookups, "tt_conference").Find("ccode", reservation.ccode);
+            if (index >= 0)
+            {
+                txtConference.Text = string.Format("{0} - {1}", txtConference.Text, Global.Global.ds_conference_lookups.tt_conference[index].conference);
+            }
+            index = new BindingSource(Global.Global.ds_conference_lookups, "tt_booking_type").Find("book_type", reservation.book_type);
+            if (index >= 0)
+            {
+                txtBookType.Text = string.Format("{0} - {1}", txtBookType.Text, Global.Global.ds_conference_lookups.tt_booking_type[index].descrip);
+            }
+            index = new BindingSource(Global.Global.ds_conference_lookups, "tt_group").Find("gcode", reservation.gcode);
+            if (index >= 0)
+            {
+                txtGroupDetail.Text = string.Format("{0} - {1}", txtGroupDetail.Text, Global.Global.ds_conference_lookups.tt_group[index].group_name);
+            }
+        }
+    }
+}

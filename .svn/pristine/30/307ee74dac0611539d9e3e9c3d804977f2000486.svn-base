@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                //TODO: Change Conference to a proper program name
+                bool validlogin = AppServer.AppServer.initial_Login(string.Empty, false, "cnfg001", false, "ConferenceSys", false);
+                if (validlogin)
+                {
+                    this.WindowState = FormWindowState.Maximized;
+
+                    toolStripStatusLabel.Text = string.Format("{0} {1} ({2}) Since {3}", toolStripStatusLabel.Text, Utils.ToUpperFirstLetter(Proxy.Info.fullname),
+                        Proxy.Info.username, string.Format("{0: dddd dd MMMM yyyy} at {1: HH:mm:ss}", DateTime.Now, DateTime.Now));
+                    
+                    //Initializer.InitializeData();
+                    Initializer.Get_Res_Codes();
+                    Initializer.Get_Conference_Code_Descriptions();
+                    Initializer.Get_Hall_Residences();
+
+                    Planner planner = new Planner();
+                    planner.MdiParent = this;
+                    planner.Dock = DockStyle.Fill;
+                    planner.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        void MainForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            RhodesControl.ThinkManager.EndThink();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About.About frmAbout = new About.About();
+            frmAbout.ShowDialog();
+        }
+    }
+}

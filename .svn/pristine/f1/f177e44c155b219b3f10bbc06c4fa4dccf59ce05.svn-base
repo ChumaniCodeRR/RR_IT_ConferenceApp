@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ConferenceSys.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LastStartDate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2013-08-28</Value>
+    </Setting>
+    <Setting Name="LastEndDate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2013-08-28</Value>
+    </Setting>
+    <Setting Name="LastChangeDate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2013-08-28</Value>
+    </Setting>
+    <Setting Name="LastHour" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastMinutes" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastConference" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastHall" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ArrivalsLastChangeDate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2013-08-28</Value>
+    </Setting>
+    <Setting Name="ArrivalsLastHour" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ArrivalsLastMin" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RegLastChange" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2013-08-28</Value>
+    </Setting>
+    <Setting Name="RegLastHour" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RegLastMin" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,303 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys
+{
+
+    public partial class Reservations : Form
+    {
+        bool AddNew;
+
+        string ConfCode;
+        string Folio;
+        string ParentFolio;
+
+        DateTime FilterDate = DateTime.Today;
+
+        bool paid_status;
+        string book_status;
+
+        DataView dv_reservations;
+        NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet ds_conferences = new NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet();
+        NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_reservations = new NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet();
+        NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet ds_conf_types = new NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet();
+        DataView dv_conf_types;
+
+        public Reservations()
+        {
+            InitializeComponent();
+        }
+
+       
+        private void SearchFolio_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                NS_System.StrongTypesNS.ds_genDataSet ds_book_status = Proxy.System.Get_Gen("*", "C5");
+               DataRow newrow1 = ds_book_status.TT_GEN.NewRow();
+                newrow1["code"] = "*";
+                newrow1["descrip"] = "All Book Types";
+                ds_book_status.TT_GEN.Rows.InsertAt(newrow1, 0);
+                bs_book_status.DataSource = ds_book_status.TT_GEN;
+                cb_book_status.SelectedIndex = 0;
+  
+
+               /* cb_book_status.Items.Add(new Item("All Bookings", "*"));
+                cb_book_status.Items.Add(new Item("Booked Only", "B"));
+                cb_book_status.Items.Add(new Item("Not Booked Only", "NB"));
+                cb_book_status.Enabled = true; */
+                           
+                cb_paid_status.Items.Add(new Item("All", "*"));
+                cb_paid_status.Items.Add(new Item("Paid Only", "P"));
+                cb_paid_status.Items.Add(new Item("Not Paid Only", "NP"));
+                cb_paid_status.Enabled = true;
+
+                ds_conf_types = Proxy.ConferenceAdmin.get_conference_types(ConfCode);
+                DataRow newrow = ds_conf_types.tt_conf_type.NewRow();
+                newrow["tcode"] = "*";
+                newrow["descrip"] = "All Types";
+                ds_conf_types.tt_conf_type.Rows.InsertAt(newrow, 0);
+                dv_conf_types = new DataView(ds_conf_types.tt_conf_type);
+                bs_conf_types.DataSource = dv_conf_types;
+                cb_conf_type.SelectedIndex = 0;
+
+                cb_book_status.SelectedIndex = 0;
+                cb_paid_status.SelectedIndex = 0;
+
+                get_conferences();
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+
+        private void get_conferences()
+        {
+            ds_conferences = Proxy.ConferenceAdmin.get_conference_reservations();
+            bs_conf_list.DataSource = ds_conferences.tt_conference;
+            txt_refreshed.Text = string.Format("{0: dddd dd MMMM yyyy} at {1: HH:mm:ss}", DateTime.Now, DateTime.Now);
+            if (cb_conferences.SelectedIndex != -1) get_reservations();
+        }
+
+
+
+
+        private void get_reservations()
+        {
+            ds_reservations = Proxy.ConferenceAdmin.get_reservations(cb_conferences.SelectedValue.ToString());
+            filter();          
+        }
+
+        private void filter()
+        {
+            try
+            {
+                dv_reservations = new DataView(ds_reservations.tt_reservations);
+                dv_reservations.RowFilter = "folio like '*" + txt_folio.Text + "*' and institution like '*" + txt_organisation.Text + "*' and surn like '*" + txt_surname.Text + "*' and book_type like '" + cb_conf_type.SelectedValue.ToString() + "'";
+                if (cb_start_dte.SelectedIndex > 0) dv_reservations.RowFilter = dv_reservations.RowFilter + " and " + String.Format(System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat,
+                     "start_dte = #{0}#", new DateTime(FilterDate.Year, FilterDate.Month, FilterDate.Day, 0, 0, 0));
+                              
+                if (cb_paid_status.SelectedIndex > 0) dv_reservations.RowFilter = dv_reservations.RowFilter + " and paid = " + paid_status;
+                             
+                
+
+                bs_reservations.DataSource = dv_reservations;
+                int guest = 0;
+                foreach (DataGridViewRow row in dg_conferences.Rows)
+                {
+                    guest = guest + int.Parse(row.Cells[cn_guests.Name].Value.ToString());
+                }
+
+                txt_total_guests.Text = guest.ToString();
+                txt_group_total.Text = dv_reservations.Count.ToString();
+                
+                  
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void dg_folios_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cb_conferences.SelectedIndex > -1)
+                {
+                    if (dg_conferences.RowCount > 0)
+                    {
+                        ConfCode = cb_conferences.SelectedValue.ToString();
+                        string ParentFolio = dg_conferences.SelectedRows[0].Cells[cn_parentfolio.Name].Value.ToString();
+
+                        ConferenceAdmin.GroupReservations frmGroupReserv = new ConferenceAdmin.GroupReservations(ConfCode,ParentFolio);
+                        frmGroupReserv.ShowDialog();
+                        get_reservations();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+                
+        private void txt_surn_TextChanged_1(object sender, EventArgs e)
+        {
+            filter();
+        }
+
+    
+        private void cb_conferences_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            if (cb_conferences.SelectedIndex != -1)
+            {
+                cb_start_dte.Items.Clear();
+                int x = 0;
+                bool proceed = false;
+                string tempkey = cb_conferences.SelectedValue.ToString();
+                DateTime StartDate = DateTime.Today;
+                DateTime EndDate = DateTime.Today;
+
+                dv_conf_types.RowFilter = "ccode like '*" + cb_conferences.SelectedValue.ToString() + "*' or tcode ='*'";
+                
+                foreach (DataRow dr in ds_conferences.tt_conference.Rows)
+                {
+                    if (ds_conferences.tt_conference[x].ccode == tempkey)
+                    {
+                        StartDate = ds_conferences.tt_conference[x].START_DTE;
+                        EndDate = ds_conferences.tt_conference[x].END_DTE;
+                        proceed = true;
+                        break;
+                    }
+                    x = x + 1;
+                }
+
+                if (proceed == true)
+                {
+                    cb_start_dte.Items.Add("All");
+                    for (DateTime _time = StartDate; _time <= EndDate; _time = _time.AddDays(1)) //from StartDate  to EndDate
+                    {
+                        cb_start_dte.Items.Add(_time.ToShortDateString());
+                    }
+                    cb_start_dte.SelectedIndex = 0;
+                }
+                
+                get_reservations();
+
+            }
+        }
+
+        private void txt_folio_TextChanged(object sender, EventArgs e)
+        {
+            filter();
+        }
+
+        private void txt_organisation_TextChanged(object sender, EventArgs e)
+        {
+            filter();
+        }
+
+        private void cb_start_dte_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cb_start_dte.SelectedIndex > 0) FilterDate = DateTime.Parse(cb_start_dte.Text.ToString());
+            filter();
+        }
+
+        private void check_status()
+        {
+            if(cb_paid_status.SelectedIndex > 0 | cb_book_status.SelectedIndex > 0)
+            {
+                if (cb_paid_status.SelectedIndex == 1) paid_status = true;
+                else paid_status = false;
+             
+            }
+            filter();
+        }
+
+        private void cb_paid_status_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            check_status();
+        }
+
+        private void cb_book_status_SelectedIndexChanged(object sender, EventArgs e)
+        {
+             book_status = cb_book_status.SelectedValue.ToString();
+             filter();
+
+        }
+
+        private void cb_conf_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filter();
+        }
+
+        private void dg_conferences_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btn_addMain_Click(object sender, EventArgs e)
+        {
+            if (cb_conferences.SelectedIndex != -1)
+            {
+                AddNew = true;
+                ConfCode = cb_conferences.SelectedValue.ToString();
+                ParentFolio = "0";
+                Folio = "0";
+                ConferenceSys.ConferenceAdmin.UpdateReserv frmUpdateReserv = new ConferenceSys.ConferenceAdmin.UpdateReserv(AddNew, ConfCode, ParentFolio, Folio);
+                frmUpdateReserv.ShowDialog();
+                get_reservations();
+            } 
+        }
+
+        private void btn_delMain_Click(object sender, EventArgs e)
+        {
+            if (dg_conferences.SelectedRows.Count > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to cancel " + dg_conferences.SelectedRows[0].Cells[cn_parentfolio.Name].Value.ToString() + ", " + dg_conferences.SelectedRows[0].Cells[cn_surn.Name].Value.ToString() + dg_conferences.SelectedRows[0].Cells[cn_institution.Name].Value.ToString() +
+                    " group from this conference?",
+                    "Cancel Group", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string feedback = Proxy.ConferenceAdmin.cancel_reservations(true, dg_conferences.SelectedRows[0].Cells[cn_parentfolio.Name].Value.ToString(), dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString(),"0");
+                    if (feedback != "") MessageBox.Show(feedback, "Cancel Reservations", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    get_reservations();
+                }
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dg_conferences.SelectedRows.Count > 0)
+            {
+                NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_report = Proxy.ConferenceAdmin.reservation_report(true, dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString());
+                if (ds_report.tt_reservations.Rows.Count > 0)
+                {
+                   // DataView dv_report = new DataView(ds_report.tt_reservations);
+                    Reports frmReport = new Reports("ReservationReport", ds_report);
+                    frmReport.Show();
+                }
+            }
+        }
+
+        private void btn_refresh_Click(object sender, EventArgs e)
+        {
+            get_conferences();
+        }
+    }
+}

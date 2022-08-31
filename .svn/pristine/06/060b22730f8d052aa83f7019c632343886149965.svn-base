@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys.ConferenceWardens
+{
+    public partial class AvailableRooms : Form
+    {
+       // NS_System.StrongTypesNS.DS_RESCODESDataSet ds_rescodes;
+        NS_System.StrongTypesNS.DS_BUILDINGSDataSet ds_buildings = new NS_System.StrongTypesNS.DS_BUILDINGSDataSet();
+
+        public AvailableRooms()
+        {
+            InitializeComponent();
+        }
+
+        private void Register_Load(object sender, EventArgs e)
+        {
+         
+
+            // Set default date from
+            if (ConferenceSys.Properties.Settings.Default.LastStartDate >= DateTime.Today)  nlb_from.Value = ConferenceSys.Properties.Settings.Default.LastStartDate;
+            else nlb_from.Value = DateTime.Today;
+
+            // Set default date to 
+            if (ConferenceSys.Properties.Settings.Default.LastEndDate >= DateTime.Today) nlb_to.Value = ConferenceSys.Properties.Settings.Default.LastEndDate;
+            else nlb_to.Value = DateTime.Today;
+
+            
+
+
+            DataRow newrow =  Global.Global.ds_conf_codes.TT_CONF_BUILDING.NewRow();
+            newrow["building"] = "*";
+            newrow["building_name"] = "All Buildings";
+            Global.Global.ds_conf_codes.TT_CONF_BUILDING.Rows.InsertAt(newrow,0);
+            bs_building.DataSource = Global.Global.ds_conf_codes.TT_CONF_BUILDING;
+
+           
+         
+        }
+
+     
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            NS_Conference.StrongTypesNS.ds_registerDataSet ds_register = new NS_Conference.StrongTypesNS.ds_registerDataSet();
+           
+                     
+            string cbuilding = "";
+            string start_dte;
+            string end_dte;
+
+
+            cbuilding = cb_buliding.SelectedValue.ToString();
+
+            if (nlb_from.Value == null) start_dte = "?";
+            else start_dte = ((DateTime)nlb_from.Value).ToString("dd/MM/yyyy");
+
+            if (nlb_to.Value == null) end_dte = "?";
+            else end_dte = ((DateTime)nlb_to.Value).ToString("dd/MM/yyyy");
+
+            ds_register = Proxy.ConferenceSystem.get_available_rooms(cbuilding, start_dte, end_dte);
+
+            if (ds_register.tt_TEMProoms.Rows.Count > 0)
+            {
+                string temptitle = " Available Rooms from " + start_dte + " until  " + end_dte;
+                           
+                Reports frm_report = new Reports("AvailableRooms",ds_register,temptitle,"",false);
+                frm_report.Show();
+
+            }
+            else MessageBox.Show("Your query returned no data to display","No Data",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+
+
+        }
+
+   
+        private void cb_buliding_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+    }
+}

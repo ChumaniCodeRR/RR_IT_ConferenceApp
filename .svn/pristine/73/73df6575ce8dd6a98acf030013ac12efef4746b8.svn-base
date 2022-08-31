@@ -1,0 +1,255 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys.ConferenceAdmin.Group_Updates
+{
+    public partial class Transactions : Form
+    {
+        string ParentFolio;
+        public int w_option = 0;
+
+        public Transactions(string _ParentFolio)
+        {
+            InitializeComponent();
+            ParentFolio = _ParentFolio;
+        }
+
+        private void Transactions_Load(object sender, EventArgs e)
+        {
+            Refresh_data();
+
+        }
+
+        private void Refresh_data()
+        {
+            NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_transactions = Proxy.ConferenceAdmin.get_prior_transactions(ParentFolio);
+            bs_transactions.DataSource = ds_transactions.tt_cnftrs;
+            sc_transactions.Panel1.Enabled = true;
+            sc_transactions.Panel2Collapsed = true;
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            w_option = 1;
+
+            txt_amount.Text = "0";
+            txt_narr.Text = string.Empty;
+            txt_receipt.Text = string.Empty;
+
+            txt_amount.Enabled = true;
+            txt_receipt.Enabled = false;
+            txt_narr.Enabled = true;
+
+            sc_transactions.Panel1.Enabled = false;
+            sc_transactions.Panel2Collapsed = false;            
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            w_option = 2;
+
+            txt_amount.Text = "0";
+            txt_narr.Text = string.Empty;
+            txt_receipt.Text = string.Empty;
+
+            txt_amount.Enabled = true;
+            txt_receipt.Enabled = false;
+            txt_narr.Enabled = true;
+
+            sc_transactions.Panel1.Enabled = false;
+            sc_transactions.Panel2Collapsed = false;            
+        }
+
+        private void btn_close_Click(object sender, EventArgs e)
+        {
+            w_option = 3;
+
+            txt_amount.Text = "0";
+            txt_narr.Text = string.Empty;
+            txt_receipt.Text = string.Empty;
+
+            txt_amount.Enabled = true;
+            txt_receipt.Enabled = true;
+            txt_narr.Enabled = false;
+
+            sc_transactions.Panel1.Enabled = false;
+            sc_transactions.Panel2Collapsed = false;            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            w_option = 4;
+
+            txt_amount.Text = "0";
+            txt_narr.Text = string.Empty;
+            txt_receipt.Text = string.Empty;
+
+            txt_amount.Enabled = false;
+            txt_receipt.Enabled = true;
+            txt_narr.Enabled = false;
+
+            sc_transactions.Panel1.Enabled = false;
+            sc_transactions.Panel2Collapsed = false;     
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            w_option = 5;
+
+            txt_amount.Text = "0";
+            txt_narr.Text = string.Empty;
+            txt_receipt.Text = string.Empty;
+
+            txt_amount.Enabled = true;
+            txt_receipt.Enabled = false;
+            txt_narr.Enabled = true;
+
+            sc_transactions.Panel1.Enabled = false;
+            sc_transactions.Panel2Collapsed = false;     
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            w_option = 6;
+
+            txt_amount.Text = "0";
+            txt_narr.Text = string.Empty;
+            txt_receipt.Text = string.Empty;
+
+            txt_amount.Enabled = true;
+            txt_receipt.Enabled = false;
+            txt_narr.Enabled = true;
+
+            sc_transactions.Panel1.Enabled = false;
+            sc_transactions.Panel2Collapsed = false;     
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            w_option = 7;
+
+            txt_amount.Text = "0";
+            txt_narr.Text = string.Empty;
+            txt_receipt.Text = string.Empty;
+
+            txt_amount.Enabled = true;
+            txt_receipt.Enabled = false;
+            txt_narr.Enabled = false;
+
+            sc_transactions.Panel1.Enabled = false;
+            sc_transactions.Panel2Collapsed = false;     
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            sc_transactions.Panel1.Enabled = true;
+            sc_transactions.Panel2Collapsed = true;     
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+
+            decimal tamount;
+            string Narrative = "";
+            if(!decimal.TryParse(txt_amount.Text.ToString(), out tamount))
+            {
+                MessageBox.Show("Please enter a correct amount", "Error Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (w_option == 1) 
+            {
+                if (tamount < 1)
+                {
+                    MessageBox.Show("Can only eneter positive amounts!","Error Amount",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+                if (txt_narr.Text == string.Empty)
+                {
+                    MessageBox.Show("You have to eneter a comment/narrative!","ErrorNarrative",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+                Narrative = "EXTRA CHARGE - " + txt_narr.Text.ToString();
+            }
+
+            if (w_option == 2)
+            {
+                if(tamount < 0)
+                {
+                    MessageBox.Show("Can only eneter positive amounts!","Error Amount",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+                Narrative = "REVERSE CHARGES - " + txt_narr.Text.ToString();
+            }
+
+            if (w_option == 3)
+            {
+                 if(tamount < 0)
+                {
+                    MessageBox.Show("Ammount cannot be less than zero!","Error Amount",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (txt_receipt.Text.ToString() == string.Empty)
+                {
+                    MessageBox.Show("Receipt reference cannot be blank!","Error Amount",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+                Narrative = "RECEIPT - " + txt_receipt.Text.ToString();
+            }
+
+            if (w_option == 4)
+            {
+                 if (txt_receipt.Text.ToString() == string.Empty)
+                {
+                    MessageBox.Show("Receipt reference cannot be blank!","Error Amount",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
+
+                Narrative = "REVERSE RECEIPT - " + txt_receipt.Text.ToString();
+            }
+
+            if (w_option == 5)
+            {
+               if (tamount < 0 | txt_narr.Text == string.Empty)
+               { 
+                   MessageBox.Show("Amount must be more than zero and Narrative/Comment cannot be blank!","Error Amount/Narr",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                   return;
+               }
+                Narrative =  "REFUND - " +  txt_narr.Text.ToString();
+            }
+
+            if (w_option == 6)
+            {
+                if (tamount < 0 | txt_narr.Text == string.Empty)
+               { 
+                   MessageBox.Show("Amount must be more than zero and Narrative/Comment cannot be blank!","Error Amount/Narr",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                   return;
+               }
+               Narrative =  "REVERSE REFUND - " + txt_narr.Text.ToString();
+            }
+
+            if(w_option == 7)
+            {
+                 if (tamount < 0 )
+               {
+                   MessageBox.Show("Can only enter positive amounts!", "Error Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   return;
+               }
+                Narrative = "WRITE OFF - " +  txt_narr.ToString();
+            }
+
+            string feedback = Proxy.ConferenceAdmin.update_transactions(w_option, ParentFolio, tamount, txt_receipt.Text.ToString(), Narrative,0);
+            if (feedback != string.Empty) MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else Refresh_data();
+
+        }
+    }
+}

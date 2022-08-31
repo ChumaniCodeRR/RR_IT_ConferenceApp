@@ -1,0 +1,227 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin.Conference_Updates
+{
+    public partial class BlockBooking : Form
+    {
+
+        #region Form Variables
+        string ConfCode;
+        string buildCode;
+        string res_code;
+        string hall_code;
+        string descrip_code;
+        NS_ConfAdmin.StrongTypesNS.DS_CCODEDataSet ds_ccode;
+        DataView dvList;
+
+
+        #endregion
+
+        public BlockBooking(string _ConfCode, string _buildcode, string _res_code, string _hall_code, string _descrip_code)
+        {
+            InitializeComponent();
+            ConfCode = _ConfCode;
+            buildCode = _buildcode;
+            res_code = _res_code;
+            hall_code = _hall_code;
+            descrip_code = _descrip_code;
+        }
+
+        #region form_load
+        private void BlockBooking_Load(object sender, EventArgs e)
+        {
+            try
+            {
+              
+                ds_ccode = Proxy.ConferenceAdmin.get_conf_halls(ConfCode);
+                if (ds_ccode.tt_ccode_hall.Rows.Count > 0)
+                {
+                    DataView DV_Halls = new DataView(ds_ccode.tt_ccode_hall);
+                    DV_Halls.Sort = "descrip";
+                    bsHall.DataSource = DV_Halls;
+                    cbHall.SelectedIndex = 0;
+
+                    FilterResidence();
+                }
+
+                if (hall_code != "") cbHall.SelectedValue = hall_code;
+                if (res_code != "") cbHouse.SelectedValue = res_code;
+                if (buildCode != "") cbBuilding.SelectedValue = buildCode;
+                if (descrip_code != "") txt_filter_descrip.Text = descrip_code;
+
+
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+        #endregion 
+
+
+        private void cbHall_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterResidence();
+            filter_buildings();  
+        }
+
+        private void filter_buildings()
+        {
+            if (ds_ccode.tt_ccode_res.Rows.Count > 0)
+            {
+                if (cbHouse.SelectedIndex == -1) cbHouse.SelectedIndex = 0;
+            }
+
+            if (ds_ccode.tt_ccode_build.Rows.Count > 0)
+            {
+                DataView dvBuilding = new DataView(ds_ccode.tt_ccode_build);
+                dvBuilding.RowFilter = string.Format("res = '{0}'", cbHouse.SelectedValue.ToString());
+                bsBuilding.DataSource = dvBuilding;
+                get_block_bookings();
+            }
+        }
+
+        void FilterResidence()
+        {
+            if (cbHall.Items.Count > 0 && cbHall.SelectedIndex == -1) cbHall.SelectedIndex = 0;
+
+            if (ds_ccode.tt_ccode_res.Rows.Count > 0)
+            {
+                DataView dvRes = new DataView(ds_ccode.tt_ccode_res);
+                dvRes.RowFilter = string.Format("shall = '{0}'", cbHall.SelectedValue.ToString());
+                bsHouse.DataSource = dvRes;
+                filter_buildings();
+            }
+        }
+
+        private void cbHouse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filter_buildings();
+        }
+
+        private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            get_block_bookings(); 
+        }
+
+        private void get_block_bookings()
+        {
+            if (cbBuilding.SelectedIndex > -1)
+            {
+                NS_ConfAdmin.StrongTypesNS.ds_blocksDataSet ds_blocks = Proxy.ConferenceAdmin.get_block_bookings(cbBuilding.SelectedValue.ToString());
+                dvList = new DataView(ds_blocks.tt_cnf_block);
+                dvList.Sort = "sort_field";
+                bs_blocked.DataSource = dvList;
+                filter();
+            }
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            if (cbBuilding.SelectedIndex > -1)
+            {
+                BlockDates frmDates = new BlockDates(ConfCode, cbBuilding.SelectedValue.ToString(), cbBuilding.Text.ToString());
+                frmDates.ShowDialog();
+                get_block_bookings();
+            }
+        }
+
+        private void btn_check_all_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btn_uncheck_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btn_clear_selection_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dg_blocked.Rows.Count > 0)
+                {
+                    bool selected = false;
+                    foreach (DataGridViewRow row in dg_blocked.Rows)
+                    {
+                        if (row.Cells[ckCopy.Name].Value != null && (bool)row.Cells[ckCopy.Name].Value)
+                        {
+                            selected = true; break;
+                        }
+                    }
+
+                    if (!selected) MessageBox.Show("There are no rooms selected to be cleared", "Clear Rooms", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                    {
+                        if (MessageBox.Show("Are you sure you want to clear selected rooms so they can be available for bookings?", "Clear Rooms", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            NS_ConfAdmin.StrongTypesNS.ds_blocksDataSet ds_clear_list = new NS_ConfAdmin.StrongTypesNS.ds_blocksDataSet();
+                            foreach (DataGridViewRow row in dg_blocked.Rows)
+                            {
+                                if (row.Cells[ckCopy.Name].Value != null && (bool)row.Cells[ckCopy.Name].Value)
+                                {
+                                    DataRow newrow = ds_clear_list.tt_cnf_block.NewRow();
+                                    newrow["trs_no"] = int.Parse(row.Cells[cnTrsno.Name].Value.ToString());
+                                    ds_clear_list.tt_cnf_block.Rows.Add(newrow);
+                                }
+                            }
+
+                            string feedback = Proxy.ConferenceAdmin.clear_block_bookings(ds_clear_list);
+                            if (feedback != string.Empty) MessageBox.Show(feedback, "Error Clear", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            else get_block_bookings();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void filter()
+        {
+            if (dvList != null)
+            {
+                dvList.RowFilter = "descrip like '*" + txt_filter_descrip.Text.ToString() + "*'";
+                bs_blocked.DataSource = dvList;
+            }
+        }
+
+        private void txt_filter_descrip_TextChanged(object sender, EventArgs e)
+        {
+            filter();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dg_blocked.Rows)
+            {
+                DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)row.Cells[ckCopy.Name];
+                if (checkCell.Value == null || !(bool)checkCell.Value) checkCell.Value = true;
+            }
+            dg_blocked.ClearSelection();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dg_blocked.Rows)
+            {
+                DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)row.Cells[ckCopy.Name];
+                if (checkCell.Value != null && (bool)checkCell.Value) checkCell.Value = false;
+            }
+            dg_blocked.ClearSelection();
+
+        }
+
+    }
+}

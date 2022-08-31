@@ -1,0 +1,338 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceWardens
+{
+    public partial class AlphaList : Form
+    {
+        public AlphaList()
+        {
+            InitializeComponent();
+        }
+
+        private void Register_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // Set default conference
+                if (ConferenceSys.Properties.Settings.Default.LastConference != "")
+                {
+                    txt_conf_code.Text = ConferenceSys.Properties.Settings.Default.LastConference;
+                    validate_conference();
+                }
+
+                
+                DataTable dt_Halls = Global.Global.ds_conf_codes.tt_conf_hall.Copy();
+                DataRow newhall = dt_Halls.NewRow();
+                newhall["hall"] = "*";
+                newhall["hallname"] = "All Halls";
+                dt_Halls.Rows.InsertAt(newhall, 0);
+                bs_hall.DataSource = dt_Halls;
+                cb_hall.SelectedValue = ConferenceSys.Properties.Settings.Default.LastHall.ToString();
+
+
+                bs_res.DataSource = Global.Global.ds_conf_codes.tt_conf_res;
+                bs_building.DataSource = Global.Global.ds_conf_codes.TT_CONF_BUILDING;
+
+                cb_buliding.SelectedIndex = -1;
+                cb_buliding.Enabled = false;
+
+                disable_field();
+                hall_changed();
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+         
+        }
+
+        private void cb_res_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            res_changed();
+        }
+
+        private void disable_field()
+        {
+            if (rb_print_all.Checked == true)
+            {
+                nlb_tempdte.Value = null;
+                txt_hours.Text = "";
+                txt_min.Text = "";
+                pnl_changes.Enabled = false;
+            }
+
+            else
+            {
+                pnl_changes.Enabled = true;
+            }
+         
+        }
+
+        private void btn_search_conf_Click(object sender, EventArgs e)
+        {
+            SearchConference frm_search = new SearchConference();
+            frm_search.ShowDialog();
+
+            if (frm_search.conference != "")
+            {
+                txt_conf_code.Text = frm_search.conference;
+                txt_conf_descrip.Text = frm_search.descrip;
+            }
+        }
+
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                NS_Conference.StrongTypesNS.ds_registerDataSet ds_register = new NS_Conference.StrongTypesNS.ds_registerDataSet();
+
+                bool ALL_CHANGES = true;
+                string TCONF = txt_conf_code.Text;
+                string tempdate;
+                string HRS = txt_hours.Text;
+                string MINTS = txt_min.Text;
+                string tempshall = "";
+                string cbuilding = "";
+                string feedback;
+
+                if (rb_print_all.Checked == false) ALL_CHANGES = false;
+
+                if (nlb_tempdte.Value == null) tempdate = "?";
+                else tempdate = ((DateTime)nlb_tempdte.Value).ToString("dd/MM/yyyy");
+
+                tempshall = cb_hall.SelectedValue.ToString();
+                if (tempshall == "*") cbuilding = "*";
+                else
+                {
+                    if (cb_res.SelectedValue.ToString() == "999") cbuilding = "*";
+                    else cbuilding = cb_buliding.SelectedValue.ToString();
+                }
+
+
+                ds_register = Proxy.ConferenceSystem.alpha_list(ALL_CHANGES, TCONF, tempdate, HRS, MINTS, tempshall, cbuilding, out feedback);
+                if (feedback.Contains("Error"))
+                {
+                    MessageBox.Show(feedback, "Register Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (ds_register.tt_aplha_list.Rows.Count == 0 && rb_print_changes.Checked == true)
+                {
+                    ConferenceSys.Properties.Settings.Default.LastConference = txt_conf_code.Text.ToString();
+                    if (nlb_tempdte.Value != null) ConferenceSys.Properties.Settings.Default.LastChangeDate = DateTime.Parse(nlb_tempdte.Value.ToString());
+                    else ConferenceSys.Properties.Settings.Default.LastChangeDate = DateTime.Today;
+                    ConferenceSys.Properties.Settings.Default.LastHour = txt_hours.Text.ToString();
+                    ConferenceSys.Properties.Settings.Default.LastMinutes = txt_min.Text.ToString();
+                    ConferenceSys.Properties.Settings.Default.Save();
+                }
+
+                if (ds_register.tt_aplha_list.Rows.Count > 0)
+                {
+                    ConferenceSys.Properties.Settings.Default.LastChangeDate = DateTime.Today;
+                    ConferenceSys.Properties.Settings.Default.LastHour = DateTime.Now.Hour.ToString();
+                    ConferenceSys.Properties.Settings.Default.LastMinutes = DateTime.Now.Minute.ToString();
+                    ConferenceSys.Properties.Settings.Default.Save();
+
+                    string temptitle = feedback + " Alpha List";
+                    
+                    Reports frm_report = new Reports("AlphaList", ds_register, temptitle);
+                    frm_report.Show();
+
+                }
+                else MessageBox.Show("Your query returned no data to display", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+
+
+        }
+
+        private void rb_print_all_CheckedChanged(object sender, EventArgs e)
+        {
+            disable_field();
+        }
+
+        private void cb_hall_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            hall_changed();
+        }
+
+        private void hall_changed()
+        {
+            try
+            {
+                if (cb_hall.SelectedIndex == 0)
+                {
+                    cb_res.SelectedIndex = 0;
+                    cb_res.Enabled = false;
+                    cb_buliding.SelectedIndex = -1;
+                    cb_buliding.Enabled = false;
+                }
+                else
+                {
+                    cb_res.Enabled = true;
+                    //cb_buliding.Enabled = true;
+                    DataTable dt_res = Global.Global.ds_conf_codes.tt_conf_res.Copy();
+                    DataView dv_res = new DataView(dt_res);
+                    dv_res.RowFilter = "hall = '" + cb_hall.SelectedValue.ToString() + "'";
+                    if (dv_res.Count > 1)
+                    {
+                        bool Add = true;
+
+                        for (int i = 0; i < dt_res.Rows.Count; i++)
+                        {
+                            if (dt_res.Rows[i]["res"].ToString() == "999" &&
+                                dt_res.Rows[i]["hall"].ToString() == cb_hall.SelectedValue.ToString()) Add = false;
+                        }
+
+                        if (Add == true)
+                        {
+                            DataRow newres = dt_res.NewRow();
+                            newres["res"] = 999;
+                            newres["resname"] = "All Residences";
+                            newres["hall"] = cb_hall.SelectedValue.ToString();
+                            dt_res.Rows.InsertAt(newres, 0);
+                        }
+
+                        DataView dv_resall = new DataView(dt_res);
+                        dv_resall.RowFilter = "hall = '" + cb_hall.SelectedValue.ToString() + "'";
+                        bs_res.DataSource = dv_resall;
+                        cb_res.SelectedIndex = 0;
+
+                    }
+                    else bs_res.DataSource = dv_res;
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void res_changed()
+        {
+            try
+            {
+
+                bool Add = true;
+
+                if (cb_res.SelectedValue.ToString() != "999")
+                {
+                    DataTable dt_buildings = Global.Global.ds_conf_codes.TT_CONF_BUILDING.Copy();
+                    cb_buliding.Enabled = true;
+                    DataView dv_buildings = new DataView(dt_buildings);
+                    dv_buildings.RowFilter = "res = " + cb_res.SelectedValue.ToString();
+                    if (dv_buildings.Count > 1)
+                    {
+
+
+                        for (int i = 0; i < dt_buildings.Rows.Count; i++)
+                        {
+                            if (dt_buildings.Rows[i]["building"].ToString() == "*" &&
+                                dt_buildings.Rows[i]["res"].ToString() == cb_res.SelectedValue.ToString()) Add = false;
+                        }
+
+                        if (Add == true)
+                        {
+                            DataRow newbuild = dt_buildings.NewRow();
+                            newbuild["building"] = "*";
+                            newbuild["building_name"] = "All Buildings";
+                            newbuild["res"] = Int32.Parse(cb_res.SelectedValue.ToString());
+                            dt_buildings.Rows.InsertAt(newbuild, 0);
+
+                        }
+
+                     
+
+                    }
+                    bs_building.DataSource = dv_buildings;
+                    if (dv_buildings.Count > 1) cb_buliding.SelectedIndex = 0;
+                }
+                else
+                {
+                    cb_buliding.SelectedIndex = -1;
+                    cb_buliding.Enabled = false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void validate_conference()
+        {
+            try
+            {
+                if (txt_conf_code.Text != "")
+                {
+                    string feedback = Proxy.ConferenceSystem.validate_conference(txt_conf_code.Text);
+                    if (!feedback.Contains("Error")) txt_conf_descrip.Text = feedback;
+                    else
+                    {
+                        MessageBox.Show(feedback, "Error Conference", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txt_conf_code.Text = "";
+                        txt_conf_descrip.Text = "";
+                        txt_conf_code.Focus();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+
+        }
+
+        private void txt_conf_code_Leave(object sender, EventArgs e)
+        {
+            validate_conference();
+        }
+
+        private void txt_conf_code_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                validate_conference();
+            }
+        }
+
+        private void rb_print_changes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_print_changes.Checked == true)
+            {
+                // Set default last change date and time
+                if (ConferenceSys.Properties.Settings.Default.LastChangeDate.Year >= DateTime.Today.Year) nlb_tempdte.Value = ConferenceSys.Properties.Settings.Default.LastChangeDate;
+                else nlb_tempdte.Value = null;
+                if (ConferenceSys.Properties.Settings.Default.LastHour != string.Empty) txt_hours.Text = ConferenceSys.Properties.Settings.Default.LastHour;
+                if (ConferenceSys.Properties.Settings.Default.LastMinutes != null) txt_min.Text = ConferenceSys.Properties.Settings.Default.LastMinutes;
+            }
+        }
+
+        private void txt_conf_descrip_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_conf_code_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+    }
+}

@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys.ConferenceAdmin
+{
+    public partial class DefaultHall : Form
+    {
+
+        public bool proceed = false;
+        public string temphall;
+
+        public DefaultHall()
+        {
+            InitializeComponent();
+        }
+
+        private void DefaultHall_Load(object sender, EventArgs e)
+        {
+            DataView DV_Halls = new DataView(Global.Global.ds_conf_codes.tt_dhall);
+            DV_Halls.Sort = "detail";
+            cbHall.DataSource = DV_Halls;
+            cbHall.SelectedIndex = 0;
+        }
+
+        private void btn_proceed_Click(object sender, EventArgs e)
+        {
+            proceed = true;
+            temphall = cbHall.SelectedValue.ToString();
+            this.Close();
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            proceed = false;
+            this.Close();
+        }
+    }
+}

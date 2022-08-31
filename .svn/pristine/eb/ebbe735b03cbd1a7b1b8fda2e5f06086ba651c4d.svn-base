@@ -1,0 +1,133 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin.ConferenceUpdate
+{
+    public partial class ApproveOverride : Form
+    {
+        NS_ConfAdmin.StrongTypesNS.ds_overrideDataSet ds_requests;
+        DataView dvData;
+
+        public ApproveOverride()
+        {
+            InitializeComponent();
+        }
+
+        private void ApproveOverride_Load(object sender, EventArgs e)
+        {
+            refresh_screen();
+        }
+
+        private void refresh_screen()
+        {
+            try
+            {
+                ds_requests = Proxy.ConferenceAdmin.get_payments_override_requests();
+                bs_requests.DataSource = ds_requests.tt_override;
+                filter();
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }     
+
+        private void dg_requests_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (dg_requests.SelectedRows.Count > 0)
+                {
+                    if (rb_approved.Checked)
+                    {
+                        if (MessageBox.Show("Are you sure you want to change chase payment indicator for this reservation?", "Chase Payament", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            string feedback = Proxy.ConferenceAdmin.update_chase_payment(dg_requests.SelectedRows[0].Cells[cn_folio.Name].Value.ToString());
+                            if (feedback != string.Empty) MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            else refresh_screen();
+                        }
+                    }
+                    else
+                    {
+
+                        DialogResult result = MessageBox.Show("Do you want to Approve/Decline  " + dg_requests.SelectedRows[0].Cells[cn_folio.Name].Value.ToString() + " " +
+                        dg_requests.SelectedRows[0].Cells[cn_names.Name].Value.ToString() + " payment override request? Click 'Yes' to Approve 'No' to Decline", "Approve/Decline Override", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes | result == DialogResult.No)
+                        {
+                            bool ApproveDecline = true;
+                            if (result == DialogResult.No) ApproveDecline = false;
+
+
+                            string feedback = Proxy.ConferenceAdmin.update_payment_override(ApproveDecline, dg_requests.SelectedRows[0].Cells[cn_folio.Name].Value.ToString());
+                            if (feedback.Contains("Error")) MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            else
+                            {
+                                MessageBox.Show(feedback, "Approve Override", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                refresh_screen();
+                            }
+                        }
+                    }
+              
+                }
+            }
+             catch (Exception ex)
+             {
+                 Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+             }
+        }
+
+        private void filter()
+        {
+            if (ds_requests != null)
+            {
+                dvData = new DataView(ds_requests.tt_override);
+                dvData.RowFilter = "payment_override = " + rb_approved.Checked.ToString();
+                bs_requests.DataSource = dvData;
+                list_changed();
+                if (dvData.Count > 0) btn_print.Enabled = true;
+                else btn_print.Enabled = false;
+            }
+        }
+
+        private void rb_pending_CheckedChanged(object sender, EventArgs e)
+        {
+            filter();
+        }
+
+        private void rb_approved_CheckedChanged(object sender, EventArgs e)
+        {
+            filter();
+        }
+
+        private void list_changed()
+        {
+            if (rb_approved.Checked)
+            {
+                lbl_action.Text = "Double Click Reservation Above To Set/Unset Chase payment";
+            }
+            else
+            {
+                lbl_action.Text = "Double Click Reservation Above To Approve/Decline Request";
+            }
+        }
+
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            if (dvData.Count > 0)
+            {
+                string title = "Pending Payment Override Requests";
+                if(rb_approved.Checked) title = "Approved Payment Override Requests";
+                ConferenceSys.Reports frmReports = new ConferenceSys.Reports("OverrideList", dvData, title);
+                frmReports.Show();
+            }
+        }
+    }
+}

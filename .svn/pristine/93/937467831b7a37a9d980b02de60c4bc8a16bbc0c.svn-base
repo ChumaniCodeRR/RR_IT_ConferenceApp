@@ -1,0 +1,97 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin.Conference_Updates
+{
+    public partial class BlockDates : Form
+    {
+
+        string Building;
+        string BuildingName;
+        string ConfCode;
+
+        public BlockDates(string _ConfCode,string _Building, string _BuildingName)
+        {
+            InitializeComponent();
+            ConfCode = _ConfCode;
+            Building = _Building;
+            BuildingName = _BuildingName;
+        }
+
+        private void BlockDates_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                string feedback = string.Empty;
+                bool ConfAdmin;
+                NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet ds_conference = Proxy.ConferenceAdmin.get_conference(false, ConfCode, out ConfAdmin, out feedback);
+                if (feedback != "")
+                {
+                    MessageBox.Show(feedback, "Code Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+                else
+                {
+                    txt_title.Text = "Block booking for " + ds_conference.tt_conference[0].conference.ToString() + " in " + BuildingName.ToString();
+                    dteBookStart.MinDate = ds_conference.tt_conference[0].START_DTE;
+                    dteBookEnd.MinDate = ds_conference.tt_conference[0].START_DTE;
+
+                    dteBookStart.MaxDate = ds_conference.tt_conference[0].END_DTE;
+                    dteBookEnd.MaxDate = ds_conference.tt_conference[0].END_DTE;
+
+                    txt_guests.Text = "1";
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+
+        }
+
+        private void btn_proceed_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txt_descrip.Text == string.Empty)
+                {
+                    MessageBox.Show("Error - Please enter block details to continue", "Error Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (dteBookStart.Text == "" | dteBookEnd.Text == "")
+               {
+                 MessageBox.Show("Error - Please enter block dates to continue", "Error Dates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   return;
+               }
+                if (DateTime.Parse(dteBookStart.Text) > DateTime.Parse(dteBookEnd.Text))
+               {
+                    MessageBox.Show("Error - Start date cannot be after end date", "Error Dates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+               }
+                int totnum;
+               bool proceed = int.TryParse(txt_guests.Text.ToString(), out totnum);
+               if (!proceed)
+               {
+                   MessageBox.Show("Error - Please enter number of guests you want to book for", "Error Guests", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   return;
+                }
+                string feedback = Proxy.ConferenceAdmin.block_bookings(Building,txt_descrip.Text.ToString(), DateTime.Parse(dteBookStart.Text), DateTime.Parse(dteBookEnd.Text), totnum);
+                MessageBox.Show(feedback, "Block Bookings", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!feedback.Contains("Error")) this.Close();
+
+            }        
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+           
+        }
+    }
+}

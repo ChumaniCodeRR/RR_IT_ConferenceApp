@@ -1,0 +1,865 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+using NS_Conference.StrongTypesNS;
+using NS_System.StrongTypesNS;
+using System.IO;
+
+namespace ConferenceSys
+{
+    public partial class Planner : Form
+    {
+        NS_ResSystem.StrongTypesNS.DS_RESDataSet ds_rooms;
+
+        public Planner()
+        {
+            InitializeComponent();
+
+            #region Grid View Styles
+            cFloor.Width = 40;
+            cRoomNo.Width = 40;
+            cBeds.Width = 40;
+            
+            cNotes.Frozen = true;
+
+            dgvBookings.AutoGenerateColumns = false;
+            dgvBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgvBookings.Columns[cNotes.Name].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvBookings.ColumnHeadersHeight = 75;
+            #endregion
+        }
+
+        #region Form Load Event Handler
+
+        private void ResPlanner_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (ConferenceSys.Properties.Settings.Default.LastStartDate != null && ConferenceSys.Properties.Settings.Default.LastStartDate >= DateTime.Today) dtpStartDate.Value = ConferenceSys.Properties.Settings.Default.LastStartDate;
+                    else dtpStartDate.Value = DateTime.Today;
+                }
+                catch
+                {
+                    dtpStartDate.Value = DateTime.Today;
+                }
+
+                try
+                {
+                    if (ConferenceSys.Properties.Settings.Default.LastEndDate >= DateTime.Today) dtpEndDate.Value = ConferenceSys.Properties.Settings.Default.LastEndDate;
+                    else dtpEndDate.Value = DateTime.Today.AddDays(7);
+                }
+                catch
+                {
+                    dtpEndDate.Value = DateTime.Today.AddDays(7);
+                }
+
+                picRhodesCrest.Image = Global.Global.RULogo;
+
+                DataView DV_Halls = new DataView(Global.Global.ds_conf_codes.tt_conf_hall);
+                DV_Halls.Sort = "hallname";
+                bsHall.DataSource = DV_Halls;
+             
+                if (cbHall.Items.Count >= 0)
+                {
+                    //This will autocatically invoke the SelectedIndexChanged event.
+                    if (ConferenceSys.Properties.Settings.Default.LastHall != string.Empty) cbHall.SelectedValue = ConferenceSys.Properties.Settings.Default.LastHall;                        
+                    else cbHall.SelectedIndex = 0;
+                    //Manually invoke the SelectedIndexChanged event.
+                    Invoke(new EventHandler(cbHall_SelectedIndexChanged), cbHall, e);
+                }
+                else
+                {
+                    //Manually invoke the SelectedIndexChanged event.
+                    Invoke(new EventHandler(cbHall_SelectedIndexChanged), cbHall, e);
+                }
+
+                SetFilterDates(/*true*/);
+                SetHorizontalHeaders();
+                CheckRoomReservation();
+                RefreshBuildingRooms();
+                RefreshBookings();
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+            finally
+            {
+                
+            }
+        }
+
+        #endregion
+
+        #region Combobox Event Handlers
+
+        private void cbHall_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbHall.SelectedIndex >= 0)
+                {
+                    ConferenceSys.Properties.Settings.Default.LastHall = cbHall.SelectedValue.ToString();
+                    ConferenceSys.Properties.Settings.Default.Save();
+                    FilterResidence();
+                }
+                else
+                {
+                    bsBuilding.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void cbHouse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbHouse.SelectedIndex >= 0)
+                {
+                    DS_BUILDINGSDataSet ds_buildings = Proxy.System.Get_Res_Buildings(
+                        int.Parse(cbHouse.SelectedValue.ToString()), Proxy.BuildingTypeEnum.Conference.ToString());
+
+                    bsBuilding.DataSource = ds_buildings.TT_BUILDING;
+                    if (cbBuilding.Items.Count > 0 && cbBuilding.SelectedIndex != 0)
+                    {
+                        //This will automatically invoke the SelectedIndexChanged event.
+                        cbBuilding.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        //Manually invoke the SelectedIndexChanged event.
+                        Invoke(new EventHandler(cbBuilding_SelectedIndexChanged), cbBuilding, e);
+                    }
+                }
+                else
+                {
+                    bsBuilding.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                if (cbBuilding.SelectedIndex >= 0)
+                {
+                    LoadBuildingPicture(cbBuilding.SelectedValue.ToString());
+                    RefreshBuildingRooms();
+                }
+                else
+                {
+                    dgvBookings.DataSource = null;
+                    picBuilding.Image = Global.Global.NoPhoto;
+               }
+                RefreshBookings();
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+            
+        }
+
+        #endregion
+
+        #region DateTimePicker Event Handers
+
+        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(dtpStartDate, string.Empty);
+            errorProvider.SetError(dtpEndDate, string.Empty);
+
+            if (ckSpecificDay.Checked)
+            {
+                dtpEndDate.Value = dtpStartDate.Value;
+                ConferenceSys.Properties.Settings.Default.LastEndDate = dtpEndDate.Value;
+                
+            }
+
+            ConferenceSys.Properties.Settings.Default.LastStartDate = dtpStartDate.Value;
+            ConferenceSys.Properties.Settings.Default.Save();
+        }
+
+        private void dtpEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(dtpStartDate, string.Empty);
+            errorProvider.SetError(dtpEndDate, string.Empty);
+
+            ConferenceSys.Properties.Settings.Default.LastEndDate = dtpEndDate.Value;
+            ConferenceSys.Properties.Settings.Default.Save();
+        }
+
+        #endregion
+
+        #region Button Event Handlers
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errorProvider.Clear();
+
+                if (dtpEndDate.Value.Date < dtpStartDate.Value.Date)
+                {
+                    errorProvider.SetError(dtpStartDate, "End date can not be less than start date");
+                    errorProvider.SetError(dtpEndDate, "End date can not be less than start date");
+                }
+                else
+                {
+                    SetFilterDates(/*false*/);
+                    RefreshBuildingRooms();
+                    SetHorizontalHeaders();
+
+                    RefreshBookings();
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+            
+        }
+
+        private void btnCreateBooking_Click(object sender, EventArgs e)
+        {
+            if (dgvBookings.SelectedCells.Count > 0)
+            {
+                List<int> rows = new List<int>();
+                List<int> cols = new List<int>();
+                                
+                foreach (DataGridViewCell cell in dgvBookings.SelectedCells)
+                {
+
+                    //Check if room is reserved
+                    object cellValue = dgvBookings[cell.ColumnIndex, cell.ColumnIndex].Value;
+                    
+                    Color bColor = dgvBookings[cell.ColumnIndex, cell.RowIndex].Style.BackColor;
+                    Color rColor = dgvBookings.Rows[cell.RowIndex].DefaultCellStyle.BackColor;
+
+                    if ((cellValue == null || (cellValue != null && cellValue.ToString().Equals(string.Empty))) && (bColor.Equals(Color.DarkGray) || rColor.Equals(Color.DarkGray)))
+                    {
+                        string msg;
+                        string reason = dgvBookings[cNotes.Name, cell.RowIndex].Value != null ? dgvBookings[cNotes.Name, cell.RowIndex].Value.ToString() : string.Empty;
+                        if (reason.ToUpper().Contains("BOX ROOM"))
+                        {
+                            msg = "Room is a 'BOX ROOM'";
+                        }
+                        else
+                        {
+                            msg = dgvBookings[cell.ColumnIndex, cell.RowIndex].ToolTipText;
+                        }
+                        MessageBox.Show(msg, "Conference System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dgvBookings.ClearSelection();
+                        return;
+                    }                                        
+                }
+                //MessageBox.Show(dgvBookings.Rows[cell.RowIndex].Cells[1].Value.ToString() + ";" + dgvBookings.Columns[cell.ColumnIndex].Tag, "blah");
+
+                MessageBox.Show("Functionality currently not available.", "Conference System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        #endregion
+
+        #region DataGridView Event Handlers
+
+        void dgvBookings_CellPainting(object sender, System.Windows.Forms.DataGridViewCellPaintingEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex == -1 && (e.ColumnIndex == 1 || e.ColumnIndex == 2))
+                {
+                    PaintHeaderCellVertical(e);
+                }
+
+                if (e.ColumnIndex == 0 && e.RowIndex != -1)
+                {
+                    MergeCells(e);
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        void dgvBookings_DataBindingComplete(object sender, System.Windows.Forms.DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvBookings.ClearSelection();
+        }
+
+        void dgvBookings_SelectionChanged(object sender, System.EventArgs e)
+        {
+            try
+            {
+                List<int> rows = new List<int>();
+                List<int> cols = new List<int>();
+
+                if (dgvBookings.SelectedCells.Count > 0)
+                {
+                    int index = dgvBookings.SelectedCells[0].ColumnIndex;
+                    if (index == cFloor.Index || index == cRoomNo.Index || index == cBeds.Index || index == cNotes.Index)
+                    {
+                        dgvBookings.ClearSelection();
+                    }
+
+                    foreach (DataGridViewCell cell in dgvBookings.SelectedCells)
+                    {
+                        if (!rows.Contains(cell.RowIndex)) rows.Add(cell.RowIndex);
+                        if (!cols.Contains(cell.ColumnIndex)) cols.Add(cell.ColumnIndex);
+                    }
+                    lblSelectionDetails.Text = string.Format("{0} room(s) and {1} day(s)", rows.Count, cols.Count);
+                }
+                else
+                {
+                    lblSelectionDetails.Text = "0 room(s) and 0 day(s)";
+                }
+
+                if (rows.Count.Equals(0) && cols.Count.Equals(0))
+                {
+                    btnCreateBooking.Enabled = false;
+                }
+                else
+                {
+                    btnCreateBooking.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        void dgvBookings_CellDoubleClick(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex != -1)
+                {
+                    if (e.ColumnIndex != cFloor.Index && e.ColumnIndex != cRoomNo.Index &&
+                        e.ColumnIndex != cBeds.Index && e.ColumnIndex != cNotes.Index)
+                    {
+                        //Check if room is reserved
+                        object cellValue = dgvBookings[e.ColumnIndex, e.ColumnIndex].Value;
+                        Color bColor = dgvBookings[e.ColumnIndex, e.RowIndex].Style.BackColor;
+                        Color rColor = dgvBookings.Rows[e.RowIndex].DefaultCellStyle.BackColor;
+                        
+                        //Perform the following action of cell doesnt have a value and the back color if gray (room is reserved or is a box room)
+                        if ((cellValue == null || (cellValue != null && cellValue.ToString().Equals(string.Empty))) && (bColor.Equals(Color.DarkGray) || rColor.Equals(Color.DarkGray)))
+                        {
+                            string msg;
+                            string reason = dgvBookings[cNotes.Name, e.RowIndex].Value != null ? dgvBookings[cNotes.Name, e.RowIndex].Value.ToString() : string.Empty;
+                            if (reason.ToUpper().Contains("BOX ROOM"))
+                            {
+                                msg = "Room is a 'BOX ROOM'";
+                            }
+                            else
+                            {
+                                msg = dgvBookings[e.ColumnIndex, e.RowIndex].ToolTipText;
+                            }
+                            MessageBox.Show(msg, "Conference System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            dgvBookings.ClearSelection();
+                            return;
+                        }
+
+                        if (dgvBookings[e.ColumnIndex, e.RowIndex].Value != null &&
+                            !dgvBookings[e.ColumnIndex, e.RowIndex].Value.ToString().Equals(string.Empty))
+                        {
+                            string folio = null;
+                            List<string> folios = (List<string>)dgvBookings[e.ColumnIndex, e.RowIndex].Tag;
+                            if (folios == null || folios.Count.Equals(0)) throw new ApplicationException("No folio(s) found for the selected booking");
+                            if (folios.Count.Equals(1))
+                            {
+                                folio = folios[0];
+                            }
+                            else
+                            {
+                                SelectFolio frmSelect = new SelectFolio(folios);
+                                DialogResult result = frmSelect.ShowDialog();
+                                if (result.Equals(DialogResult.OK))
+                                {
+                                    folio = frmSelect.Folio;
+                                }
+                                else
+                                {
+                                    return; //Action canceled. Exit method
+                                }
+                            }
+
+                            int beds = int.Parse(dgvBookings[cBeds.Name, e.RowIndex].Value.ToString());
+                            Get_Reservation(folio);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("There is no booking for the selected room and day.", "Bookings", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        #endregion
+
+        #region Other Local Methods
+
+        void LoadBuildingPicture(string building)
+        {
+            string buildingImage = string.Format(@"/db/1/live/programs/venues/{0}.jpg", building.Trim().ToUpper());
+            NS_System.StrongTypesNS.DS_PHOTODataSet ds_image = Proxy.System.Get_Photos(buildingImage);
+
+            int imageCount = ds_image.TT_PHOTO.Rows.Count;
+
+            if (imageCount > 0)
+            {
+                try
+                {
+                    MemoryStream imageStream = new MemoryStream((byte[])(ds_image.TT_PHOTO.Rows[imageCount - 1]["image"]));
+                    picBuilding.Image = Image.FromStream(imageStream);
+                }
+                catch (ArgumentException)
+                {
+                    // If loading image throws an expection,
+                    // rather not have an image than letting the application break.
+                    picBuilding.Image = null;
+                }
+                catch (InvalidCastException)
+                {
+                    picBuilding.Image = null;
+                }
+            }
+            else
+            {
+                picBuilding.Image = Global.Global.NoPhoto;
+            }
+        }
+
+        void FilterResidence()
+        {
+            DataView dvRes = new DataView(Global.Global.ds_conf_codes.tt_conf_res.Copy());
+            dvRes.RowFilter = string.Format("HALL = '{0}'", cbHall.SelectedValue.ToString());
+            bsHouse.DataSource = dvRes;
+            if (cbHouse.Items.Count > 0 && cbHouse.SelectedIndex != 0)
+            {
+                //This will automatically fire the SelectedIndexChangedEvent
+                cbHouse.SelectedIndex = 0;
+            }
+            else
+            {
+                //Manually invoke the selected index changed event
+                Invoke(new EventHandler(cbHouse_SelectedIndexChanged), cbHouse, new EventArgs());
+            }
+        }
+
+        void SetFilterDates(/*bool defaultDates*/)
+        {
+            /*
+            if (defaultDates)
+            {
+                //Get first previous Sunday
+                DateTime startDate = dtpStartDate.Value.Date;
+                while (!startDate.DayOfWeek.ToString().Equals("Sunday"))
+                {
+                    startDate = startDate.AddDays(-1);
+                }
+
+                //Get first next Saturday
+                DateTime endDate = dtpEndDate.Value.Date;
+                while (!endDate.DayOfWeek.ToString().Equals("Saturday"))
+                {
+                    endDate = endDate.AddDays(1);
+                }
+
+                dtpStartDate.Value = startDate;
+                dtpEndDate.Value = endDate;
+            }
+            */
+            string dateFrom = dtpStartDate.Value.ToString("dd MMMM yyyy");
+            string dateTo = dtpEndDate.Value.ToString("dd MMMM yyyy");
+
+            lblDateFromTo.Text = string.Format("{0} - {1}", dateFrom, dateTo);
+             
+        }
+
+        void SetHorizontalHeaders()
+        {
+            DateTime loopDate = dtpStartDate.Value.Date;
+
+            for (int i = 0; i < dgvBookings.Columns.Count; i++)
+            {
+                DataGridViewColumn c = dgvBookings.Columns[i];
+                if (c.Name != cFloor.Name && c.Name != cRoomNo.Name && c.Name != cBeds.Name && c.Name != cNotes.Name)
+                {
+                    dgvBookings.Columns.Remove(c);
+                    i--;
+                }
+            }
+
+            if (!IsValidDateRange())
+            {
+                string msg = "The date range is too big. Please narrow the date range.";
+                MessageBox.Show(msg, "Conference Bookings", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; //Exit method without populating columns
+            }
+
+            //Get public holidays for the selected year(s)
+            ds_holidaysDataSet ds_holidays = Proxy.ConferenceSystem.Get_PublicHolidays(dtpStartDate.Value.Date, dtpEndDate.Value.Date);
+
+            do
+            {
+                HorizontalHeader header = new HorizontalHeader();
+                header.DateColumnHeader = loopDate.Date.ToString("dd-MMM-yyyy");
+                header.DayColumnHeader = loopDate.DayOfWeek.ToString();
+                header.ActualColumnHeaderDate = loopDate.Date;
+                int phIndex = new BindingSource(ds_holidays, "tt_holiday").Find("public_holiday", loopDate.Date);
+                if (phIndex >= 0)
+                {
+                    header.IsPublicHoliday = true;
+                    header.PublicHoliday = ds_holidays.tt_holiday[phIndex].descrip;
+                }
+
+                DataGridViewTextBoxColumn tc = new DataGridViewTextBoxColumn();
+                tc.HeaderText = string.Format("{0}\n\n{1}", header.DateColumnHeader, header.DayColumnHeader);
+                tc.Width = tc.MinimumWidth = 100;
+                tc.SortMode = DataGridViewColumnSortMode.NotSortable;
+                tc.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                tc.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                tc.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                if (header.IsPublicHoliday)
+                {
+                    tc.HeaderText = string.Format("{0}\n(Public Holiday)", tc.HeaderText);
+                    tc.ToolTipText = header.PublicHoliday;
+                    DataGridViewCellStyle tcStyle = new DataGridViewCellStyle();
+                    tcStyle.Font = new Font("Arial", 8, FontStyle.Bold);
+                    tcStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    tc.HeaderCell.Style = tcStyle;
+                }
+                //Set special day back colors
+                if (header.ActualColumnHeaderDate.Date.Equals(DateTime.Today))
+                {
+                    tc.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+                else if (header.IsPublicHoliday)
+                {
+                    tc.DefaultCellStyle.BackColor = Color.Thistle;
+                }
+                else if (header.DayColumnHeader.Equals("Saturday") || header.DayColumnHeader.Equals("Sunday"))
+                {
+                    tc.DefaultCellStyle.BackColor = Color.LightGray;
+                }
+                tc.Tag = header.ActualColumnHeaderDate.Date;
+
+                //Add grid view date column header
+                dgvBookings.Columns.Add(tc);
+
+                //Increment date by one day
+                loopDate = loopDate.Date.AddDays(1);
+            }
+            while (loopDate <= dtpEndDate.Value.Date);
+        }
+
+        void CheckRoomReservation()
+        {
+            string toolTip;
+            DateTime term1StartDate = Global.Global.ds_conference_lookups.tt_meal_control[0].term1_start.Date;
+            DateTime term4EndDate = Global.Global.ds_conference_lookups.tt_meal_control[0].term4_end.Date;
+
+            //Check if room is reserved
+            foreach (DataGridViewRow room in dgvBookings.Rows)
+            {
+                object notes = dgvBookings[cNotes.Name, room.Index].Value;
+                if (notes != null && !notes.ToString().Equals(string.Empty))
+                {
+                    //Check if room is a box room
+                    if (notes.ToString().ToUpper().Contains("BOX ROOM"))
+                    {
+                        room.DefaultCellStyle.BackColor = Color.DarkGray;
+                        continue;
+                    }
+
+                    foreach (DataGridViewColumn day in dgvBookings.Columns)
+                    {
+                        if (day.Tag == null || !day.Tag.GetType().Equals(typeof(DateTime))) continue;
+
+                        DateTime columnDate = (DateTime)day.Tag;
+                        if (term1StartDate.Date <= columnDate.Date && columnDate.Date <= term4EndDate.Date)
+                        {
+                            toolTip = string.Format("Room is reserved for '{0}' for the period {1:dd-MMM-yyyy} to {2:dd-MMM-yyyy}",
+                                notes, term1StartDate, term4EndDate);
+
+                            room.Cells[day.Index].Style.BackColor = Color.DarkGray;
+                            room.Cells[day.Index].ToolTipText = toolTip;
+                        }
+                    }
+                }
+            }
+            dgvBookings.Invalidate();
+        }
+
+        void RefreshBookings()
+        {
+            if (!IsValidDateRange()) return; //Exit method without populating data
+            if (cbBuilding.SelectedIndex < 0) return;
+
+            Global.Global.ds_bookings = Proxy.ConferenceSystem.Get_Res_Bookings_Summary(cbBuilding.SelectedValue.ToString(), dtpStartDate.Value.Date, dtpEndDate.Value.Date);
+            List<string> missing_rooms = new List<string>();
+
+            foreach (ds_booking_summaryDataSet.tt_booking_summaryRow booking in Global.Global.ds_bookings.tt_booking_summary)
+            {
+
+                DataGridViewRow roomRow = null;
+                foreach (DataGridViewRow row in dgvBookings.Rows)
+                {
+                    //first try convert room numbers to intergers to remove leading zeros
+                    int gRoom, bRoom;
+                    if (int.TryParse(row.Cells[cRoomNo.Name].Value.ToString(), out gRoom) && int.TryParse(booking.room_no, out bRoom))
+                    {
+                        if (gRoom.Equals(bRoom))
+                        {
+                            roomRow = row; break;
+                        }
+                    }
+                    else if (row.Cells[cRoomNo.Name].Value.ToString().Equals(booking.room_no))
+                    {
+                        roomRow = row; break;
+                    }
+                }
+                if (roomRow == null)
+                {
+                    //Booking room not matched in building rooms
+                    missing_rooms.Add(string.Format("Room {0} - folio {1}", booking.room_no, booking.folio));
+                    continue;
+                }
+
+                foreach (DataGridViewCell cell in roomRow.Cells)
+                {
+                    if (cell.ColumnIndex != 0 && cell.ColumnIndex != 1 && cell.ColumnIndex != 2 && cell.ColumnIndex != 3)
+                    {
+                        DateTime cellDate = (DateTime)dgvBookings.Columns[cell.ColumnIndex].Tag;
+                        if (cellDate.Date >= booking.start_dte.Date && cellDate.Date <= booking.end_dte.Date.AddDays(-1)) //Exclude the date guests leave, hence endDate - 1
+                        {
+                            string cellValue = string.Empty;
+                            if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                            {
+                                cellValue = cell.Value.ToString();
+                            }
+                            if (!string.IsNullOrEmpty(cellValue))
+                            {
+                                cell.Value = string.Format("{0}\n\r{1} {2} {3}", cellValue, booking.titl, booking.initials, booking.surn);
+                            }
+                            else
+                            {
+                                cell.Value = string.Format("{0} {1} {2}", booking.titl, booking.initials, booking.surn);
+                            }
+
+                            List<string> cellTag;
+                            if (cell.Tag == null)
+                            {
+                                cellTag = new List<string>();
+                            }
+                            else
+                            {
+                                cellTag = (List<string>)cell.Tag;
+                            }
+                            cellTag.Add(booking.folio);
+                            cell.Tag = cellTag;
+                        }
+                    }
+                }
+            }
+
+            //if (missing_rooms.Count > 0)
+            //{
+            //    string msg = "Rooms were not found for the following bookings";
+            //    missing_rooms.ForEach(delegate(string s)
+            //    {
+            //        msg = string.Format("{0}\n{1}", msg, s);
+            //    });
+            //    MessageBox.Show(msg, "Conference System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
+
+            CheckRoomReservation();
+        }
+
+        bool IsValidDateRange()
+        {
+            TimeSpan span = dtpEndDate.Value.Subtract(dtpStartDate.Value);
+            if (span.Days > 366)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        void RefreshBuildingRooms()
+        {
+            try
+            {
+                ds_rooms = Proxy.Res_System.All_Res_Rooms(cbBuilding.SelectedValue.ToString(), DateTime.Today.Year, "Conference");
+
+                DataView dvRooms = new DataView(ds_rooms.TT_ROOMS);
+                dvRooms.Sort = "ROOM_SORT ASC, ROOM_NO ASC";
+                dgvBookings.DataSource = dvRooms;
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+        #endregion
+
+        #region DataGridView Paint Methods
+
+        void PaintHeaderCellVertical(System.Windows.Forms.DataGridViewCellPaintingEventArgs e)
+        {
+            int bottomCenter = ((e.CellBounds.Right - e.CellBounds.Left) / 2) - 7;
+
+            e.PaintBackground(e.CellBounds, true);
+            e.Graphics.TranslateTransform(e.CellBounds.Left, e.CellBounds.Bottom);
+            e.Graphics.RotateTransform(270);
+            e.Graphics.DrawString(e.FormattedValue.ToString(), e.CellStyle.Font, Brushes.Black, 5, bottomCenter);
+            e.Graphics.ResetTransform();
+            e.Handled = true;
+        }
+
+        void MergeCells(System.Windows.Forms.DataGridViewCellPaintingEventArgs e)
+        {
+            Brush gridBrush = new SolidBrush(this.dgvBookings.GridColor);
+            Brush backColorBrush = new SolidBrush(e.CellStyle.BackColor);
+
+            Pen gridLinePen = new Pen(gridBrush);
+            e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
+
+            //Draw line (bottom border and right border of current cell)
+            //If next row cell has different content, only draw bottom border line of current cell
+            if (e.RowIndex < dgvBookings.Rows.Count - 1 &&
+                dgvBookings.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].Value.ToString() != e.Value.ToString())
+            {
+                e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1);
+            }
+
+            //Draw right border line of current cell
+            e.Graphics.DrawLine(gridLinePen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom);
+
+            //draw/fill content in current cell, and fill only one cell of multiple same cells
+            if (e.Value != null)
+            {
+                if (e.RowIndex > 0 && dgvBookings.Rows[e.RowIndex - 1].Cells[e.ColumnIndex].Value.ToString() == e.Value.ToString())
+                {
+                    //Do nothing
+                }
+                else
+                {
+                    e.Graphics.DrawString(e.Value.ToString(), e.CellStyle.Font, Brushes.Black, e.CellBounds.X + 2, e.CellBounds.Y + 5, StringFormat.GenericDefault);
+                }
+            }
+            e.Handled = true;
+
+        }
+
+        void PaintCellStyles(System.Windows.Forms.DataGridViewCellPaintingEventArgs e)
+        {
+            Rectangle rect = dgvBookings.GetCellDisplayRectangle(e.ColumnIndex, -1, true);
+            rect.X += 1;
+            rect.Y = rect.Height / 2 + 1;
+            rect.Width -= 2;
+            rect.Height = rect.Height / 2 - 2;
+            e.Graphics.FillRectangle(new SolidBrush(dgvBookings.ColumnHeadersDefaultCellStyle.BackColor), rect);
+        }
+
+        #endregion
+
+        #region Checkbox Events
+
+        private void ckSpecificDay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckSpecificDay.Checked)
+            {
+                dtpEndDate.Enabled = false;
+                dtpEndDate.Value = dtpStartDate.Value;
+            }
+            else
+            {
+                dtpEndDate.Enabled = true;
+            }
+        }
+
+        #endregion
+
+        private void Get_Reservation(string folio)
+        {
+            Global.Global.ds_single_booking = Proxy.ConferenceSystem.Get_Single_Reservation(folio);
+
+            if (Global.Global.ds_single_booking.tt_reservation.Rows.Count == 0)
+            {
+                MessageBox.Show("No Reservation can be found with folio number: " + folio, "Invalid Folio Number", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            ConferenceSys.ConferenceAdmin.UpdateReserv frmReservation = new ConferenceSys.ConferenceAdmin.UpdateReserv(false, Global.Global.ds_single_booking.tt_reservation[0].ccode, Global.Global.ds_single_booking.tt_reservation[0].parentfolio, Global.Global.ds_single_booking.tt_reservation[0].folio);
+            frmReservation.ShowDialog();
+
+            SetFilterDates(/*false*/);
+            RefreshBuildingRooms();
+            SetHorizontalHeaders();
+            RefreshBookings();
+        }
+
+        private void txt_folio_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
+            {
+                Get_Reservation(txt_folio.Text);
+            }           
+        }
+
+        private void txt_folio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //* Backspace and paste allowed */
+            if (e.KeyChar != 8 && e.KeyChar != 22)
+            {
+                // Check for a naughty character in the KeyDown event.
+                if (System.Text.RegularExpressions.Regex.IsMatch(e.KeyChar.ToString(), @"[^0-9^+^\-^\/^\*^\(^\)]"))
+                {
+                    // Stop the character from being entered into the control since it is illegal.
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void btn_search_folio_Click(object sender, EventArgs e)
+        {
+
+            ConferenceSys.ConferenceWardens.SearchFolio frm_search = new ConferenceSys.ConferenceWardens.SearchFolio();
+            frm_search.ShowDialog();
+
+            if (frm_search.folio != "")
+            {
+                txt_folio.Text = frm_search.folio;
+                Get_Reservation(txt_folio.Text);
+            }
+        }
+    }
+}

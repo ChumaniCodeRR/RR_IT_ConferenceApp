@@ -1,0 +1,137 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                //TODO: Change Conference to a proper program name
+                bool validlogin = AppServer.AppServer.initial_Login(string.Empty, false, "cnfg001", false, "ConferenceSys", false);
+                if (validlogin)
+                {
+                    if (Proxy.Info.username.StartsWith("test")) menuStrip.BackColor = statusStrip.BackColor = Color.LightGreen;
+                    this.WindowState = FormWindowState.Maximized;
+
+                    toolStripStatusLabel.Text = string.Format("{0} {1} ({2}) Since {3}", toolStripStatusLabel.Text, Utils.ToUpperFirstLetter(Proxy.Info.fullname),
+                        Proxy.Info.username, string.Format("{0: dddd dd MMMM yyyy} at {1: HH:mm:ss}", DateTime.Now, DateTime.Now));
+                    
+                    //Initializer.InitializeData();
+                    //Initializer.Get_Res_Codes();
+                    Initializer.Get_Conference_Code_Descriptions();
+                    //Initializer.Get_Hall_Residences();
+
+                    Global.Global.ds_conf_codes = Proxy.ConferenceSystem.populate_conf_codes();
+
+                    Planner planner = new Planner();
+                    planner.MdiParent = this;
+                    planner.Dock = DockStyle.Fill;
+                    planner.Show();
+
+
+                    Global.Global.ds_logo = new NS_System.StrongTypesNS.DS_PHOTODataSet();
+                    Bitmap image = new Bitmap( ConferenceSys.Properties.Resources.RUpurple);
+                    DataRow row = Global.Global.ds_logo.TT_PHOTO.NewRow();
+                    row["image"] = (byte[])TypeDescriptor.GetConverter(image).ConvertTo(image, typeof(byte[]));
+
+                    Global.Global.ds_logo.TT_PHOTO.Rows.Add(row);
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        void MainForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About.About frmAbout = new About.About();
+            frmAbout.ShowDialog();
+        }
+
+        private void registerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.Register frm_register = new ConferenceWardens.Register();
+            frm_register.ShowDialog();
+        }
+
+        private void printFolioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.Folio frm_folio = new ConferenceWardens.Folio("Register");
+            frm_folio.ShowDialog();
+
+        }
+
+        private void availableRoomsListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.AvailableRooms frm_available = new ConferenceWardens.AvailableRooms();
+            frm_available.ShowDialog();
+        }
+
+        private void arrivalDepartureListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.ArrivalDeparture frm_arrivals = new ConferenceWardens.ArrivalDeparture();
+            frm_arrivals.ShowDialog();
+        }
+
+        private void alphaListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.AlphaList frm_alpha = new ConferenceWardens.AlphaList();
+            frm_alpha.ShowDialog();
+        }
+
+        private void mealReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.MealsReport frm_meals = new ConferenceWardens.MealsReport();
+            frm_meals.ShowDialog();
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.Folio frm_folio = new ConferenceWardens.Folio("QuerySurnName");
+            frm_folio.ShowDialog();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.QuerySurnName frm_query = new ConferenceWardens.QuerySurnName();
+            frm_query.ShowDialog();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.QueryResRoom frm_query = new ConferenceWardens.QueryResRoom();
+            frm_query.ShowDialog();
+        }
+
+        private void fsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

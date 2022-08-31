@@ -1,0 +1,218 @@
+﻿namespace ConferenceSys.ConferenceWardens
+{
+    partial class ConferenceBuildings
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConferenceBuildings));
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.dg_buildings = new CustomDataGridView();
+            this.cn_checked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_building = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_buildingname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsBuilding = new System.Windows.Forms.BindingSource(this.components);
+            this.bsHouse = new System.Windows.Forms.BindingSource(this.components);
+            this.cbHall = new System.Windows.Forms.ComboBox();
+            this.bsHall = new System.Windows.Forms.BindingSource(this.components);
+            this.lblHall = new System.Windows.Forms.Label();
+            this.btn_uncheck = new System.Windows.Forms.Button();
+            this.btn_check = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_buildings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsBuilding)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHouse)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHall)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Location = new System.Drawing.Point(347, 375);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(165, 23);
+            this.btn_cancel.TabIndex = 69;
+            this.btn_cancel.Text = "Cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // dg_buildings
+            // 
+            this.dg_buildings.AllowUserToAddRows = false;
+            this.dg_buildings.AllowUserToDeleteRows = false;
+            this.dg_buildings.AutoGenerateColumns = false;
+            this.dg_buildings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_buildings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cn_checked,
+            this.cn_building,
+            this.cn_buildingname});
+            this.dg_buildings.DataSource = this.bsBuilding;
+            this.dg_buildings.Location = new System.Drawing.Point(7, 39);
+            this.dg_buildings.MultiSelect = false;
+            this.dg_buildings.Name = "dg_buildings";
+            this.dg_buildings.RowHeadersVisible = false;
+            this.dg_buildings.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg_buildings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dg_buildings.Size = new System.Drawing.Size(678, 330);
+            this.dg_buildings.TabIndex = 67;
+            // 
+            // cn_checked
+            // 
+            this.cn_checked.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cn_checked.HeaderText = "";
+            this.cn_checked.Name = "cn_checked";
+            this.cn_checked.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cn_checked.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.cn_checked.Width = 19;
+            // 
+            // cn_building
+            // 
+            this.cn_building.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cn_building.DataPropertyName = "BUILDING";
+            this.cn_building.HeaderText = "Code";
+            this.cn_building.Name = "cn_building";
+            this.cn_building.Width = 57;
+            // 
+            // cn_buildingname
+            // 
+            this.cn_buildingname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_buildingname.DataPropertyName = "BUILDING_NAME";
+            this.cn_buildingname.HeaderText = "Name";
+            this.cn_buildingname.Name = "cn_buildingname";
+            // 
+            // bsBuilding
+            // 
+            this.bsBuilding.DataSource = typeof(NS_System.StrongTypesNS.DS_BUILDINGSDataSet.TT_BUILDINGDataTable);
+            // 
+            // bsHouse
+            // 
+            this.bsHouse.DataSource = typeof(NS_System.StrongTypesNS.DS_RESCODESDataSet.TT_RESDataTable);
+            // 
+            // cbHall
+            // 
+            this.cbHall.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbHall.DataSource = this.bsHall;
+            this.cbHall.DisplayMember = "hallname";
+            this.cbHall.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHall.FormattingEnabled = true;
+            this.cbHall.Location = new System.Drawing.Point(46, 12);
+            this.cbHall.Name = "cbHall";
+            this.cbHall.Size = new System.Drawing.Size(169, 21);
+            this.cbHall.TabIndex = 71;
+            this.cbHall.ValueMember = "hall";
+            this.cbHall.SelectedIndexChanged += new System.EventHandler(this.cbHall_SelectedIndexChanged);
+            // 
+            // bsHall
+            // 
+            this.bsHall.DataSource = typeof(NS_Conference.StrongTypesNS.ds_conf_codesDataSet.tt_conf_hallDataTable);
+            // 
+            // lblHall
+            // 
+            this.lblHall.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblHall.AutoSize = true;
+            this.lblHall.Location = new System.Drawing.Point(15, 15);
+            this.lblHall.Name = "lblHall";
+            this.lblHall.Size = new System.Drawing.Size(25, 13);
+            this.lblHall.TabIndex = 70;
+            this.lblHall.Text = "Hall";
+            // 
+            // btn_uncheck
+            // 
+            this.btn_uncheck.Location = new System.Drawing.Point(601, 10);
+            this.btn_uncheck.Name = "btn_uncheck";
+            this.btn_uncheck.Size = new System.Drawing.Size(75, 23);
+            this.btn_uncheck.TabIndex = 73;
+            this.btn_uncheck.Text = "Uncheck All";
+            this.btn_uncheck.UseVisualStyleBackColor = true;
+            this.btn_uncheck.Click += new System.EventHandler(this.btn_uncheck_Click);
+            // 
+            // btn_check
+            // 
+            this.btn_check.Location = new System.Drawing.Point(520, 10);
+            this.btn_check.Name = "btn_check";
+            this.btn_check.Size = new System.Drawing.Size(75, 23);
+            this.btn_check.TabIndex = 72;
+            this.btn_check.Text = "Check All";
+            this.btn_check.UseVisualStyleBackColor = true;
+            this.btn_check.Click += new System.EventHandler(this.btn_check_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(176, 375);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(165, 23);
+            this.btnAdd.TabIndex = 74;
+            this.btnAdd.Text = "Add Selected Building(s)";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // ConferenceBuildings
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(688, 401);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btn_uncheck);
+            this.Controls.Add(this.btn_check);
+            this.Controls.Add(this.cbHall);
+            this.Controls.Add(this.lblHall);
+            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.dg_buildings);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ConferenceBuildings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Search Conference Buildings";
+            this.Load += new System.EventHandler(this.ConferenceBuildings_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dg_buildings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsBuilding)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHouse)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHall)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btn_cancel;
+        private CustomDataGridView dg_buildings;
+        private System.Windows.Forms.ComboBox cbHall;
+        private System.Windows.Forms.Label lblHall;
+        private System.Windows.Forms.BindingSource bsHall;
+        private System.Windows.Forms.BindingSource bsHouse;
+        private System.Windows.Forms.BindingSource bsBuilding;
+        private System.Windows.Forms.Button btn_uncheck;
+        private System.Windows.Forms.Button btn_check;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn cn_checked;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_building;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_buildingname;
+        private System.Windows.Forms.Button btnAdd;
+    }
+}

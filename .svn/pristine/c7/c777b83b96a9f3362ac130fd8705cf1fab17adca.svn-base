@@ -1,0 +1,884 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9D4D5362-5D8E-49E3-A953-F218373F9F73}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConferenceSys</RootNamespace>
+    <AssemblyName>ConferenceSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <PublishUrl>R:\publish\Conferences\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>https://dmuapps.ru.ac.za/publish/Conferences/</InstallUrl>
+    <ProductName>Conference System</ProductName>
+    <PublisherName>Protea Applications</PublisherName>
+    <MinimumRequiredVersion>2.0.0.38</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>39</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Utilities\home.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>CDA6997379B4B72FB693D3B27B5867379ED047B5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>RhodesnewCert.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="PN_ConfAdmin">
+      <HintPath>..\..\..\Proxies\NS_ConfAdmin\PN_ConfAdmin.dll</HintPath>
+    </Reference>
+    <Reference Include="PN_Conference">
+      <HintPath>..\..\..\Proxies\NS_Conference\PN_Conference.dll</HintPath>
+    </Reference>
+    <Reference Include="PN_Global, Version=10.0.1.50000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Proxies\NS_Global\PN_Global.dll</HintPath>
+    </Reference>
+    <Reference Include="PN_ResSystem, Version=10.0.1.50000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Proxies\NS_ResSystem\PN_ResSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="PN_System, Version=10.0.1.50000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Proxies\NS_System\PN_System.dll</HintPath>
+    </Reference>
+    <Reference Include="Progress.Messages, Version=10.2.2.1235, Culture=neutral, PublicKeyToken=1a0c0a15bd34807c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Proxies\NS_System\Progress.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="Progress.o4glrt, Version=10.2.2.1235, Culture=neutral, PublicKeyToken=1a0c0a15bd34807c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Proxies\NS_System\Progress.o4glrt.dll</HintPath>
+    </Reference>
+    <Reference Include="Proxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\c# Standard Classes\Proxy\Proxy\bin\Debug\Proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\c# Standard Classes\Item.cs">
+      <Link>Utilities\Item.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DMU\DMU\DMU_Procedures\SearchGLAccounts.cs">
+      <Link>SharedScreens\SearchGLAccounts.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\DMU\DMU\DMU_Procedures\SearchGLAccounts.designer.cs">
+      <Link>SharedScreens\SearchGLAccounts.designer.cs</Link>
+      <DependentUpon>SearchGLAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DMU\DMU\DMU_Procedures\Search_Protea_Users.cs">
+      <Link>SharedScreens\Search_Protea_Users.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\DMU\DMU\DMU_Procedures\Search_Protea_Users.designer.cs">
+      <Link>SharedScreens\Search_Protea_Users.designer.cs</Link>
+      <DependentUpon>Search_Protea_Users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DMU\DMU\Utilities\utils.cs">
+      <Link>Utilities\utils.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ResOps\ResOps\ConferenceAdmin\Utilities\FolioLookUp.cs">
+      <Link>ConferenceAdmin\FolioLookUp.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\ResOps\ResOps\ConferenceAdmin\Utilities\FolioLookUp.designer.cs">
+      <Link>ConferenceAdmin\FolioLookUp.designer.cs</Link>
+      <DependentUpon>FolioLookUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Shared_Screens\About\About.cs">
+      <Link>SharedScreens\About.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Shared_Screens\About\About.designer.cs">
+      <Link>SharedScreens\About.designer.cs</Link>
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Shared_Screens\ThinkManager\SplashScreen.cs">
+      <Link>Utilities\SplashScreen.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Shared_Screens\ThinkManager\SplashScreen.designer.cs">
+      <Link>Utilities\SplashScreen.designer.cs</Link>
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Shared_Screens\ThinkManager\ThinkManager.cs">
+      <Link>Utilities\ThinkManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\StudentDetails\StudentDetails\SearchGrid\Search_Grid_Students.cs">
+      <Link>SharedScreens\Search_Grid_Students.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\StudentDetails\StudentDetails\SearchGrid\Search_Grid_Students.designer.cs">
+      <Link>SharedScreens\Search_Grid_Students.designer.cs</Link>
+      <DependentUpon>Search_Grid_Students.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\RoomsNightReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\RoomsNightReport.Designer.cs">
+      <DependentUpon>RoomsNightReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\BlockBooking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\BlockBooking.Designer.cs">
+      <DependentUpon>BlockBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\BlockDates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\BlockDates.Designer.cs">
+      <DependentUpon>BlockDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\AvailableBlockRooms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\AvailableBlockRooms.Designer.cs">
+      <DependentUpon>AvailableBlockRooms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\ApproveOverride.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\ApproveOverride.designer.cs">
+      <DependentUpon>ApproveOverride.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\Capture_Reciept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\Capture_Reciept.Designer.cs">
+      <DependentUpon>Capture_Reciept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\FullConferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\FullConferences.designer.cs">
+      <DependentUpon>FullConferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\Writeoff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\Writeoff.Designer.cs">
+      <DependentUpon>Writeoff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Group Updates\Transactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Group Updates\Transactions.Designer.cs">
+      <DependentUpon>Transactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Reports\RoomDiscrepancies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Reports\RoomDiscrepancies.Designer.cs">
+      <DependentUpon>RoomDiscrepancies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\MultipleAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\MultipleAdd.Designer.cs">
+      <DependentUpon>MultipleAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Reports\FinancialReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Reports\FinancialReport.designer.cs">
+      <DependentUpon>FinancialReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\ConfBuildings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\ConfBuildings.Designer.cs">
+      <DependentUpon>ConfBuildings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\ConferenceTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\ConferenceTypes.designer.cs">
+      <DependentUpon>ConferenceTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\ConferenceUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Conference Updates\ConferenceUpdate.designer.cs">
+      <DependentUpon>ConferenceUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Reports\Mattress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Reports\Mattress.designer.cs">
+      <DependentUpon>Mattress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Reports\GuestsByHall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Reports\GuestsByHall.Designer.cs">
+      <DependentUpon>GuestsByHall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Group Updates\ResetBookDates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Group Updates\ResetBookDates.Designer.cs">
+      <DependentUpon>ResetBookDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\DefaultHall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\DefaultHall.Designer.cs">
+      <DependentUpon>DefaultHall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Group Updates\Discount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Group Updates\Discount.Designer.cs">
+      <DependentUpon>Discount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\GroupReservations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\GroupReservations.Designer.cs">
+      <DependentUpon>GroupReservations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Group Updates\MealProcessing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Group Updates\MealProcessing.Designer.cs">
+      <DependentUpon>MealProcessing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\Reservations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\Reservations.Designer.cs">
+      <DependentUpon>Reservations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\RoomBeds.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\RoomBeds.Designer.cs">
+      <DependentUpon>RoomBeds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\SearchMainReserv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\SearchMainReserv.Designer.cs">
+      <DependentUpon>SearchMainReserv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceAdmin\UpdateReserv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\UpdateReserv.Designer.cs">
+      <DependentUpon>UpdateReserv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\AvailableRooms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\AvailableRooms.Designer.cs">
+      <DependentUpon>AvailableRooms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\ArrivalDeparture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\ArrivalDeparture.Designer.cs">
+      <DependentUpon>ArrivalDeparture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\AplhaList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\AplhaList.Designer.cs">
+      <DependentUpon>AplhaList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\ConferenceBuildings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\ConferenceBuildings.Designer.cs">
+      <DependentUpon>ConferenceBuildings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\ConferenceAvaialbleRooms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\ConferenceAvaialbleRooms.Designer.cs">
+      <DependentUpon>ConferenceAvaialbleRooms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\BedNightsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\BedNightsReport.Designer.cs">
+      <DependentUpon>BedNightsReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\QuerySurnName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\QuerySurnName.Designer.cs">
+      <DependentUpon>QuerySurnName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\QueryResRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\QueryResRoom.Designer.cs">
+      <DependentUpon>QueryResRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\MealsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\MealsReport.Designer.cs">
+      <DependentUpon>MealsReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\Folio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\Folio.Designer.cs">
+      <DependentUpon>Folio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\SearchConference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\SearchConference.Designer.cs">
+      <DependentUpon>SearchConference.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\SearchGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\SearchGroups.Designer.cs">
+      <DependentUpon>SearchGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\Register.Designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConferenceWardens\SearchFolio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceWardens\SearchFolio.Designer.cs">
+      <DependentUpon>SearchFolio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\ConfReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\ConfReports.designer.cs">
+      <DependentUpon>ConfReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="ConferenceAdmin\Utilities\SrcMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConferenceAdmin\Utilities\SrcMain.designer.cs">
+      <DependentUpon>SrcMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskInitializer\InitializingTask.cs" />
+    <Compile Include="TaskInitializer\TaskInitializeLoader.cs" />
+    <Compile Include="LocalClasses\HorizontalHeaders.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AccessControl.cs" />
+    <Compile Include="Utilities\CustomDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TaskInitializer\TaskInitializer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskInitializer\TaskInitializer.Designer.cs">
+      <DependentUpon>TaskInitializer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\MailMerge.cs" />
+    <Compile Include="Utilities\NullableDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="..\..\DMU\DMU\DMU_Procedures\SearchGLAccounts.resx">
+      <Link>SharedScreens\SearchGLAccounts.resx</Link>
+      <DependentUpon>SearchGLAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\DMU\DMU\DMU_Procedures\Search_Protea_Users.resx">
+      <Link>SharedScreens\Search_Protea_Users.resx</Link>
+      <DependentUpon>Search_Protea_Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\ResOps\ResOps\ConferenceAdmin\Utilities\FolioLookUp.resx">
+      <Link>ConferenceAdmin\FolioLookUp.resx</Link>
+      <DependentUpon>FolioLookUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Shared_Screens\About\About.resx">
+      <Link>SharedScreens\About.resx</Link>
+      <DependentUpon>About.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Shared_Screens\ThinkManager\SplashScreen.resx">
+      <Link>Utilities\SplashScreen.resx</Link>
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\StudentDetails\StudentDetails\SearchGrid\Search_Grid_Students.resx">
+      <Link>SharedScreens\Search_Grid_Students.resx</Link>
+      <DependentUpon>Search_Grid_Students.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\RoomsNightReport.resx">
+      <DependentUpon>RoomsNightReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\BlockBooking.resx">
+      <DependentUpon>BlockBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\BlockDates.resx">
+      <DependentUpon>BlockDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\AvailableBlockRooms.resx">
+      <DependentUpon>AvailableBlockRooms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\ApproveOverride.resx">
+      <DependentUpon>ApproveOverride.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\Capture_Reciept.resx">
+      <DependentUpon>Capture_Reciept.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\FullConferences.resx">
+      <DependentUpon>FullConferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\Writeoff.resx">
+      <DependentUpon>Writeoff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Group Updates\Transactions.resx">
+      <DependentUpon>Transactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Reports\RoomDiscrepancies.resx">
+      <DependentUpon>RoomDiscrepancies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Utilities\MultipleAdd.resx">
+      <DependentUpon>MultipleAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Reports\FinancialReport.resx">
+      <DependentUpon>FinancialReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\ConfBuildings.resx">
+      <DependentUpon>ConfBuildings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\ConferenceTypes.resx">
+      <DependentUpon>ConferenceTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Conference Updates\ConferenceUpdate.resx">
+      <DependentUpon>ConferenceUpdate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Reports\Mattress.resx">
+      <DependentUpon>Mattress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Reports\GuestsByHall.resx">
+      <DependentUpon>GuestsByHall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Group Updates\ResetBookDates.resx">
+      <DependentUpon>ResetBookDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Utilities\DefaultHall.resx">
+      <DependentUpon>DefaultHall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Group Updates\Discount.resx">
+      <DependentUpon>Discount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Utilities\GroupReservations.resx">
+      <DependentUpon>GroupReservations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Group Updates\MealProcessing.resx">
+      <DependentUpon>MealProcessing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Utilities\Reservations.resx">
+      <DependentUpon>Reservations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Utilities\RoomBeds.resx">
+      <DependentUpon>RoomBeds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\Utilities\SearchMainReserv.resx">
+      <DependentUpon>SearchMainReserv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceAdmin\UpdateReserv.resx">
+      <DependentUpon>UpdateReserv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\AvailableRooms.resx">
+      <DependentUpon>AvailableRooms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\ArrivalDeparture.resx">
+      <DependentUpon>ArrivalDeparture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\AplhaList.resx">
+      <DependentUpon>AplhaList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\ConferenceBuildings.resx">
+      <DependentUpon>ConferenceBuildings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\ConferenceAvaialbleRooms.resx">
+      <DependentUpon>ConferenceAvaialbleRooms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\BedNightsReport.resx">
+      <DependentUpon>BedNightsReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\QuerySurnName.resx">
+      <DependentUpon>QuerySurnName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\QueryResRoom.resx">
+      <DependentUpon>QueryResRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\MealsReport.resx">
+      <DependentUpon>MealsReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\Folio.resx">
+      <DependentUpon>Folio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\SearchConference.resx">
+      <DependentUpon>SearchConference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\SearchGroups.resx">
+      <DependentUpon>SearchGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConferenceWardens\SearchFolio.resx">
+      <DependentUpon>SearchFolio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conferences\Planner.resx">
+      <DependentUpon>Planner.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conferences\SelectFolio.resx">
+      <DependentUpon>SelectFolio.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ReportForms\ConfReports.resx">
+      <DependentUpon>ConfReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ConferenceWardens\ConferenceRegister.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\AvailableRooms.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\ArrivalDeparture.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\AlphaList.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\BookingsSubreport.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\BlockedRooms.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\ConferenceAvailableRooms.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\ConfirmationLetter.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\BedNights.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\NAFConfirmLetter.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\NSFASLIST.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\FullReservationReport.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\RoomNights.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\LockProblems.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\OverridePayments1.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\UnbookedReservations.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\Discrepancies.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\RoomsStats.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\SrcList.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\Mattress.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\StuBookings.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\GuestsByHall.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\ReserevationPrint.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\QuerySurnName.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\QueryResRoom.rdlc" />
+    <EmbeddedResource Include="Reports\ConferenceWardens\MealsReport.rdlc" />
+    <EmbeddedResource Include="ConferenceAdmin\Utilities\SrcMain.resx">
+      <DependentUpon>SrcMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskInitializer\TaskInitializer.resx">
+      <DependentUpon>TaskInitializer.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_blocksDataSet+tt_cnf_blockDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_bookings_reportDataSet+tt_bookings_reportDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.DS_CCODEDataSet+tt_roomsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.DS_CCODEDataSet.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_conf_fullDataSet+tt_conf_fullDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet+tt_conf_buildDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet+tt_conf_typeDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.DS_CONF_ROOMS_REPORTDataSet+tt_conf_roomsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_lettersDataSet+tt_book_listDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_lock_problemsDataSet+tt_lock_problemsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_overrideDataSet+tt_overrideDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_recieptDataSet.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet+tt_bookingsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet+tt_cnftrsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet+tt_reservationsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.ds_reserv_lookupDataSet+tt_reserve_lookupDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ConfAdmin.StrongTypesNS.DS_SRCDataSet+TT_SRCDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_beds_reportDataSet+tt_beds_fileDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_beds_reportDataSet+tt_rooms_fileDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_conference_lookupDataSet+tt_conferenceDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_conf_codesDataSet+TT_CONF_BUILDINGDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_conf_codesDataSet+tt_conf_hallDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_conf_codesDataSet+tt_conf_resDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_mealsDataSet+TT_MEALSDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_registerDataSet+tt_aplha_listDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_registerDataSet+tt_arrivalsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_registerDataSet+tt_mealsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_registerDataSet+TT_REGISTERDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_registerDataSet+tt_TEMProomsDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_rooms_reportDataSet+TT_ROOMSDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_rooms_reportDataSet+tt_rooms_reportDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_System.StrongTypesNS.ds_genDataSet+TT_GENDataTable.datasource" />
+    <None Include="RhodesnewCert.pfx" />
+    <None Include="Utilities\app.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_bookingsDataSet+tt_reservationDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_Conference.StrongTypesNS.ds_conference_lookupDataSet+tt_groupDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_ResSystem.StrongTypesNS.DS_RESDataSet+TT_ROOMSDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_System.StrongTypesNS.DS_BUILDINGSDataSet+TT_BUILDINGDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_System.StrongTypesNS.DS_RESCODESDataSet+TT_HALLDataTable.datasource" />
+    <None Include="Properties\DataSources\NS_System.StrongTypesNS.DS_RESCODESDataSet+TT_RESDataTable.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Conferences\Planner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conferences\Planner.Designer.cs">
+      <DependentUpon>Planner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Conferences\SelectFolio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conferences\SelectFolio.Designer.cs">
+      <DependentUpon>SelectFolio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Global.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Header.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.ReportViewer.11.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft Report Viewer 2012 Runtime</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SqlServer.SQLSysClrTypes.11.0.x86">
+      <Visible>False</Visible>
+      <ProductName>Microsoft® System CLR Types for SQL Server® 2012 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RUpurple.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no_photo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no_photo_available.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrashCan.jpg" />
+    <None Include="Resources\trash.png" />
+    <None Include="Resources\cancel-icon.png" />
+    <None Include="Resources\Calendar2.png" />
+    <None Include="Resources\Calendar.png" />
+    <None Include="Resources\Calendar21.png" />
+    <None Include="Resources\Calendar22.png" />
+    <None Include="Resources\food.png" />
+    <None Include="Resources\dicount.png" />
+    <Content Include="Utilities\home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Microsoft.ReportViewer.Common">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.DataVisualization">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.ProcessingObjectModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.WinForms">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Types">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

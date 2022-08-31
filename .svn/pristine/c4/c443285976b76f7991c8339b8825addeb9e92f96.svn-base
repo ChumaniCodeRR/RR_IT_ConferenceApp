@@ -1,0 +1,202 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys
+{
+    public partial class MainForm : Form
+    {
+
+        Planner planner = new Planner();
+        ConferenceSys.Reservations frmReservations = new Reservations();
+
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                //TODO: Change Conference to a proper program name
+                bool validlogin = AppServer.AppServer.initial_Login(string.Empty, false, "cnfg001", false, "ConferenceSys", false);
+                if (validlogin)
+                {
+                    if (Proxy.Info.username.StartsWith("test")) menuStrip.BackColor = statusStrip.BackColor = Color.LightGreen;
+                    this.WindowState = FormWindowState.Maximized;
+
+                    toolStripStatusLabel.Text = string.Format("{0} {1} ({2}) Since {3}", toolStripStatusLabel.Text, Utils.ToUpperFirstLetter(Proxy.Info.fullname),
+                        Proxy.Info.username, string.Format("{0: dddd dd MMMM yyyy} at {1: HH:mm:ss}", DateTime.Now, DateTime.Now));
+
+                    Global.Global.ds_conference_lookups = Proxy.ConferenceSystem.Get_Conference_Code_Descriptions();              
+                    Global.Global.ds_conf_codes = Proxy.ConferenceSystem.populate_conf_codes();
+
+                    Global.Global.ds_Stu = Proxy.Global.Get_Reg_Stu_By_Res(0);            
+                                        
+                    planner.MdiParent = this;
+                    planner.Dock = DockStyle.Fill;
+                    planner.Show();
+                    
+                    Global.Global.ds_logo = new NS_System.StrongTypesNS.DS_PHOTODataSet();
+                    Bitmap image = new Bitmap( ConferenceSys.Properties.Resources.RUpurple);
+                    DataRow row = Global.Global.ds_logo.TT_PHOTO.NewRow();
+                    row["image"] = (byte[])TypeDescriptor.GetConverter(image).ConvertTo(image, typeof(byte[]));
+
+                    Global.Global.ds_logo.TT_PHOTO.Rows.Add(row);
+
+                    Utilities.AccessControl.CheckUserAccess();
+                    conferenceOfficeToolStripMenuItem.Visible = Utilities.AccessControl.HasConfAdmin;
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        void MainForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About.About frmAbout = new About.About();
+            frmAbout.ShowDialog();
+        }
+
+        private void registerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.Register frm_register = new ConferenceWardens.Register();
+            frm_register.ShowDialog();
+        }
+
+        private void printFolioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.Folio frm_folio = new ConferenceWardens.Folio("Register");
+            frm_folio.ShowDialog();
+
+        }
+
+        private void availableRoomsListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.AvailableRooms frm_available = new ConferenceWardens.AvailableRooms();
+            frm_available.ShowDialog();
+        }
+
+        private void arrivalDepartureListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.ArrivalDeparture frm_arrivals = new ConferenceWardens.ArrivalDeparture();
+            frm_arrivals.ShowDialog();
+        }
+
+        private void alphaListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.AlphaList frm_alpha = new ConferenceWardens.AlphaList();
+            frm_alpha.ShowDialog();
+        }
+
+        private void mealReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.MealsReport frm_meals = new ConferenceWardens.MealsReport();
+            frm_meals.ShowDialog();
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.Folio frm_folio = new ConferenceWardens.Folio("QuerySurnName");
+            frm_folio.ShowDialog();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.QuerySurnName frm_query = new ConferenceWardens.QuerySurnName();
+            frm_query.ShowDialog();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ConferenceWardens.QueryResRoom frm_query = new ConferenceWardens.QueryResRoom();
+            frm_query.ShowDialog();
+        }
+               
+        private void manageRoomsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceAdmin.RoomBeds frmBeds = new ConferenceAdmin.RoomBeds();
+            frmBeds.ShowDialog();
+        }
+
+        private void manageConferenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceSys.ConferenceAdmin.ConferenceUpdate.ConferenceUpdate frm_conference = new ConferenceSys.ConferenceAdmin.ConferenceUpdate.ConferenceUpdate();
+            frm_conference.ShowDialog();
+            
+            if (frmReservations !=  null) frmReservations.get_conferences();
+
+        }
+
+        private void manageReservationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReservations.MdiParent = this;
+            frmReservations.Dock = DockStyle.Fill;
+            frmReservations.Show();         
+        }
+
+        private void guestsByDinningHallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceSys.ConferenceAdmin.GuestsByHall frmGuests = new ConferenceSys.ConferenceAdmin.GuestsByHall();
+            frmGuests.ShowDialog();
+        }
+
+        private void studentBookingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Search_Grid_Students.Search_Grid_Students frmSearch = new Search_Grid_Students.Search_Grid_Students(true);
+                frmSearch.ShowDialog();
+                if (frmSearch.Stuno != "")
+                {
+                    string tempstring = "";
+                    NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_bookings = Proxy.ConferenceAdmin.student_bookings(frmSearch.Stuno, out tempstring);
+
+                    if (ds_bookings.tt_bookings.Count > 0)
+                    {
+                        DataView dv_report = new DataView(ds_bookings.tt_bookings);
+                        Reports frmReport = new Reports("StuBookings", dv_report, tempstring);
+                        frmReport.Show();
+                    }
+                    else MessageBox.Show("Your query returned no data to print.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+             }
+            catch(Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void mattressReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConferenceSys.ConferenceAdmin.Mattress frmMatt = new ConferenceSys.ConferenceAdmin.Mattress();
+            frmMatt.ShowDialog();
+        }
+
+        private void financialReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResOps.ConferenceAdmin.FinancialReport frmFinancial = new  ResOps.ConferenceAdmin.FinancialReport();
+            frmFinancial.ShowDialog();
+        }        
+    }
+}

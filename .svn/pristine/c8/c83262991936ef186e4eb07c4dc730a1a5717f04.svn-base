@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys.ConferenceWardens
+{
+    public partial class Folio : Form
+    {
+        public string ttype;
+
+        public Folio(string _ttype)
+        {
+            InitializeComponent();
+            ttype = _ttype;
+            if (ttype == "Register") this.Text = "Register By Folio";
+            if (ttype == "QuerySurnName") this.Text = "Query By Folio";
+
+        }
+
+        private void btn_search_folio_Click(object sender, EventArgs e)
+        {
+
+            SearchFolio frm_search = new SearchFolio();
+            frm_search.ShowDialog();
+
+            if (frm_search.folio != "")
+            {
+                txt_folio.Text = frm_search.folio;
+                txt_descrip.Text = frm_search.descrip;
+            }
+          
+        }
+
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txt_folio.Text == "") MessageBox.Show("Error - Please enter a folio number to proceed", "Folio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    NS_Conference.StrongTypesNS.ds_registerDataSet ds_register = new NS_Conference.StrongTypesNS.ds_registerDataSet();
+
+
+                    string feedback = "";
+                    if (ttype == "Register") ds_register = Proxy.ConferenceSystem.register(txt_folio.Text, "*", "*", "*", "?", "?", "*", false, "?", "", "", out feedback); 
+                    if (ttype == "QuerySurnName") ds_register = Proxy.ConferenceSystem.query_by_folio(txt_folio.Text, out feedback);
+
+                    if (feedback.Contains("Error"))
+                    {
+                        MessageBox.Show(feedback, "Folio Number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+
+                    if (ds_register.TT_REGISTER.Rows.Count > 0)
+                    {
+                        ConferenceSys.Properties.Settings.Default.Save();
+                        string temptitle = "";
+                        
+                        if (ttype == "Register") temptitle = "Conference Register";
+                        if (ttype == "QuerySurnName") temptitle = "Query By Surname/Name/Folio or Group";
+
+                        Reports frm_report = new Reports(ttype, ds_register, temptitle);
+                        frm_report.Show();
+
+                    }
+                    else MessageBox.Show("Your query returned no data to display", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void Folio_Load(object sender, EventArgs e)
+        {
+            
+        }
+    }
+}

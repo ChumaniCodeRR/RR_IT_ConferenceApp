@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ConferenceSys">
+</Property><Property Name="Solution File" Value="Q:\csharp\programs\ConferenceSys\ConferenceSys.sln">
+</Property><Property Name="User Options File" Value="Q:\csharp\programs\ConferenceSys\ConferenceSys.suo">
+</Property><Property Name="Date" Value="01 February 2012">
+</Property><Property Name="Time" Value="08:23 AM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="ConferenceSys.sln" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys.sln">
+</Event><Event ErrorLevel="0" Project="" Source="ConferenceSys.suo" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys.suo">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\ConferenceSys.csproj" Description="Project file successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\ConferenceSys.csproj">
+</Event><Event ErrorLevel="1" Project="ConferenceSys" Source="..\Shared_Screens\About\About.cs" Description="Backed up project may not build.  Project contains linked file: C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SharedScreens\About.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="..\Shared_Screens\About\About.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SharedScreens\About.cs">
+</Event><Event ErrorLevel="1" Project="ConferenceSys" Source="..\Shared_Screens\About\About.designer.cs" Description="Backed up project may not build.  Project contains linked file: C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SharedScreens\About.designer.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="..\Shared_Screens\About\About.designer.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SharedScreens\About.designer.cs">
+</Event><Event ErrorLevel="1" Project="ConferenceSys" Source="..\Shared_Screens\SharedCode\utils.cs" Description="Backed up project may not build.  Project contains linked file: C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SharedCode\utils.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="..\Shared_Screens\SharedCode\utils.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SharedCode\utils.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\BookingDetails.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\BookingDetails.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\BookingDetails.Designer.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\BookingDetails.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\LocalClasses\HorizontalHeaders.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\LocalClasses\HorizontalHeaders.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\MainForm.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\MainForm.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\MainForm.Designer.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\MainForm.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Program.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Program.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Properties\Resources.Designer.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Properties\Settings.Designer.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\ResPlanner.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\ResPlanner.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\ResPlanner.Designer.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\ResPlanner.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\SelectFolio.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SelectFolio.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\SelectFolio.Designer.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SelectFolio.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Utilities\DGVRowHeader.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Utilities\DGVRowHeader.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Utilities\Global.cs" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Utilities\Global.cs">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Properties\Settings.settings" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Resources\Header.png" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Resources\Header.png">
+</Event><Event ErrorLevel="1" Project="ConferenceSys" Source="..\Shared_Screens\About\About.resx" Description="Backed up project may not build.  Project contains linked file: C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SharedScreens\About.resx">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="..\Shared_Screens\About\About.resx" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SharedScreens\About.resx">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\BookingDetails.resx" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\BookingDetails.resx">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\MainForm.resx" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\MainForm.resx">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\Properties\Resources.resx" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\ResPlanner.resx" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\ResPlanner.resx">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\SelectFolio.resx" Description="File successfully backed up as C:\Users\s1100302\Documents\Soft\Backup\ConferenceSys\SelectFolio.resx">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\ConferenceSys.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ConferenceSys" Source="ConferenceSys\ConferenceSys.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="ConferenceSys.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="ConferenceSys.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ConferenceSys" Source="ConferenceSys\ConferenceSys.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

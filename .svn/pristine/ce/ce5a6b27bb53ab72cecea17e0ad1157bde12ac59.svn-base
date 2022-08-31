@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin
+{
+    public partial class GuestsByHall : Form
+    {   
+  
+        DateTime StartDate;
+        DateTime EndDate;
+        string header;
+
+        public GuestsByHall()
+        {
+            InitializeComponent();
+        }
+
+        private void GuestsByHall_Load(object sender, EventArgs e)
+        {
+            DataView DV_Halls = new DataView(Global.Global.ds_conf_codes.tt_dhall);
+            DV_Halls.Sort = "detail";
+            cbHall.DataSource = DV_Halls;
+            cbHall.SelectedIndex = 0;           
+        }
+
+        private void btn_proceed_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_guests = Proxy.ConferenceAdmin.guests_by_hall(cbHall.SelectedValue.ToString(), dateTimePicker1.Value, dateTimePicker2.Value);
+                if (ds_guests.tt_bookings.Count > 0)
+                {
+                    string title = cbHall.Text + " " + dateTimePicker1.Value.ToShortDateString() + " - " + dateTimePicker2.Value.ToShortDateString();
+                    DataView dv_report = new DataView(ds_guests.tt_bookings);
+                    ConferenceSys.Reports frmReport = new ConferenceSys.Reports("GuestsByHall", dv_report, title);
+                    frmReport.Show();
+                }
+                else MessageBox.Show("Your query returned no data to print.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }    
+
+        private void btn_cancel_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }      
+    }
+}

@@ -1,0 +1,337 @@
+﻿namespace ConferenceSys.ConferenceAdmin
+{
+    partial class SearchMainReserv
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchMainReserv));
+            this.label11 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cb_conferences = new System.Windows.Forms.ComboBox();
+            this.bs_conf_list = new System.Windows.Forms.BindingSource(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_folio = new System.Windows.Forms.TextBox();
+            this.txt_organisation = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt_surname = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.p = new System.Windows.Forms.Panel();
+            this.dg_conferences = new CustomDataGridView();
+            this.cnFolio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cnSurn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cnInstitution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startdteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enddteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typedescripDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.guestsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parentfolioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs_reservations = new System.Windows.Forms.BindingSource(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_conf_list)).BeginInit();
+            this.p.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_conferences)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_reservations)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(472, 56);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 13);
+            this.label11.TabIndex = 100;
+            this.label11.Text = "Surname:";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(182, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 13);
+            this.label7.TabIndex = 99;
+            this.label7.Text = "Conference:";
+            // 
+            // cb_conferences
+            // 
+            this.cb_conferences.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cb_conferences.DataSource = this.bs_conf_list;
+            this.cb_conferences.DisplayMember = "conference";
+            this.cb_conferences.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_conferences.FormattingEnabled = true;
+            this.cb_conferences.Location = new System.Drawing.Point(253, 10);
+            this.cb_conferences.Name = "cb_conferences";
+            this.cb_conferences.Size = new System.Drawing.Size(308, 21);
+            this.cb_conferences.TabIndex = 98;
+            this.cb_conferences.ValueMember = "ccode";
+            this.cb_conferences.SelectedIndexChanged += new System.EventHandler(this.cb_conferences_SelectedIndexChanged);
+            // 
+            // bs_conf_list
+            // 
+            this.bs_conf_list.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet.tt_conferenceDataTable);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(120, 56);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 97;
+            this.label5.Text = "Folio:";
+            // 
+            // txt_folio
+            // 
+            this.txt_folio.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_folio.Location = new System.Drawing.Point(158, 53);
+            this.txt_folio.Name = "txt_folio";
+            this.txt_folio.Size = new System.Drawing.Size(84, 20);
+            this.txt_folio.TabIndex = 96;
+            // 
+            // txt_organisation
+            // 
+            this.txt_organisation.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_organisation.Location = new System.Drawing.Point(323, 53);
+            this.txt_organisation.Name = "txt_organisation";
+            this.txt_organisation.Size = new System.Drawing.Size(143, 20);
+            this.txt_organisation.TabIndex = 95;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(248, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 93;
+            this.label4.Text = "Organisation:";
+            // 
+            // txt_surname
+            // 
+            this.txt_surname.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_surname.Location = new System.Drawing.Point(530, 53);
+            this.txt_surname.Name = "txt_surname";
+            this.txt_surname.Size = new System.Drawing.Size(144, 20);
+            this.txt_surname.TabIndex = 92;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(73, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 91;
+            this.label1.Text = "Filters: ";
+            // 
+            // p
+            // 
+            this.p.Controls.Add(this.cb_conferences);
+            this.p.Controls.Add(this.label7);
+            this.p.Location = new System.Drawing.Point(1, 2);
+            this.p.Name = "p";
+            this.p.Size = new System.Drawing.Size(743, 41);
+            this.p.TabIndex = 101;
+            // 
+            // dg_conferences
+            // 
+            this.dg_conferences.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dg_conferences.AllowUserToAddRows = false;
+            this.dg_conferences.AllowUserToDeleteRows = false;
+            this.dg_conferences.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg_conferences.AutoGenerateColumns = false;
+            this.dg_conferences.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dg_conferences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_conferences.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cnFolio,
+            this.cnSurn,
+            this.cnInstitution,
+            this.startdteDataGridViewTextBoxColumn,
+            this.enddteDataGridViewTextBoxColumn,
+            this.typedescripDataGridViewTextBoxColumn,
+            this.guestsDataGridViewTextBoxColumn,
+            this.parentfolioDataGridViewTextBoxColumn});
+            this.dg_conferences.DataSource = this.bs_reservations;
+            this.dg_conferences.Location = new System.Drawing.Point(1, 79);
+            this.dg_conferences.MultiSelect = false;
+            this.dg_conferences.Name = "dg_conferences";
+            this.dg_conferences.ReadOnly = true;
+            this.dg_conferences.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg_conferences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dg_conferences.Size = new System.Drawing.Size(743, 316);
+            this.dg_conferences.TabIndex = 102;
+            this.dg_conferences.DoubleClick += new System.EventHandler(this.dg_conferences_DoubleClick);
+            // 
+            // cnFolio
+            // 
+            this.cnFolio.DataPropertyName = "folio";
+            this.cnFolio.HeaderText = "Folio";
+            this.cnFolio.Name = "cnFolio";
+            this.cnFolio.ReadOnly = true;
+            // 
+            // cnSurn
+            // 
+            this.cnSurn.DataPropertyName = "surn";
+            this.cnSurn.HeaderText = "Guest Surname";
+            this.cnSurn.Name = "cnSurn";
+            this.cnSurn.ReadOnly = true;
+            // 
+            // cnInstitution
+            // 
+            this.cnInstitution.DataPropertyName = "institution";
+            this.cnInstitution.HeaderText = "Institution";
+            this.cnInstitution.Name = "cnInstitution";
+            this.cnInstitution.ReadOnly = true;
+            // 
+            // startdteDataGridViewTextBoxColumn
+            // 
+            this.startdteDataGridViewTextBoxColumn.DataPropertyName = "start_dte";
+            this.startdteDataGridViewTextBoxColumn.HeaderText = "Start Date";
+            this.startdteDataGridViewTextBoxColumn.Name = "startdteDataGridViewTextBoxColumn";
+            this.startdteDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // enddteDataGridViewTextBoxColumn
+            // 
+            this.enddteDataGridViewTextBoxColumn.DataPropertyName = "end_dte";
+            this.enddteDataGridViewTextBoxColumn.HeaderText = "End Date";
+            this.enddteDataGridViewTextBoxColumn.Name = "enddteDataGridViewTextBoxColumn";
+            this.enddteDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typedescripDataGridViewTextBoxColumn
+            // 
+            this.typedescripDataGridViewTextBoxColumn.DataPropertyName = "type_descrip";
+            this.typedescripDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typedescripDataGridViewTextBoxColumn.Name = "typedescripDataGridViewTextBoxColumn";
+            this.typedescripDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // guestsDataGridViewTextBoxColumn
+            // 
+            this.guestsDataGridViewTextBoxColumn.DataPropertyName = "guests";
+            this.guestsDataGridViewTextBoxColumn.HeaderText = "Guests";
+            this.guestsDataGridViewTextBoxColumn.Name = "guestsDataGridViewTextBoxColumn";
+            this.guestsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // parentfolioDataGridViewTextBoxColumn
+            // 
+            this.parentfolioDataGridViewTextBoxColumn.DataPropertyName = "parentfolio";
+            this.parentfolioDataGridViewTextBoxColumn.HeaderText = "parentfolio";
+            this.parentfolioDataGridViewTextBoxColumn.Name = "parentfolioDataGridViewTextBoxColumn";
+            this.parentfolioDataGridViewTextBoxColumn.ReadOnly = true;
+            this.parentfolioDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // bs_reservations
+            // 
+            this.bs_reservations.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet.tt_reservationsDataTable);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(251, 406);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(244, 13);
+            this.label3.TabIndex = 104;
+            this.label3.Text = "Double click on an item above to select it";
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Location = new System.Drawing.Point(652, 401);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(83, 23);
+            this.btn_cancel.TabIndex = 105;
+            this.btn_cancel.Text = "Cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // SearchMainReserv
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(747, 428);
+            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dg_conferences);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.p);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.txt_surname);
+            this.Controls.Add(this.txt_folio);
+            this.Controls.Add(this.txt_organisation);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label5);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "SearchMainReserv";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Search Main Reservations";
+            this.Load += new System.EventHandler(this.SearchMainReserv_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.bs_conf_list)).EndInit();
+            this.p.ResumeLayout(false);
+            this.p.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_conferences)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_reservations)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cb_conferences;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_folio;
+        private System.Windows.Forms.TextBox txt_organisation;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txt_surname;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel p;
+        private System.Windows.Forms.BindingSource bs_conf_list;
+        private CustomDataGridView dg_conferences;
+        private System.Windows.Forms.BindingSource bs_reservations;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cnFolio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cnSurn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cnInstitution;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startdteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn enddteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typedescripDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn guestsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parentfolioDataGridViewTextBoxColumn;
+    }
+}

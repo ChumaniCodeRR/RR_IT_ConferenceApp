@@ -1,0 +1,967 @@
+﻿namespace ConferenceSys
+{
+    partial class BookingDetails
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.lblBookingDetails = new System.Windows.Forms.Label();
+            this.tcBookingDetails = new System.Windows.Forms.TabControl();
+            this.tpDetail = new System.Windows.Forms.TabPage();
+            this.txtDiet = new System.Windows.Forms.TextBox();
+            this.lblDiet = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.lblEMail = new System.Windows.Forms.Label();
+            this.txtCell = new System.Windows.Forms.TextBox();
+            this.txtFax = new System.Windows.Forms.TextBox();
+            this.lblCell = new System.Windows.Forms.Label();
+            this.lblFax = new System.Windows.Forms.Label();
+            this.txtWorkPhone = new System.Windows.Forms.TextBox();
+            this.lblWorkPhone = new System.Windows.Forms.Label();
+            this.lblHomePhone = new System.Windows.Forms.Label();
+            this.txtHomePhone = new System.Windows.Forms.TextBox();
+            this.txtAddressLine5 = new System.Windows.Forms.TextBox();
+            this.txtAddressLine4 = new System.Windows.Forms.TextBox();
+            this.txtAddressLine3 = new System.Windows.Forms.TextBox();
+            this.txtAddressLine2 = new System.Windows.Forms.TextBox();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.txtAddressLine1 = new System.Windows.Forms.TextBox();
+            this.txtAgency = new System.Windows.Forms.TextBox();
+            this.lblAgency = new System.Windows.Forms.Label();
+            this.txtInstitution = new System.Windows.Forms.TextBox();
+            this.lblInstitution = new System.Windows.Forms.Label();
+            this.txtBalanceDetail = new System.Windows.Forms.TextBox();
+            this.lblBalanceDetail = new System.Windows.Forms.Label();
+            this.txtMonument = new System.Windows.Forms.TextBox();
+            this.lblMonument = new System.Windows.Forms.Label();
+            this.txtGroupDetail = new System.Windows.Forms.TextBox();
+            this.lblGroupDetail = new System.Windows.Forms.Label();
+            this.txtDiscount = new System.Windows.Forms.TextBox();
+            this.lblDiscount = new System.Windows.Forms.Label();
+            this.txtMatressBooking = new System.Windows.Forms.TextBox();
+            this.lblMatressBooking = new System.Windows.Forms.Label();
+            this.txtBookType = new System.Windows.Forms.TextBox();
+            this.lblBookType = new System.Windows.Forms.Label();
+            this.txtConference = new System.Windows.Forms.TextBox();
+            this.lblConference = new System.Windows.Forms.Label();
+            this.tpBooking = new System.Windows.Forms.TabPage();
+            this.txtRate = new System.Windows.Forms.TextBox();
+            this.lblRate = new System.Windows.Forms.Label();
+            this.txtMatresses = new System.Windows.Forms.TextBox();
+            this.lblMatresses = new System.Windows.Forms.Label();
+            this.dtpLeave = new System.Windows.Forms.DateTimePicker();
+            this.lblLeave = new System.Windows.Forms.Label();
+            this.dtpArrive = new System.Windows.Forms.DateTimePicker();
+            this.lblArrive = new System.Windows.Forms.Label();
+            this.txtRoom = new System.Windows.Forms.TextBox();
+            this.lblRoom = new System.Windows.Forms.Label();
+            this.txtHall = new System.Windows.Forms.TextBox();
+            this.lblHall = new System.Windows.Forms.Label();
+            this.txtRes = new System.Windows.Forms.TextBox();
+            this.lblRes = new System.Windows.Forms.Label();
+            this.tpMeals = new System.Windows.Forms.TabPage();
+            this.dgvMeals = new System.Windows.Forms.DataGridView();
+            this.cMealNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMealDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMeal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDiet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cHall = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDallasChip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cPrinted = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblFolio = new System.Windows.Forms.Label();
+            this.txtFolio = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblStudentStaffOther = new System.Windows.Forms.Label();
+            this.txtStudentStaffOther = new System.Windows.Forms.TextBox();
+            this.lblStudentSattNo = new System.Windows.Forms.Label();
+            this.txtStudentStuffNo = new System.Windows.Forms.TextBox();
+            this.lblGroup = new System.Windows.Forms.Label();
+            this.txtGroup = new System.Windows.Forms.TextBox();
+            this.lblBalance = new System.Windows.Forms.Label();
+            this.txtBalance = new System.Windows.Forms.TextBox();
+            this.tcBookingDetails.SuspendLayout();
+            this.tpDetail.SuspendLayout();
+            this.tpBooking.SuspendLayout();
+            this.tpMeals.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMeals)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // btnClose
+            // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Location = new System.Drawing.Point(338, 513);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 0;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
+            // lblBookingDetails
+            // 
+            this.lblBookingDetails.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblBookingDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookingDetails.Location = new System.Drawing.Point(12, 9);
+            this.lblBookingDetails.Name = "lblBookingDetails";
+            this.lblBookingDetails.Size = new System.Drawing.Size(714, 24);
+            this.lblBookingDetails.TabIndex = 4;
+            this.lblBookingDetails.Text = "Booking Details";
+            this.lblBookingDetails.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tcBookingDetails
+            // 
+            this.tcBookingDetails.Controls.Add(this.tpDetail);
+            this.tcBookingDetails.Controls.Add(this.tpBooking);
+            this.tcBookingDetails.Controls.Add(this.tpMeals);
+            this.tcBookingDetails.Location = new System.Drawing.Point(12, 116);
+            this.tcBookingDetails.Name = "tcBookingDetails";
+            this.tcBookingDetails.SelectedIndex = 0;
+            this.tcBookingDetails.Size = new System.Drawing.Size(714, 391);
+            this.tcBookingDetails.TabIndex = 5;
+            // 
+            // tpDetail
+            // 
+            this.tpDetail.Controls.Add(this.txtDiet);
+            this.tpDetail.Controls.Add(this.lblDiet);
+            this.tpDetail.Controls.Add(this.txtEmail);
+            this.tpDetail.Controls.Add(this.lblEMail);
+            this.tpDetail.Controls.Add(this.txtCell);
+            this.tpDetail.Controls.Add(this.txtFax);
+            this.tpDetail.Controls.Add(this.lblCell);
+            this.tpDetail.Controls.Add(this.lblFax);
+            this.tpDetail.Controls.Add(this.txtWorkPhone);
+            this.tpDetail.Controls.Add(this.lblWorkPhone);
+            this.tpDetail.Controls.Add(this.lblHomePhone);
+            this.tpDetail.Controls.Add(this.txtHomePhone);
+            this.tpDetail.Controls.Add(this.txtAddressLine5);
+            this.tpDetail.Controls.Add(this.txtAddressLine4);
+            this.tpDetail.Controls.Add(this.txtAddressLine3);
+            this.tpDetail.Controls.Add(this.txtAddressLine2);
+            this.tpDetail.Controls.Add(this.lblAddress);
+            this.tpDetail.Controls.Add(this.txtAddressLine1);
+            this.tpDetail.Controls.Add(this.txtAgency);
+            this.tpDetail.Controls.Add(this.lblAgency);
+            this.tpDetail.Controls.Add(this.txtInstitution);
+            this.tpDetail.Controls.Add(this.lblInstitution);
+            this.tpDetail.Controls.Add(this.txtBalanceDetail);
+            this.tpDetail.Controls.Add(this.lblBalanceDetail);
+            this.tpDetail.Controls.Add(this.txtMonument);
+            this.tpDetail.Controls.Add(this.lblMonument);
+            this.tpDetail.Controls.Add(this.txtGroupDetail);
+            this.tpDetail.Controls.Add(this.lblGroupDetail);
+            this.tpDetail.Controls.Add(this.txtDiscount);
+            this.tpDetail.Controls.Add(this.lblDiscount);
+            this.tpDetail.Controls.Add(this.txtMatressBooking);
+            this.tpDetail.Controls.Add(this.lblMatressBooking);
+            this.tpDetail.Controls.Add(this.txtBookType);
+            this.tpDetail.Controls.Add(this.lblBookType);
+            this.tpDetail.Controls.Add(this.txtConference);
+            this.tpDetail.Controls.Add(this.lblConference);
+            this.tpDetail.Location = new System.Drawing.Point(4, 22);
+            this.tpDetail.Name = "tpDetail";
+            this.tpDetail.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDetail.Size = new System.Drawing.Size(706, 365);
+            this.tpDetail.TabIndex = 1;
+            this.tpDetail.Text = "Detail";
+            this.tpDetail.UseVisualStyleBackColor = true;
+            // 
+            // txtDiet
+            // 
+            this.txtDiet.Location = new System.Drawing.Point(81, 332);
+            this.txtDiet.Name = "txtDiet";
+            this.txtDiet.ReadOnly = true;
+            this.txtDiet.Size = new System.Drawing.Size(286, 20);
+            this.txtDiet.TabIndex = 42;
+            // 
+            // lblDiet
+            // 
+            this.lblDiet.AutoSize = true;
+            this.lblDiet.Location = new System.Drawing.Point(6, 335);
+            this.lblDiet.Name = "lblDiet";
+            this.lblDiet.Size = new System.Drawing.Size(26, 13);
+            this.lblDiet.TabIndex = 41;
+            this.lblDiet.Text = "Diet";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(81, 306);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.ReadOnly = true;
+            this.txtEmail.Size = new System.Drawing.Size(619, 20);
+            this.txtEmail.TabIndex = 40;
+            // 
+            // lblEMail
+            // 
+            this.lblEMail.AutoSize = true;
+            this.lblEMail.Location = new System.Drawing.Point(6, 309);
+            this.lblEMail.Name = "lblEMail";
+            this.lblEMail.Size = new System.Drawing.Size(33, 13);
+            this.lblEMail.TabIndex = 39;
+            this.lblEMail.Text = "EMail";
+            // 
+            // txtCell
+            // 
+            this.txtCell.Location = new System.Drawing.Point(403, 280);
+            this.txtCell.Name = "txtCell";
+            this.txtCell.ReadOnly = true;
+            this.txtCell.Size = new System.Drawing.Size(297, 20);
+            this.txtCell.TabIndex = 38;
+            // 
+            // txtFax
+            // 
+            this.txtFax.Location = new System.Drawing.Point(403, 254);
+            this.txtFax.Name = "txtFax";
+            this.txtFax.ReadOnly = true;
+            this.txtFax.Size = new System.Drawing.Size(297, 20);
+            this.txtFax.TabIndex = 37;
+            // 
+            // lblCell
+            // 
+            this.lblCell.AutoSize = true;
+            this.lblCell.Location = new System.Drawing.Point(373, 283);
+            this.lblCell.Name = "lblCell";
+            this.lblCell.Size = new System.Drawing.Size(24, 13);
+            this.lblCell.TabIndex = 36;
+            this.lblCell.Text = "Cell";
+            // 
+            // lblFax
+            // 
+            this.lblFax.AutoSize = true;
+            this.lblFax.Location = new System.Drawing.Point(373, 257);
+            this.lblFax.Name = "lblFax";
+            this.lblFax.Size = new System.Drawing.Size(24, 13);
+            this.lblFax.TabIndex = 35;
+            this.lblFax.Text = "Fax";
+            // 
+            // txtWorkPhone
+            // 
+            this.txtWorkPhone.Location = new System.Drawing.Point(81, 280);
+            this.txtWorkPhone.Name = "txtWorkPhone";
+            this.txtWorkPhone.ReadOnly = true;
+            this.txtWorkPhone.Size = new System.Drawing.Size(286, 20);
+            this.txtWorkPhone.TabIndex = 34;
+            // 
+            // lblWorkPhone
+            // 
+            this.lblWorkPhone.AutoSize = true;
+            this.lblWorkPhone.Location = new System.Drawing.Point(6, 283);
+            this.lblWorkPhone.Name = "lblWorkPhone";
+            this.lblWorkPhone.Size = new System.Drawing.Size(67, 13);
+            this.lblWorkPhone.TabIndex = 33;
+            this.lblWorkPhone.Text = "Work Phone";
+            // 
+            // lblHomePhone
+            // 
+            this.lblHomePhone.AutoSize = true;
+            this.lblHomePhone.Location = new System.Drawing.Point(6, 257);
+            this.lblHomePhone.Name = "lblHomePhone";
+            this.lblHomePhone.Size = new System.Drawing.Size(69, 13);
+            this.lblHomePhone.TabIndex = 32;
+            this.lblHomePhone.Text = "Home Phone";
+            // 
+            // txtHomePhone
+            // 
+            this.txtHomePhone.Location = new System.Drawing.Point(81, 254);
+            this.txtHomePhone.Name = "txtHomePhone";
+            this.txtHomePhone.ReadOnly = true;
+            this.txtHomePhone.Size = new System.Drawing.Size(286, 20);
+            this.txtHomePhone.TabIndex = 31;
+            // 
+            // txtAddressLine5
+            // 
+            this.txtAddressLine5.Location = new System.Drawing.Point(81, 228);
+            this.txtAddressLine5.Name = "txtAddressLine5";
+            this.txtAddressLine5.ReadOnly = true;
+            this.txtAddressLine5.Size = new System.Drawing.Size(433, 20);
+            this.txtAddressLine5.TabIndex = 30;
+            // 
+            // txtAddressLine4
+            // 
+            this.txtAddressLine4.Location = new System.Drawing.Point(81, 202);
+            this.txtAddressLine4.Name = "txtAddressLine4";
+            this.txtAddressLine4.ReadOnly = true;
+            this.txtAddressLine4.Size = new System.Drawing.Size(433, 20);
+            this.txtAddressLine4.TabIndex = 29;
+            // 
+            // txtAddressLine3
+            // 
+            this.txtAddressLine3.Location = new System.Drawing.Point(81, 176);
+            this.txtAddressLine3.Name = "txtAddressLine3";
+            this.txtAddressLine3.ReadOnly = true;
+            this.txtAddressLine3.Size = new System.Drawing.Size(433, 20);
+            this.txtAddressLine3.TabIndex = 28;
+            // 
+            // txtAddressLine2
+            // 
+            this.txtAddressLine2.Location = new System.Drawing.Point(81, 150);
+            this.txtAddressLine2.Name = "txtAddressLine2";
+            this.txtAddressLine2.ReadOnly = true;
+            this.txtAddressLine2.Size = new System.Drawing.Size(433, 20);
+            this.txtAddressLine2.TabIndex = 27;
+            // 
+            // lblAddress
+            // 
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Location = new System.Drawing.Point(6, 131);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(45, 13);
+            this.lblAddress.TabIndex = 26;
+            this.lblAddress.Text = "Address";
+            // 
+            // txtAddressLine1
+            // 
+            this.txtAddressLine1.Location = new System.Drawing.Point(81, 124);
+            this.txtAddressLine1.Name = "txtAddressLine1";
+            this.txtAddressLine1.ReadOnly = true;
+            this.txtAddressLine1.Size = new System.Drawing.Size(433, 20);
+            this.txtAddressLine1.TabIndex = 25;
+            // 
+            // txtAgency
+            // 
+            this.txtAgency.Location = new System.Drawing.Point(578, 72);
+            this.txtAgency.Name = "txtAgency";
+            this.txtAgency.ReadOnly = true;
+            this.txtAgency.Size = new System.Drawing.Size(122, 20);
+            this.txtAgency.TabIndex = 24;
+            // 
+            // lblAgency
+            // 
+            this.lblAgency.AutoSize = true;
+            this.lblAgency.Location = new System.Drawing.Point(529, 75);
+            this.lblAgency.Name = "lblAgency";
+            this.lblAgency.Size = new System.Drawing.Size(43, 13);
+            this.lblAgency.TabIndex = 23;
+            this.lblAgency.Text = "Agency";
+            // 
+            // txtInstitution
+            // 
+            this.txtInstitution.Location = new System.Drawing.Point(81, 98);
+            this.txtInstitution.Name = "txtInstitution";
+            this.txtInstitution.ReadOnly = true;
+            this.txtInstitution.Size = new System.Drawing.Size(286, 20);
+            this.txtInstitution.TabIndex = 22;
+            // 
+            // lblInstitution
+            // 
+            this.lblInstitution.AutoSize = true;
+            this.lblInstitution.Location = new System.Drawing.Point(6, 101);
+            this.lblInstitution.Name = "lblInstitution";
+            this.lblInstitution.Size = new System.Drawing.Size(52, 13);
+            this.lblInstitution.TabIndex = 21;
+            this.lblInstitution.Text = "Institution";
+            // 
+            // txtBalanceDetail
+            // 
+            this.txtBalanceDetail.Location = new System.Drawing.Point(578, 98);
+            this.txtBalanceDetail.Name = "txtBalanceDetail";
+            this.txtBalanceDetail.ReadOnly = true;
+            this.txtBalanceDetail.Size = new System.Drawing.Size(125, 20);
+            this.txtBalanceDetail.TabIndex = 20;
+            // 
+            // lblBalanceDetail
+            // 
+            this.lblBalanceDetail.AutoSize = true;
+            this.lblBalanceDetail.Location = new System.Drawing.Point(526, 101);
+            this.lblBalanceDetail.Name = "lblBalanceDetail";
+            this.lblBalanceDetail.Size = new System.Drawing.Size(46, 13);
+            this.lblBalanceDetail.TabIndex = 19;
+            this.lblBalanceDetail.Text = "Balance";
+            // 
+            // txtMonument
+            // 
+            this.txtMonument.Location = new System.Drawing.Point(465, 98);
+            this.txtMonument.Name = "txtMonument";
+            this.txtMonument.ReadOnly = true;
+            this.txtMonument.Size = new System.Drawing.Size(49, 20);
+            this.txtMonument.TabIndex = 18;
+            // 
+            // lblMonument
+            // 
+            this.lblMonument.AutoSize = true;
+            this.lblMonument.Location = new System.Drawing.Point(402, 101);
+            this.lblMonument.Name = "lblMonument";
+            this.lblMonument.Size = new System.Drawing.Size(57, 13);
+            this.lblMonument.TabIndex = 17;
+            this.lblMonument.Text = "Monument";
+            // 
+            // txtGroupDetail
+            // 
+            this.txtGroupDetail.Location = new System.Drawing.Point(81, 72);
+            this.txtGroupDetail.Name = "txtGroupDetail";
+            this.txtGroupDetail.ReadOnly = true;
+            this.txtGroupDetail.Size = new System.Drawing.Size(433, 20);
+            this.txtGroupDetail.TabIndex = 16;
+            // 
+            // lblGroupDetail
+            // 
+            this.lblGroupDetail.AutoSize = true;
+            this.lblGroupDetail.Location = new System.Drawing.Point(6, 75);
+            this.lblGroupDetail.Name = "lblGroupDetail";
+            this.lblGroupDetail.Size = new System.Drawing.Size(36, 13);
+            this.lblGroupDetail.TabIndex = 15;
+            this.lblGroupDetail.Text = "Group";
+            // 
+            // txtDiscount
+            // 
+            this.txtDiscount.Location = new System.Drawing.Point(575, 46);
+            this.txtDiscount.Name = "txtDiscount";
+            this.txtDiscount.ReadOnly = true;
+            this.txtDiscount.Size = new System.Drawing.Size(125, 20);
+            this.txtDiscount.TabIndex = 14;
+            // 
+            // lblDiscount
+            // 
+            this.lblDiscount.AutoSize = true;
+            this.lblDiscount.Location = new System.Drawing.Point(520, 49);
+            this.lblDiscount.Name = "lblDiscount";
+            this.lblDiscount.Size = new System.Drawing.Size(49, 13);
+            this.lblDiscount.TabIndex = 13;
+            this.lblDiscount.Text = "Discount";
+            // 
+            // txtMatressBooking
+            // 
+            this.txtMatressBooking.Location = new System.Drawing.Point(465, 46);
+            this.txtMatressBooking.Name = "txtMatressBooking";
+            this.txtMatressBooking.ReadOnly = true;
+            this.txtMatressBooking.Size = new System.Drawing.Size(49, 20);
+            this.txtMatressBooking.TabIndex = 12;
+            // 
+            // lblMatressBooking
+            // 
+            this.lblMatressBooking.AutoSize = true;
+            this.lblMatressBooking.Location = new System.Drawing.Point(373, 49);
+            this.lblMatressBooking.Name = "lblMatressBooking";
+            this.lblMatressBooking.Size = new System.Drawing.Size(86, 13);
+            this.lblMatressBooking.TabIndex = 9;
+            this.lblMatressBooking.Text = "Matress Booking";
+            // 
+            // txtBookType
+            // 
+            this.txtBookType.Location = new System.Drawing.Point(81, 46);
+            this.txtBookType.Name = "txtBookType";
+            this.txtBookType.ReadOnly = true;
+            this.txtBookType.Size = new System.Drawing.Size(286, 20);
+            this.txtBookType.TabIndex = 8;
+            // 
+            // lblBookType
+            // 
+            this.lblBookType.AutoSize = true;
+            this.lblBookType.Location = new System.Drawing.Point(6, 49);
+            this.lblBookType.Name = "lblBookType";
+            this.lblBookType.Size = new System.Drawing.Size(59, 13);
+            this.lblBookType.TabIndex = 3;
+            this.lblBookType.Text = "Book Type";
+            // 
+            // txtConference
+            // 
+            this.txtConference.Location = new System.Drawing.Point(81, 20);
+            this.txtConference.Name = "txtConference";
+            this.txtConference.ReadOnly = true;
+            this.txtConference.Size = new System.Drawing.Size(619, 20);
+            this.txtConference.TabIndex = 2;
+            // 
+            // lblConference
+            // 
+            this.lblConference.AutoSize = true;
+            this.lblConference.Location = new System.Drawing.Point(6, 23);
+            this.lblConference.Name = "lblConference";
+            this.lblConference.Size = new System.Drawing.Size(62, 13);
+            this.lblConference.TabIndex = 0;
+            this.lblConference.Text = "Conference";
+            // 
+            // tpBooking
+            // 
+            this.tpBooking.Controls.Add(this.txtRate);
+            this.tpBooking.Controls.Add(this.lblRate);
+            this.tpBooking.Controls.Add(this.txtMatresses);
+            this.tpBooking.Controls.Add(this.lblMatresses);
+            this.tpBooking.Controls.Add(this.dtpLeave);
+            this.tpBooking.Controls.Add(this.lblLeave);
+            this.tpBooking.Controls.Add(this.dtpArrive);
+            this.tpBooking.Controls.Add(this.lblArrive);
+            this.tpBooking.Controls.Add(this.txtRoom);
+            this.tpBooking.Controls.Add(this.lblRoom);
+            this.tpBooking.Controls.Add(this.txtHall);
+            this.tpBooking.Controls.Add(this.lblHall);
+            this.tpBooking.Controls.Add(this.txtRes);
+            this.tpBooking.Controls.Add(this.lblRes);
+            this.tpBooking.Location = new System.Drawing.Point(4, 22);
+            this.tpBooking.Name = "tpBooking";
+            this.tpBooking.Padding = new System.Windows.Forms.Padding(3);
+            this.tpBooking.Size = new System.Drawing.Size(706, 365);
+            this.tpBooking.TabIndex = 0;
+            this.tpBooking.Text = "Booking";
+            this.tpBooking.UseVisualStyleBackColor = true;
+            // 
+            // txtRate
+            // 
+            this.txtRate.Location = new System.Drawing.Point(356, 58);
+            this.txtRate.Name = "txtRate";
+            this.txtRate.ReadOnly = true;
+            this.txtRate.Size = new System.Drawing.Size(215, 20);
+            this.txtRate.TabIndex = 24;
+            // 
+            // lblRate
+            // 
+            this.lblRate.AutoSize = true;
+            this.lblRate.Location = new System.Drawing.Point(307, 61);
+            this.lblRate.Name = "lblRate";
+            this.lblRate.Size = new System.Drawing.Size(30, 13);
+            this.lblRate.TabIndex = 23;
+            this.lblRate.Text = "Rate";
+            // 
+            // txtMatresses
+            // 
+            this.txtMatresses.Location = new System.Drawing.Point(150, 139);
+            this.txtMatresses.Name = "txtMatresses";
+            this.txtMatresses.ReadOnly = true;
+            this.txtMatresses.Size = new System.Drawing.Size(126, 20);
+            this.txtMatresses.TabIndex = 22;
+            // 
+            // lblMatresses
+            // 
+            this.lblMatresses.AutoSize = true;
+            this.lblMatresses.Location = new System.Drawing.Point(7, 142);
+            this.lblMatresses.Name = "lblMatresses";
+            this.lblMatresses.Size = new System.Drawing.Size(137, 13);
+            this.lblMatresses.TabIndex = 21;
+            this.lblMatresses.Text = "Number of Extra Mattresses";
+            // 
+            // dtpLeave
+            // 
+            this.dtpLeave.Enabled = false;
+            this.dtpLeave.Location = new System.Drawing.Point(356, 98);
+            this.dtpLeave.Name = "dtpLeave";
+            this.dtpLeave.Size = new System.Drawing.Size(215, 20);
+            this.dtpLeave.TabIndex = 20;
+            // 
+            // lblLeave
+            // 
+            this.lblLeave.AutoSize = true;
+            this.lblLeave.Location = new System.Drawing.Point(307, 104);
+            this.lblLeave.Name = "lblLeave";
+            this.lblLeave.Size = new System.Drawing.Size(37, 13);
+            this.lblLeave.TabIndex = 19;
+            this.lblLeave.Text = "Leave";
+            // 
+            // dtpArrive
+            // 
+            this.dtpArrive.Enabled = false;
+            this.dtpArrive.Location = new System.Drawing.Point(61, 98);
+            this.dtpArrive.Name = "dtpArrive";
+            this.dtpArrive.Size = new System.Drawing.Size(215, 20);
+            this.dtpArrive.TabIndex = 18;
+            // 
+            // lblArrive
+            // 
+            this.lblArrive.AutoSize = true;
+            this.lblArrive.Location = new System.Drawing.Point(6, 104);
+            this.lblArrive.Name = "lblArrive";
+            this.lblArrive.Size = new System.Drawing.Size(34, 13);
+            this.lblArrive.TabIndex = 17;
+            this.lblArrive.Text = "Arrive";
+            // 
+            // txtRoom
+            // 
+            this.txtRoom.Location = new System.Drawing.Point(61, 58);
+            this.txtRoom.Name = "txtRoom";
+            this.txtRoom.ReadOnly = true;
+            this.txtRoom.Size = new System.Drawing.Size(215, 20);
+            this.txtRoom.TabIndex = 16;
+            // 
+            // lblRoom
+            // 
+            this.lblRoom.AutoSize = true;
+            this.lblRoom.Location = new System.Drawing.Point(6, 61);
+            this.lblRoom.Name = "lblRoom";
+            this.lblRoom.Size = new System.Drawing.Size(35, 13);
+            this.lblRoom.TabIndex = 4;
+            this.lblRoom.Text = "Room";
+            // 
+            // txtHall
+            // 
+            this.txtHall.Location = new System.Drawing.Point(356, 23);
+            this.txtHall.Name = "txtHall";
+            this.txtHall.ReadOnly = true;
+            this.txtHall.Size = new System.Drawing.Size(215, 20);
+            this.txtHall.TabIndex = 3;
+            // 
+            // lblHall
+            // 
+            this.lblHall.AutoSize = true;
+            this.lblHall.Location = new System.Drawing.Point(307, 26);
+            this.lblHall.Name = "lblHall";
+            this.lblHall.Size = new System.Drawing.Size(25, 13);
+            this.lblHall.TabIndex = 2;
+            this.lblHall.Text = "Hall";
+            // 
+            // txtRes
+            // 
+            this.txtRes.Location = new System.Drawing.Point(61, 23);
+            this.txtRes.Name = "txtRes";
+            this.txtRes.ReadOnly = true;
+            this.txtRes.Size = new System.Drawing.Size(215, 20);
+            this.txtRes.TabIndex = 1;
+            // 
+            // lblRes
+            // 
+            this.lblRes.AutoSize = true;
+            this.lblRes.Location = new System.Drawing.Point(6, 26);
+            this.lblRes.Name = "lblRes";
+            this.lblRes.Size = new System.Drawing.Size(26, 13);
+            this.lblRes.TabIndex = 0;
+            this.lblRes.Text = "Res";
+            // 
+            // tpMeals
+            // 
+            this.tpMeals.Controls.Add(this.dgvMeals);
+            this.tpMeals.Location = new System.Drawing.Point(4, 22);
+            this.tpMeals.Name = "tpMeals";
+            this.tpMeals.Padding = new System.Windows.Forms.Padding(3);
+            this.tpMeals.Size = new System.Drawing.Size(706, 365);
+            this.tpMeals.TabIndex = 2;
+            this.tpMeals.Text = "Meals";
+            this.tpMeals.UseVisualStyleBackColor = true;
+            // 
+            // dgvMeals
+            // 
+            this.dgvMeals.AllowUserToAddRows = false;
+            this.dgvMeals.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCyan;
+            this.dgvMeals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvMeals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMeals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cMealNumber,
+            this.cMealDate,
+            this.cMeal,
+            this.cDiet,
+            this.cCode,
+            this.cHall,
+            this.cDallasChip,
+            this.cPrinted});
+            this.dgvMeals.Location = new System.Drawing.Point(6, 6);
+            this.dgvMeals.MultiSelect = false;
+            this.dgvMeals.Name = "dgvMeals";
+            this.dgvMeals.ReadOnly = true;
+            this.dgvMeals.RowHeadersVisible = false;
+            this.dgvMeals.Size = new System.Drawing.Size(694, 353);
+            this.dgvMeals.TabIndex = 0;
+            // 
+            // cMealNumber
+            // 
+            this.cMealNumber.DataPropertyName = "LINENO";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.cMealNumber.DefaultCellStyle = dataGridViewCellStyle2;
+            this.cMealNumber.HeaderText = "No.";
+            this.cMealNumber.Name = "cMealNumber";
+            this.cMealNumber.ReadOnly = true;
+            this.cMealNumber.Width = 30;
+            // 
+            // cMealDate
+            // 
+            this.cMealDate.DataPropertyName = "MDATE";
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            this.cMealDate.DefaultCellStyle = dataGridViewCellStyle3;
+            this.cMealDate.HeaderText = "Date";
+            this.cMealDate.Name = "cMealDate";
+            this.cMealDate.ReadOnly = true;
+            // 
+            // cMeal
+            // 
+            this.cMeal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cMeal.DataPropertyName = "MTIME1";
+            this.cMeal.HeaderText = "Meal";
+            this.cMeal.Name = "cMeal";
+            this.cMeal.ReadOnly = true;
+            // 
+            // cDiet
+            // 
+            this.cDiet.DataPropertyName = "DIET";
+            this.cDiet.HeaderText = "Diet";
+            this.cDiet.Name = "cDiet";
+            this.cDiet.ReadOnly = true;
+            this.cDiet.Width = 50;
+            // 
+            // cCode
+            // 
+            this.cCode.DataPropertyName = "MCODE";
+            this.cCode.HeaderText = "Code";
+            this.cCode.Name = "cCode";
+            this.cCode.ReadOnly = true;
+            this.cCode.Width = 50;
+            // 
+            // cHall
+            // 
+            this.cHall.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cHall.DataPropertyName = "DHALL";
+            this.cHall.HeaderText = "Hall";
+            this.cHall.Name = "cHall";
+            this.cHall.ReadOnly = true;
+            // 
+            // cDallasChip
+            // 
+            this.cDallasChip.DataPropertyName = "DCHIP";
+            this.cDallasChip.HeaderText = "Dallas Chip";
+            this.cDallasChip.Name = "cDallasChip";
+            this.cDallasChip.ReadOnly = true;
+            // 
+            // cPrinted
+            // 
+            this.cPrinted.DataPropertyName = "TICKET";
+            this.cPrinted.HeaderText = "Printed";
+            this.cPrinted.Name = "cPrinted";
+            this.cPrinted.ReadOnly = true;
+            this.cPrinted.Width = 75;
+            // 
+            // lblFolio
+            // 
+            this.lblFolio.AutoSize = true;
+            this.lblFolio.Location = new System.Drawing.Point(13, 55);
+            this.lblFolio.Name = "lblFolio";
+            this.lblFolio.Size = new System.Drawing.Size(29, 13);
+            this.lblFolio.TabIndex = 6;
+            this.lblFolio.Text = "Folio";
+            // 
+            // txtFolio
+            // 
+            this.txtFolio.Location = new System.Drawing.Point(54, 52);
+            this.txtFolio.Name = "txtFolio";
+            this.txtFolio.ReadOnly = true;
+            this.txtFolio.Size = new System.Drawing.Size(100, 20);
+            this.txtFolio.TabIndex = 7;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(13, 81);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.TabIndex = 8;
+            this.lblName.Text = "Name";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(54, 78);
+            this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
+            this.txtName.Size = new System.Drawing.Size(227, 20);
+            this.txtName.TabIndex = 9;
+            // 
+            // lblStudentStaffOther
+            // 
+            this.lblStudentStaffOther.AutoSize = true;
+            this.lblStudentStaffOther.Location = new System.Drawing.Point(323, 55);
+            this.lblStudentStaffOther.Name = "lblStudentStaffOther";
+            this.lblStudentStaffOther.Size = new System.Drawing.Size(102, 13);
+            this.lblStudentStaffOther.TabIndex = 10;
+            this.lblStudentStaffOther.Text = "Student/Staff/Other";
+            // 
+            // txtStudentStaffOther
+            // 
+            this.txtStudentStaffOther.Location = new System.Drawing.Point(431, 52);
+            this.txtStudentStaffOther.Name = "txtStudentStaffOther";
+            this.txtStudentStaffOther.ReadOnly = true;
+            this.txtStudentStaffOther.Size = new System.Drawing.Size(49, 20);
+            this.txtStudentStaffOther.TabIndex = 11;
+            // 
+            // lblStudentSattNo
+            // 
+            this.lblStudentSattNo.AutoSize = true;
+            this.lblStudentSattNo.Location = new System.Drawing.Point(520, 55);
+            this.lblStudentSattNo.Name = "lblStudentSattNo";
+            this.lblStudentSattNo.Size = new System.Drawing.Size(91, 13);
+            this.lblStudentSattNo.TabIndex = 12;
+            this.lblStudentSattNo.Text = "Student/Staff No.";
+            // 
+            // txtStudentStuffNo
+            // 
+            this.txtStudentStuffNo.Location = new System.Drawing.Point(617, 52);
+            this.txtStudentStuffNo.Name = "txtStudentStuffNo";
+            this.txtStudentStuffNo.ReadOnly = true;
+            this.txtStudentStuffNo.Size = new System.Drawing.Size(105, 20);
+            this.txtStudentStuffNo.TabIndex = 13;
+            // 
+            // lblGroup
+            // 
+            this.lblGroup.AutoSize = true;
+            this.lblGroup.Location = new System.Drawing.Point(323, 81);
+            this.lblGroup.Name = "lblGroup";
+            this.lblGroup.Size = new System.Drawing.Size(36, 13);
+            this.lblGroup.TabIndex = 14;
+            this.lblGroup.Text = "Group";
+            // 
+            // txtGroup
+            // 
+            this.txtGroup.Location = new System.Drawing.Point(431, 78);
+            this.txtGroup.Name = "txtGroup";
+            this.txtGroup.ReadOnly = true;
+            this.txtGroup.Size = new System.Drawing.Size(49, 20);
+            this.txtGroup.TabIndex = 15;
+            // 
+            // lblBalance
+            // 
+            this.lblBalance.AutoSize = true;
+            this.lblBalance.Location = new System.Drawing.Point(520, 81);
+            this.lblBalance.Name = "lblBalance";
+            this.lblBalance.Size = new System.Drawing.Size(46, 13);
+            this.lblBalance.TabIndex = 16;
+            this.lblBalance.Text = "Balance";
+            // 
+            // txtBalance
+            // 
+            this.txtBalance.Location = new System.Drawing.Point(617, 78);
+            this.txtBalance.Name = "txtBalance";
+            this.txtBalance.ReadOnly = true;
+            this.txtBalance.Size = new System.Drawing.Size(105, 20);
+            this.txtBalance.TabIndex = 17;
+            // 
+            // BookingDetails
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnClose;
+            this.ClientSize = new System.Drawing.Size(738, 548);
+            this.Controls.Add(this.txtBalance);
+            this.Controls.Add(this.lblBalance);
+            this.Controls.Add(this.txtGroup);
+            this.Controls.Add(this.lblGroup);
+            this.Controls.Add(this.txtStudentStuffNo);
+            this.Controls.Add(this.lblStudentSattNo);
+            this.Controls.Add(this.txtStudentStaffOther);
+            this.Controls.Add(this.lblStudentStaffOther);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.txtFolio);
+            this.Controls.Add(this.lblFolio);
+            this.Controls.Add(this.tcBookingDetails);
+            this.Controls.Add(this.lblBookingDetails);
+            this.Controls.Add(this.btnClose);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "BookingDetails";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Booking Details";
+            this.Load += new System.EventHandler(this.BookingDetails_Load);
+            this.tcBookingDetails.ResumeLayout(false);
+            this.tpDetail.ResumeLayout(false);
+            this.tpDetail.PerformLayout();
+            this.tpBooking.ResumeLayout(false);
+            this.tpBooking.PerformLayout();
+            this.tpMeals.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMeals)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label lblBookingDetails;
+        private System.Windows.Forms.TabControl tcBookingDetails;
+        private System.Windows.Forms.TabPage tpBooking;
+        private System.Windows.Forms.TabPage tpDetail;
+        private System.Windows.Forms.TabPage tpMeals;
+        private System.Windows.Forms.Label lblFolio;
+        private System.Windows.Forms.TextBox txtFolio;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label lblStudentStaffOther;
+        private System.Windows.Forms.TextBox txtStudentStaffOther;
+        private System.Windows.Forms.Label lblStudentSattNo;
+        private System.Windows.Forms.TextBox txtStudentStuffNo;
+        private System.Windows.Forms.Label lblGroup;
+        private System.Windows.Forms.TextBox txtGroup;
+        private System.Windows.Forms.Label lblBalance;
+        private System.Windows.Forms.TextBox txtBalance;
+        private System.Windows.Forms.TextBox txtRoom;
+        private System.Windows.Forms.Label lblRoom;
+        private System.Windows.Forms.TextBox txtHall;
+        private System.Windows.Forms.Label lblHall;
+        private System.Windows.Forms.TextBox txtRes;
+        private System.Windows.Forms.Label lblRes;
+        private System.Windows.Forms.TextBox txtMatresses;
+        private System.Windows.Forms.Label lblMatresses;
+        private System.Windows.Forms.DateTimePicker dtpLeave;
+        private System.Windows.Forms.Label lblLeave;
+        private System.Windows.Forms.DateTimePicker dtpArrive;
+        private System.Windows.Forms.Label lblArrive;
+        private System.Windows.Forms.Label lblRate;
+        private System.Windows.Forms.TextBox txtRate;
+        private System.Windows.Forms.Label lblConference;
+        private System.Windows.Forms.TextBox txtMonument;
+        private System.Windows.Forms.Label lblMonument;
+        private System.Windows.Forms.TextBox txtGroupDetail;
+        private System.Windows.Forms.Label lblGroupDetail;
+        private System.Windows.Forms.TextBox txtDiscount;
+        private System.Windows.Forms.Label lblDiscount;
+        private System.Windows.Forms.TextBox txtMatressBooking;
+        private System.Windows.Forms.Label lblMatressBooking;
+        private System.Windows.Forms.TextBox txtBookType;
+        private System.Windows.Forms.Label lblBookType;
+        private System.Windows.Forms.TextBox txtConference;
+        private System.Windows.Forms.Label lblAgency;
+        private System.Windows.Forms.TextBox txtInstitution;
+        private System.Windows.Forms.Label lblInstitution;
+        private System.Windows.Forms.TextBox txtBalanceDetail;
+        private System.Windows.Forms.Label lblBalanceDetail;
+        private System.Windows.Forms.TextBox txtAgency;
+        private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.TextBox txtAddressLine1;
+        private System.Windows.Forms.TextBox txtAddressLine5;
+        private System.Windows.Forms.TextBox txtAddressLine4;
+        private System.Windows.Forms.TextBox txtAddressLine3;
+        private System.Windows.Forms.TextBox txtAddressLine2;
+        private System.Windows.Forms.Label lblEMail;
+        private System.Windows.Forms.TextBox txtCell;
+        private System.Windows.Forms.TextBox txtFax;
+        private System.Windows.Forms.Label lblCell;
+        private System.Windows.Forms.Label lblFax;
+        private System.Windows.Forms.TextBox txtWorkPhone;
+        private System.Windows.Forms.Label lblWorkPhone;
+        private System.Windows.Forms.Label lblHomePhone;
+        private System.Windows.Forms.TextBox txtHomePhone;
+        private System.Windows.Forms.TextBox txtDiet;
+        private System.Windows.Forms.Label lblDiet;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.DataGridView dgvMeals;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cMealNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cMealDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cMeal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cDiet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cHall;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cDallasChip;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cPrinted;
+    }
+}

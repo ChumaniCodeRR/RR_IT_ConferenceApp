@@ -1,0 +1,620 @@
+﻿namespace ConferenceSys
+{
+
+    partial class Reservations
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reservations));
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt_surname = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_refresh = new System.Windows.Forms.Button();
+            this.txt_organisation = new System.Windows.Forms.TextBox();
+            this.cb_conf_type = new System.Windows.Forms.ComboBox();
+            this.bs_conf_types = new System.Windows.Forms.BindingSource(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_folio = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cb_start_dte = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cb_conferences = new System.Windows.Forms.ComboBox();
+            this.bs_conf_list = new System.Windows.Forms.BindingSource(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_refreshed = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt_total_guests = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt_group_total = new System.Windows.Forms.TextBox();
+            this.bs_reservations = new System.Windows.Forms.BindingSource(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cb_book_status = new System.Windows.Forms.ComboBox();
+            this.bs_book_status = new System.Windows.Forms.BindingSource(this.components);
+            this.label13 = new System.Windows.Forms.Label();
+            this.cb_paid_status = new System.Windows.Forms.ComboBox();
+            this.dg_conferences = new CustomDataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_surn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_institution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_guests = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_parentfolio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_addMain = new System.Windows.Forms.Button();
+            this.btn_delMain = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_conf_types)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_conf_list)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_reservations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_book_status)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_conferences)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(255, 46);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 61;
+            this.label4.Text = "Organisation:";
+            // 
+            // txt_surname
+            // 
+            this.txt_surname.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_surname.Location = new System.Drawing.Point(537, 43);
+            this.txt_surname.Name = "txt_surname";
+            this.txt_surname.Size = new System.Drawing.Size(153, 20);
+            this.txt_surname.TabIndex = 60;
+            this.txt_surname.TextChanged += new System.EventHandler(this.txt_surn_TextChanged_1);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 58;
+            this.label1.Text = "Additional Filters: ";
+            // 
+            // btn_refresh
+            // 
+            this.btn_refresh.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btn_refresh.Location = new System.Drawing.Point(482, 10);
+            this.btn_refresh.Name = "btn_refresh";
+            this.btn_refresh.Size = new System.Drawing.Size(77, 23);
+            this.btn_refresh.TabIndex = 66;
+            this.btn_refresh.Text = "Refresh List";
+            this.btn_refresh.UseVisualStyleBackColor = true;
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
+            // 
+            // txt_organisation
+            // 
+            this.txt_organisation.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_organisation.Location = new System.Drawing.Point(330, 43);
+            this.txt_organisation.Name = "txt_organisation";
+            this.txt_organisation.Size = new System.Drawing.Size(143, 20);
+            this.txt_organisation.TabIndex = 68;
+            this.txt_organisation.TextChanged += new System.EventHandler(this.txt_organisation_TextChanged);
+            // 
+            // cb_conf_type
+            // 
+            this.cb_conf_type.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cb_conf_type.DataSource = this.bs_conf_types;
+            this.cb_conf_type.DisplayMember = "descrip";
+            this.cb_conf_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_conf_type.FormattingEnabled = true;
+            this.cb_conf_type.Location = new System.Drawing.Point(164, 96);
+            this.cb_conf_type.Name = "cb_conf_type";
+            this.cb_conf_type.Size = new System.Drawing.Size(159, 21);
+            this.cb_conf_type.TabIndex = 76;
+            this.cb_conf_type.ValueMember = "tcode";
+            this.cb_conf_type.SelectedIndexChanged += new System.EventHandler(this.cb_conf_type_SelectedIndexChanged);
+            // 
+            // bs_conf_types
+            // 
+            this.bs_conf_types.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet.tt_conf_typeDataTable);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(97, 99);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.TabIndex = 77;
+            this.label2.Text = "Book Type:";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(127, 46);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 79;
+            this.label5.Text = "Folio:";
+            // 
+            // txt_folio
+            // 
+            this.txt_folio.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_folio.Location = new System.Drawing.Point(165, 43);
+            this.txt_folio.Name = "txt_folio";
+            this.txt_folio.Size = new System.Drawing.Size(84, 20);
+            this.txt_folio.TabIndex = 78;
+            this.txt_folio.TextChanged += new System.EventHandler(this.txt_folio_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(501, 99);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.TabIndex = 81;
+            this.label6.Text = "Start Date:";
+            // 
+            // cb_start_dte
+            // 
+            this.cb_start_dte.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cb_start_dte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_start_dte.FormattingEnabled = true;
+            this.cb_start_dte.Location = new System.Drawing.Point(565, 96);
+            this.cb_start_dte.Name = "cb_start_dte";
+            this.cb_start_dte.Size = new System.Drawing.Size(118, 21);
+            this.cb_start_dte.TabIndex = 80;
+            this.cb_start_dte.SelectedIndexChanged += new System.EventHandler(this.cb_start_dte_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(94, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 13);
+            this.label7.TabIndex = 83;
+            this.label7.Text = "Conference:";
+            // 
+            // cb_conferences
+            // 
+            this.cb_conferences.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cb_conferences.DataSource = this.bs_conf_list;
+            this.cb_conferences.DisplayMember = "conference";
+            this.cb_conferences.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_conferences.FormattingEnabled = true;
+            this.cb_conferences.Location = new System.Drawing.Point(165, 12);
+            this.cb_conferences.Name = "cb_conferences";
+            this.cb_conferences.Size = new System.Drawing.Size(308, 21);
+            this.cb_conferences.TabIndex = 82;
+            this.cb_conferences.ValueMember = "ccode";
+            this.cb_conferences.SelectedIndexChanged += new System.EventHandler(this.cb_conferences_SelectedIndexChanged);
+            // 
+            // bs_conf_list
+            // 
+            this.bs_conf_list.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet.tt_conferenceDataTable);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(349, 444);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(82, 13);
+            this.label8.TabIndex = 85;
+            this.label8.Text = "Last Refreshed:";
+            // 
+            // txt_refreshed
+            // 
+            this.txt_refreshed.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.txt_refreshed.Location = new System.Drawing.Point(437, 441);
+            this.txt_refreshed.Name = "txt_refreshed";
+            this.txt_refreshed.Size = new System.Drawing.Size(253, 20);
+            this.txt_refreshed.TabIndex = 84;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(183, 444);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(70, 13);
+            this.label9.TabIndex = 87;
+            this.label9.Text = "Total Guests:";
+            // 
+            // txt_total_guests
+            // 
+            this.txt_total_guests.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.txt_total_guests.Location = new System.Drawing.Point(259, 441);
+            this.txt_total_guests.Name = "txt_total_guests";
+            this.txt_total_guests.Size = new System.Drawing.Size(84, 20);
+            this.txt_total_guests.TabIndex = 86;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(16, 444);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 13);
+            this.label10.TabIndex = 89;
+            this.label10.Text = "Total Groups:";
+            // 
+            // txt_group_total
+            // 
+            this.txt_group_total.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.txt_group_total.Location = new System.Drawing.Point(93, 441);
+            this.txt_group_total.Name = "txt_group_total";
+            this.txt_group_total.Size = new System.Drawing.Size(84, 20);
+            this.txt_group_total.TabIndex = 88;
+            // 
+            // bs_reservations
+            // 
+            this.bs_reservations.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet.tt_reservationsDataTable);
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(479, 46);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 13);
+            this.label11.TabIndex = 90;
+            this.label11.Text = "Surname:";
+            // 
+            // label12
+            // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(72, 75);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(82, 13);
+            this.label12.TabIndex = 94;
+            this.label12.Text = "Booking Status:";
+            // 
+            // cb_book_status
+            // 
+            this.cb_book_status.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cb_book_status.DataSource = this.bs_book_status;
+            this.cb_book_status.DisplayMember = "descrip";
+            this.cb_book_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_book_status.FormattingEnabled = true;
+            this.cb_book_status.Location = new System.Drawing.Point(165, 69);
+            this.cb_book_status.Name = "cb_book_status";
+            this.cb_book_status.Size = new System.Drawing.Size(518, 21);
+            this.cb_book_status.TabIndex = 93;
+            this.cb_book_status.ValueMember = "code";
+            this.cb_book_status.SelectedIndexChanged += new System.EventHandler(this.cb_book_status_SelectedIndexChanged);
+            // 
+            // bs_book_status
+            // 
+            this.bs_book_status.DataSource = typeof(NS_System.StrongTypesNS.ds_genDataSet.TT_GENDataTable);
+            // 
+            // label13
+            // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(329, 99);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(64, 13);
+            this.label13.TabIndex = 92;
+            this.label13.Text = "Paid Status:";
+            // 
+            // cb_paid_status
+            // 
+            this.cb_paid_status.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cb_paid_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_paid_status.FormattingEnabled = true;
+            this.cb_paid_status.Location = new System.Drawing.Point(399, 96);
+            this.cb_paid_status.Name = "cb_paid_status";
+            this.cb_paid_status.Size = new System.Drawing.Size(96, 21);
+            this.cb_paid_status.TabIndex = 91;
+            this.cb_paid_status.SelectedIndexChanged += new System.EventHandler(this.cb_paid_status_SelectedIndexChanged);
+            // 
+            // dg_conferences
+            // 
+            this.dg_conferences.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dg_conferences.AllowUserToAddRows = false;
+            this.dg_conferences.AllowUserToDeleteRows = false;
+            this.dg_conferences.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg_conferences.AutoGenerateColumns = false;
+            this.dg_conferences.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dg_conferences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_conferences.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.cn_surn,
+            this.cn_institution,
+            this.cn_start,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.cn_guests,
+            this.cn_folio,
+            this.cn_parentfolio,
+            this.dataGridViewTextBoxColumn2});
+            this.dg_conferences.DataSource = this.bs_reservations;
+            this.dg_conferences.Location = new System.Drawing.Point(12, 123);
+            this.dg_conferences.MultiSelect = false;
+            this.dg_conferences.Name = "dg_conferences";
+            this.dg_conferences.ReadOnly = true;
+            this.dg_conferences.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg_conferences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dg_conferences.Size = new System.Drawing.Size(678, 312);
+            this.dg_conferences.TabIndex = 64;
+            this.dg_conferences.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_conferences_CellContentClick);
+            this.dg_conferences.DoubleClick += new System.EventHandler(this.dg_folios_DoubleClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "folio";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Folio";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 54;
+            // 
+            // cn_surn
+            // 
+            this.cn_surn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_surn.DataPropertyName = "surn";
+            this.cn_surn.HeaderText = "Guest Surname";
+            this.cn_surn.Name = "cn_surn";
+            this.cn_surn.ReadOnly = true;
+            // 
+            // cn_institution
+            // 
+            this.cn_institution.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_institution.DataPropertyName = "institution";
+            this.cn_institution.HeaderText = "Institution";
+            this.cn_institution.Name = "cn_institution";
+            this.cn_institution.ReadOnly = true;
+            // 
+            // cn_start
+            // 
+            this.cn_start.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cn_start.DataPropertyName = "start_dte";
+            this.cn_start.HeaderText = "Start Date";
+            this.cn_start.Name = "cn_start";
+            this.cn_start.ReadOnly = true;
+            this.cn_start.Width = 74;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "end_dte";
+            this.dataGridViewTextBoxColumn6.HeaderText = "End Date";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "type_descrip";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Type";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // cn_guests
+            // 
+            this.cn_guests.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cn_guests.DataPropertyName = "guests";
+            this.cn_guests.HeaderText = "Guests";
+            this.cn_guests.Name = "cn_guests";
+            this.cn_guests.ReadOnly = true;
+            this.cn_guests.Width = 65;
+            // 
+            // cn_folio
+            // 
+            this.cn_folio.DataPropertyName = "folio";
+            this.cn_folio.HeaderText = "folio";
+            this.cn_folio.Name = "cn_folio";
+            this.cn_folio.ReadOnly = true;
+            this.cn_folio.Visible = false;
+            // 
+            // cn_parentfolio
+            // 
+            this.cn_parentfolio.DataPropertyName = "parentfolio";
+            this.cn_parentfolio.HeaderText = "parentfolio";
+            this.cn_parentfolio.Name = "cn_parentfolio";
+            this.cn_parentfolio.ReadOnly = true;
+            this.cn_parentfolio.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "ccode";
+            this.dataGridViewTextBoxColumn2.HeaderText = "ccode";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // btn_addMain
+            // 
+            this.btn_addMain.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btn_addMain.Location = new System.Drawing.Point(120, 467);
+            this.btn_addMain.Name = "btn_addMain";
+            this.btn_addMain.Size = new System.Drawing.Size(156, 23);
+            this.btn_addMain.TabIndex = 95;
+            this.btn_addMain.Text = "Add Main Reservation";
+            this.btn_addMain.UseVisualStyleBackColor = true;
+            this.btn_addMain.Click += new System.EventHandler(this.btn_addMain_Click);
+            // 
+            // btn_delMain
+            // 
+            this.btn_delMain.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btn_delMain.Location = new System.Drawing.Point(282, 467);
+            this.btn_delMain.Name = "btn_delMain";
+            this.btn_delMain.Size = new System.Drawing.Size(156, 23);
+            this.btn_delMain.TabIndex = 96;
+            this.btn_delMain.Text = "Cancel Group Reservation";
+            this.btn_delMain.UseVisualStyleBackColor = true;
+            this.btn_delMain.Click += new System.EventHandler(this.btn_delMain_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(668, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(22, 23);
+            this.button1.TabIndex = 97;
+            this.button1.Text = "X";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button2.Location = new System.Drawing.Point(444, 467);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(131, 23);
+            this.button2.TabIndex = 103;
+            this.button2.Text = "Print Group Details";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // Reservations
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(695, 498);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_delMain);
+            this.Controls.Add(this.btn_addMain);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.cb_book_status);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.cb_paid_status);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txt_group_total);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txt_total_guests);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txt_refreshed);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.cb_conferences);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cb_start_dte);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txt_folio);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cb_conf_type);
+            this.Controls.Add(this.txt_organisation);
+            this.Controls.Add(this.btn_refresh);
+            this.Controls.Add(this.dg_conferences);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txt_surname);
+            this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "Reservations";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Search Conferences";
+            this.Load += new System.EventHandler(this.SearchFolio_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.bs_conf_types)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_conf_list)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_reservations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_book_status)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_conferences)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txt_surname;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_refresh;
+        //private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txt_organisation;
+        private System.Windows.Forms.ComboBox cb_conf_type;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_folio;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cb_start_dte;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cb_conferences;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txt_refreshed;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txt_total_guests;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txt_group_total;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn surnDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn institutionDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn startdteDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn enddteDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn guestsDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn parentfolioDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn ccodeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.BindingSource bs_conf_list;
+        private System.Windows.Forms.BindingSource bs_reservations;
+        private System.Windows.Forms.BindingSource bs_conf_types;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cb_book_status;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cb_paid_status;
+        private CustomDataGridView dg_conferences;
+        private System.Windows.Forms.Button btn_addMain;
+        private System.Windows.Forms.Button btn_delMain;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_surn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_institution;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_start;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_guests;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_folio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_parentfolio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.BindingSource bs_book_status;
+        private System.Windows.Forms.Button button2;
+    }
+}

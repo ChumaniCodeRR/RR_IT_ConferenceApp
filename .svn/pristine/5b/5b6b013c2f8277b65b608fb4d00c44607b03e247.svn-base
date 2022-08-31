@@ -1,0 +1,113 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys.ConferenceAdmin
+{
+    public partial class GroupReservations : Form
+    {
+        bool AddNew;
+        string ConfCode;
+        string Folio;
+        string ParentFolio;
+        public GroupReservations(string _ConfCode,string _ParentFolio)
+        {
+            InitializeComponent();
+            ConfCode = _ConfCode;
+            ParentFolio = _ParentFolio;
+        }
+
+        private void GroupReservations_Load(object sender, EventArgs e)
+        {
+            refresh_data();
+        }
+
+        private void refresh_data()
+        {
+            NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_reservations = Proxy.ConferenceAdmin.get_group_reservations(ParentFolio);
+            if (ds_reservations.tt_reservations.Rows.Count < 1) this.Close();
+            bs_reservations.DataSource = ds_reservations.tt_reservations;
+            dg_conferences.ClearSelection();
+            txt_total_guests.Text = ds_reservations.tt_reservations.Rows.Count.ToString();
+           
+            foreach (DataGridViewRow row in dg_conferences.Rows)
+            {
+                if (row.Cells[cn_folio.Name].Value.ToString() == row.Cells[cn_parentfolio.Name].Value.ToString()) row.DefaultCellStyle.BackColor = Color.LightGray;
+               
+            }
+            
+        }
+
+        private void dg_conferences_DoubleClick(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btn_add_guest_Click(object sender, EventArgs e)
+        {
+            AddNew = true;
+        }
+
+        private void dg_conferences_DoubleClick_1(object sender, EventArgs e)
+        {
+            if (dg_conferences.SelectedRows.Count > 0)
+            {
+                AddNew = false;
+                ConfCode = dg_conferences.SelectedRows[0].Cells[cn_ccode.Name].Value.ToString();
+                ParentFolio = dg_conferences.SelectedRows[0].Cells[cn_parentfolio.Name].Value.ToString();
+                Folio = dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString();
+                UpdateReserv frmUpdateReserv = new UpdateReserv(AddNew, ConfCode, ParentFolio, Folio);
+                frmUpdateReserv.ShowDialog();
+                refresh_data();
+            }
+        }
+
+        private void btn_add_guest_Click_1(object sender, EventArgs e)
+        {
+            AddNew = true;
+            UpdateReserv frmUpdateReserv = new UpdateReserv(AddNew, ConfCode, ParentFolio, "0");
+            frmUpdateReserv.ShowDialog();
+            refresh_data();
+           
+        }
+
+        private void btn_del_guest_Click(object sender, EventArgs e)
+        {
+            if (dg_conferences.SelectedRows.Count > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to cancel " + dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString() + " " + dg_conferences.SelectedRows[0].Cells[cn_surn.Name].Value.ToString() + "?", "Cancel Reservation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ConfCode = dg_conferences.SelectedRows[0].Cells[cn_ccode.Name].Value.ToString();
+                    ParentFolio = dg_conferences.SelectedRows[0].Cells[cn_parentfolio.Name].Value.ToString();
+                    Folio = dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString();
+                    string newMain = "0";                 
+
+                    string cancel_single = Proxy.ConferenceAdmin.cancel_reservations(false, ParentFolio, Folio, newMain);
+                    if (cancel_single != "") MessageBox.Show(cancel_single, "Cancel Reservations", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    refresh_data();
+                }
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dg_conferences.SelectedRows.Count > 0)
+            {
+                NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_report = Proxy.ConferenceAdmin.reservation_report(true, dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString());
+                if (ds_report.tt_reservations.Rows.Count > 0)
+                {
+                   // DataView dv_report = new DataView(ds_report.tt_reservations);
+                    Reports frmReport = new Reports("ReservationReport", ds_report);
+                    frmReport.Show();
+                }
+            }
+        }
+    }
+}

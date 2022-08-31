@@ -1,0 +1,224 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys.ConferenceWardens
+{
+    public partial class AvailableRooms : Form
+    {
+       // NS_System.StrongTypesNS.DS_RESCODESDataSet ds_rescodes;
+        NS_System.StrongTypesNS.DS_BUILDINGSDataSet ds_buildings = new NS_System.StrongTypesNS.DS_BUILDINGSDataSet();
+
+        DataTable dt_halls = Global.Global.ds_conf_codes.tt_conf_hall.Copy();
+        DataTable dt_res = Global.Global.ds_conf_codes.tt_conf_res.Copy();
+        DataTable dt_buildings = Global.Global.ds_conf_codes.TT_CONF_BUILDING.Copy();
+
+
+        public AvailableRooms()
+        {
+            InitializeComponent();
+        }
+
+        private void Register_Load(object sender, EventArgs e)
+        {
+            try
+            {
+            
+                nlb_from.Value = DateTime.Today;
+                nlb_to.Value = DateTime.Today;
+
+                DataRow newhall = dt_halls.NewRow();
+                newhall["hall"] = "*";
+                newhall["hallname"] = "All Halls";
+                dt_halls.Rows.InsertAt(newhall, 0);
+                bs_hall.DataSource = dt_halls;
+                bs_res.DataSource = dt_res;
+
+                bs_building.DataSource = dt_buildings;
+
+                hall_changed();
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+
+        }
+
+     
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (nlb_from.Value > nlb_to.Value) MessageBox.Show("Error - Start date cannot be after End date", "Error Dates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+
+                    NS_ConfAdmin.StrongTypesNS.DS_CONF_ROOMS_REPORTDataSet ds_rooms = new NS_ConfAdmin.StrongTypesNS.DS_CONF_ROOMS_REPORTDataSet();
+
+                    string temphall = cb_hall.SelectedValue.ToString();
+                    int tempres = 999;
+                    string cbuilding = "*";
+
+                    if (cb_res.SelectedIndex > -1) { if (cb_res.SelectedValue.ToString() != "999")  tempres = int.Parse(cb_res.SelectedValue.ToString()); }
+                    if (cb_buliding.SelectedIndex > -1) {if (cb_buliding.SelectedValue.ToString() != "*") cbuilding = cb_buliding.SelectedValue.ToString();}
+                    
+                    DateTime start_dte = nlb_from.Value;
+                    DateTime end_dte = nlb_to.Value;
+                    bool double_rooms = rb_double.Checked;
+
+                    ds_rooms = Proxy.ConferenceAdmin.available_rooms_report(temphall,tempres,cbuilding, start_dte, end_dte, double_rooms);
+
+                    if (ds_rooms.tt_conf_rooms.Rows.Count > 0)
+                    {
+                        string temptitle = string.Empty;
+                        if (rb_single.Checked) temptitle =  "Available Single Rooms From ";
+                        else temptitle =  "Available Double Rooms From ";
+                        temptitle = temptitle + start_dte.ToShortDateString() + " Until  " + end_dte.ToShortDateString();
+
+                        DataView dvReport = new DataView(ds_rooms.tt_conf_rooms);
+                        Reports frm_report = new Reports("AvailableRooms", dvReport, temptitle);
+                        frm_report.Show();
+
+                    }
+                    else MessageBox.Show("Your query returned no data to display", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+       
+        private void cb_hall_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           hall_changed();
+        }
+      
+        // New hall select change
+
+       private void hall_changed()
+       {
+           try
+           {
+               if (cb_hall.SelectedIndex > -1)
+               {
+                   if (cb_hall.SelectedIndex == 0)
+                   {
+                       cb_res.SelectedIndex = -1;
+                       cb_res.Enabled = false;
+                       cb_buliding.SelectedIndex = -1;
+                       cb_buliding.Enabled = false;
+                   }
+                   else
+                   {
+                       cb_res.Enabled = true;
+                       cb_buliding.Enabled = true;
+                       DataView dv_res = new DataView(dt_res);
+                       dv_res.RowFilter = "hall = '" + cb_hall.SelectedValue.ToString() + "'";
+                       bool AddAll = true;
+
+                       if (dv_res.Count > 1)
+                       {
+                           for (int i = 0; i < dt_res.Rows.Count; i++)
+                           {
+                               if (dt_res.Rows[i]["res"].ToString() == "999" &&
+                                   dt_res.Rows[i]["hall"].ToString() == cb_hall.SelectedValue.ToString()) AddAll = false;
+                           }
+
+                           if (AddAll == true)
+                           {
+                               DataRow newres = dt_res.NewRow();
+                               newres["res"] = "999";
+                               newres["resname"] = "All Residences";
+                               newres["hall"] = cb_hall.SelectedValue.ToString();
+                               dt_res.Rows.InsertAt(newres, 0);
+                           }
+                       }
+
+                       cb_res.DataSource = dv_res;
+                       cb_res.DisplayMember = "res_name";
+                       cb_res.ValueMember = "res";
+
+                   }
+
+                  res_changed();
+               }
+           }
+           catch (Exception ex)
+           {
+               Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+           }
+       }
+       
+       private void res_changed()
+       {
+           try
+           {
+               if (cb_res.SelectedIndex > -1)
+               {
+                    if (cb_res.SelectedIndex == 0)
+                   {
+                       cb_buliding.SelectedIndex = -1;
+                       cb_buliding.Enabled = false;
+                   }
+                   else
+                   { 
+                        cb_buliding.Enabled = true;
+                        cb_buliding.Enabled = true;
+                        bool AddAll = true;
+
+                       DataView dv_build = new DataView(dt_buildings);
+                       dv_build.RowFilter = "res = '" + cb_res.SelectedValue.ToString() + "'";
+
+                       if (dv_build.Count > 1)
+                       {
+                           for (int i = 0; i < dt_buildings.Rows.Count; i++)
+                           {
+                               if (dt_buildings.Rows[i]["building"].ToString() == "*" &&
+                                   dt_buildings.Rows[i]["res"].ToString() == cb_res.SelectedValue.ToString()) AddAll = false;
+                           }
+
+                           if (AddAll == true)
+                           {
+                               DataRow newbuild = dt_buildings.NewRow();
+                               newbuild["building"] = "*";
+                               newbuild["building_name"] = "All Buildings";
+                               newbuild["res"] = cb_res.SelectedValue.ToString();
+                               dt_buildings.Rows.InsertAt(newbuild, 0);
+                           }
+                       }
+                       cb_buliding.DataSource = dv_build;
+                       cb_buliding.DisplayMember = "building_name";
+                       cb_buliding.ValueMember = "building";
+                  
+                   }
+                     
+               }
+           }
+           catch (Exception ex)
+           {
+               Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+           }
+       }
+
+       private void cb_res_SelectedIndexChanged(object sender, EventArgs e)
+       {
+           res_changed();
+       }     
+
+    }
+}

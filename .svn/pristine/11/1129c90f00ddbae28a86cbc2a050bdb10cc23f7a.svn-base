@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Utilities
+{
+    internal static class AccessControl
+    {
+        internal static bool HasConfAdmin;
+        
+        internal static void CheckUserAccess()
+        {
+            HasConfAdmin = Proxy.System.Check_Sub_Menu_Access("Conf_Admin");            
+        }
+    }
+}

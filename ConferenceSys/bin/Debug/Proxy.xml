@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Proxy</name>
+    </assembly>
+    <members>
+        <member name="F:LoginScreen.Login.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LoginScreen.Login.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LoginScreen.Login.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Proxy.Res_System.Acad_Graph_Res(System.Int32,System.String,System.Int32,System.String@)">
+            <summary>
+            Graphic Display of Academic Results
+            </summary>
+            <param name="year"></param>
+            <param name="exam"></param>
+            <param name="feedback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Proxy.DisciplineSystem.Get_Student_Info(System.String)">
+            <summary>
+            Get student information by student number
+            </summary>
+            <param name="tempstu">Student number</param>
+            <returns>Student information dataset</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,315 @@
+﻿namespace ConferenceSys.ConferenceWardens
+{
+    partial class ConferenceAvaialbleRooms
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConferenceAvaialbleRooms));
+            this.bs_hall = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_building = new System.Windows.Forms.BindingSource(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.bs_res = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_print = new System.Windows.Forms.Button();
+            this.nlb_from = new System.Windows.Forms.DateTimePicker();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.txt_conf_descrip = new System.Windows.Forms.TextBox();
+            this.btn_search_conf = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txt_conf_code = new System.Windows.Forms.TextBox();
+            this.nlb_to = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cb_buliding = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cb_res = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cb_hall = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.rb_single = new System.Windows.Forms.RadioButton();
+            this.rb_double = new System.Windows.Forms.RadioButton();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_hall)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_building)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_res)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // bs_hall
+            // 
+            this.bs_hall.DataSource = typeof(NS_Conference.StrongTypesNS.ds_conf_codesDataSet.tt_conf_hallDataTable);
+            // 
+            // bs_building
+            // 
+            this.bs_building.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet.tt_conf_buildDataTable);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(70, 94);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Date From:";
+            // 
+            // bs_res
+            // 
+            this.bs_res.DataSource = typeof(NS_Conference.StrongTypesNS.ds_conf_codesDataSet.tt_conf_resDataTable);
+            // 
+            // btn_print
+            // 
+            this.btn_print.Location = new System.Drawing.Point(233, 147);
+            this.btn_print.Name = "btn_print";
+            this.btn_print.Size = new System.Drawing.Size(130, 23);
+            this.btn_print.TabIndex = 32;
+            this.btn_print.Text = "Proceed";
+            this.btn_print.UseVisualStyleBackColor = true;
+            this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
+            // 
+            // nlb_from
+            // 
+            this.nlb_from.Location = new System.Drawing.Point(135, 92);
+            this.nlb_from.Name = "nlb_from";
+            this.nlb_from.Size = new System.Drawing.Size(200, 20);
+            this.nlb_from.TabIndex = 35;
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Location = new System.Drawing.Point(369, 147);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(130, 23);
+            this.btn_cancel.TabIndex = 37;
+            this.btn_cancel.Text = "Cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // txt_conf_descrip
+            // 
+            this.txt_conf_descrip.Location = new System.Drawing.Point(302, 12);
+            this.txt_conf_descrip.Name = "txt_conf_descrip";
+            this.txt_conf_descrip.ReadOnly = true;
+            this.txt_conf_descrip.Size = new System.Drawing.Size(389, 20);
+            this.txt_conf_descrip.TabIndex = 41;
+            // 
+            // btn_search_conf
+            // 
+            this.btn_search_conf.Location = new System.Drawing.Point(270, 9);
+            this.btn_search_conf.Name = "btn_search_conf";
+            this.btn_search_conf.Size = new System.Drawing.Size(26, 23);
+            this.btn_search_conf.TabIndex = 40;
+            this.btn_search_conf.Text = "...";
+            this.btn_search_conf.UseVisualStyleBackColor = true;
+            this.btn_search_conf.Click += new System.EventHandler(this.btn_search_conf_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(37, 14);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(93, 13);
+            this.label11.TabIndex = 39;
+            this.label11.Text = "Conference Code:";
+            // 
+            // txt_conf_code
+            // 
+            this.txt_conf_code.Location = new System.Drawing.Point(135, 12);
+            this.txt_conf_code.Name = "txt_conf_code";
+            this.txt_conf_code.ReadOnly = true;
+            this.txt_conf_code.Size = new System.Drawing.Size(129, 20);
+            this.txt_conf_code.TabIndex = 38;
+            // 
+            // nlb_to
+            // 
+            this.nlb_to.Location = new System.Drawing.Point(378, 92);
+            this.nlb_to.Name = "nlb_to";
+            this.nlb_to.Size = new System.Drawing.Size(200, 20);
+            this.nlb_to.TabIndex = 42;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(341, 94);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "Until:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(82, 68);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.TabIndex = 45;
+            this.label8.Text = "Building:";
+            // 
+            // cb_buliding
+            // 
+            this.cb_buliding.DataSource = this.bs_building;
+            this.cb_buliding.DisplayMember = "building_descrip";
+            this.cb_buliding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_buliding.FormattingEnabled = true;
+            this.cb_buliding.Location = new System.Drawing.Point(135, 65);
+            this.cb_buliding.Name = "cb_buliding";
+            this.cb_buliding.Size = new System.Drawing.Size(556, 21);
+            this.cb_buliding.TabIndex = 44;
+            this.cb_buliding.ValueMember = "building";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(378, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.TabIndex = 49;
+            this.label2.Text = "Residence:";
+            // 
+            // cb_res
+            // 
+            this.cb_res.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_res.Enabled = false;
+            this.cb_res.FormattingEnabled = true;
+            this.cb_res.Location = new System.Drawing.Point(445, 38);
+            this.cb_res.Name = "cb_res";
+            this.cb_res.Size = new System.Drawing.Size(246, 21);
+            this.cb_res.TabIndex = 48;
+            this.cb_res.SelectedIndexChanged += new System.EventHandler(this.cb_res_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(101, 41);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(28, 13);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "Hall:";
+            // 
+            // cb_hall
+            // 
+            this.cb_hall.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_hall.FormattingEnabled = true;
+            this.cb_hall.Location = new System.Drawing.Point(135, 38);
+            this.cb_hall.Name = "cb_hall";
+            this.cb_hall.Size = new System.Drawing.Size(237, 21);
+            this.cb_hall.TabIndex = 46;
+            this.cb_hall.SelectedIndexChanged += new System.EventHandler(this.cb_hall_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(64, 124);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.TabIndex = 50;
+            this.label3.Text = "Room Type:";
+            // 
+            // rb_single
+            // 
+            this.rb_single.AutoSize = true;
+            this.rb_single.Checked = true;
+            this.rb_single.Location = new System.Drawing.Point(135, 122);
+            this.rb_single.Name = "rb_single";
+            this.rb_single.Size = new System.Drawing.Size(54, 17);
+            this.rb_single.TabIndex = 51;
+            this.rb_single.Text = "Single";
+            this.rb_single.UseVisualStyleBackColor = true;
+            // 
+            // rb_double
+            // 
+            this.rb_double.AutoSize = true;
+            this.rb_double.Location = new System.Drawing.Point(195, 122);
+            this.rb_double.Name = "rb_double";
+            this.rb_double.Size = new System.Drawing.Size(59, 17);
+            this.rb_double.TabIndex = 52;
+            this.rb_double.Text = "Double";
+            this.rb_double.UseVisualStyleBackColor = true;
+            // 
+            // ConferenceAvaialbleRooms
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(728, 182);
+            this.Controls.Add(this.rb_double);
+            this.Controls.Add(this.rb_single);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cb_res);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.cb_hall);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cb_buliding);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nlb_to);
+            this.Controls.Add(this.txt_conf_descrip);
+            this.Controls.Add(this.btn_search_conf);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.txt_conf_code);
+            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.nlb_from);
+            this.Controls.Add(this.btn_print);
+            this.Controls.Add(this.label6);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ConferenceAvaialbleRooms";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Conference Available Rooms";
+            this.Load += new System.EventHandler(this.ConferenceAvaialbleRooms_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.bs_hall)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_building)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_res)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btn_print;
+        private System.Windows.Forms.BindingSource bs_hall;
+        private System.Windows.Forms.BindingSource bs_res;
+        private System.Windows.Forms.BindingSource bs_building;
+        private System.Windows.Forms.DateTimePicker nlb_from;
+        private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.TextBox txt_conf_descrip;
+        private System.Windows.Forms.Button btn_search_conf;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txt_conf_code;
+        private System.Windows.Forms.DateTimePicker nlb_to;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cb_buliding;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cb_res;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cb_hall;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RadioButton rb_single;
+        private System.Windows.Forms.RadioButton rb_double;
+    }
+}

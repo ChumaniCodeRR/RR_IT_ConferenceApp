@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using ConferenceSys;
+
+namespace Global
+{
+    static class Global
+    {
+        public static NS_System.StrongTypesNS.DS_RESCODESDataSet ds_rescodes;
+        public static NS_Conference.StrongTypesNS.ds_booking_summaryDataSet ds_bookings;
+        public static NS_Conference.StrongTypesNS.ds_bookingsDataSet ds_single_booking;
+        public static NS_Conference.StrongTypesNS.ds_conference_lookupDataSet ds_conference_lookups;
+        public static NS_System.StrongTypesNS.DS_HALLRESIDENCESDataSet ds_res;
+    }
+}

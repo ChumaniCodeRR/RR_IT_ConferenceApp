@@ -1,0 +1,111 @@
+﻿namespace ConferenceSys.ConferenceAdmin
+{
+    partial class DefaultHall
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DefaultHall));
+            this.cbHall = new System.Windows.Forms.ComboBox();
+            this.lblHall = new System.Windows.Forms.Label();
+            this.btn_proceed = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // cbHall
+            // 
+            this.cbHall.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbHall.DisplayMember = "detail";
+            this.cbHall.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHall.FormattingEnabled = true;
+            this.cbHall.Location = new System.Drawing.Point(109, 12);
+            this.cbHall.Name = "cbHall";
+            this.cbHall.Size = new System.Drawing.Size(220, 21);
+            this.cbHall.TabIndex = 39;
+            this.cbHall.ValueMember = "dhall";
+            // 
+            // lblHall
+            // 
+            this.lblHall.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblHall.AutoSize = true;
+            this.lblHall.Location = new System.Drawing.Point(36, 15);
+            this.lblHall.Name = "lblHall";
+            this.lblHall.Size = new System.Drawing.Size(67, 13);
+            this.lblHall.TabIndex = 38;
+            this.lblHall.Text = "Dinning Hall:";
+            // 
+            // btn_proceed
+            // 
+            this.btn_proceed.Location = new System.Drawing.Point(104, 56);
+            this.btn_proceed.Name = "btn_proceed";
+            this.btn_proceed.Size = new System.Drawing.Size(75, 23);
+            this.btn_proceed.TabIndex = 40;
+            this.btn_proceed.Text = "Proceed";
+            this.btn_proceed.UseVisualStyleBackColor = true;
+            this.btn_proceed.Click += new System.EventHandler(this.btn_proceed_Click);
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Location = new System.Drawing.Point(185, 56);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_cancel.TabIndex = 41;
+            this.btn_cancel.Text = "Cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // DefaultHall
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(365, 91);
+            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.btn_proceed);
+            this.Controls.Add(this.cbHall);
+            this.Controls.Add(this.lblHall);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "DefaultHall";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Change Default Hall";
+            this.Load += new System.EventHandler(this.DefaultHall_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ComboBox cbHall;
+        private System.Windows.Forms.Label lblHall;
+        private System.Windows.Forms.Button btn_proceed;
+        private System.Windows.Forms.Button btn_cancel;
+
+    }
+}

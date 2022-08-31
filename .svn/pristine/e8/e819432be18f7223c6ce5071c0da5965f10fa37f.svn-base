@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin.Reports
+{
+    public partial class RoomDiscrepancies : Form
+    {
+
+        NS_ConfAdmin.StrongTypesNS.DS_CCODEDataSet ds_ccode;
+
+        public RoomDiscrepancies()
+        {
+            InitializeComponent();
+        }
+
+        private void RoomDiscrepancies_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                ds_ccode = Proxy.ConferenceAdmin.get_conf_halls("*");
+                if (ds_ccode.tt_ccode_hall.Rows.Count > 0)
+                {
+                    DataView DV_Halls = new DataView(ds_ccode.tt_ccode_hall);
+                    DataRow newrow = DV_Halls.Table.NewRow();
+                    newrow["shall"] = "*";
+                    newrow["descrip"] = " All Halls";                    
+                    DV_Halls.Table.Rows.InsertAt(newrow, 0);
+
+                    DV_Halls.Sort = "descrip";
+                    bsHall.DataSource = DV_Halls;
+                    cbHall.SelectedIndex = 0;
+                    FilterResidence();
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void cbHall_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterResidence();
+        }
+
+        void FilterResidence()
+        {
+            if (cbHall.Items.Count > 0 && cbHall.SelectedIndex == -1) cbHall.SelectedIndex = 0;
+
+            DataView dvRes = new DataView(ds_ccode.tt_ccode_res);
+            dvRes.RowFilter = string.Format("shall = '{0}'", cbHall.SelectedValue.ToString());
+            dvRes.Sort = "res_name";
+
+            if (cbHall.SelectedIndex > 0)
+            {
+                string searchstr = "All Residences in " + cbHall.Text.ToString();
+                cbHouse.Enabled = true;
+
+                int index = dvRes.Find(searchstr);
+                if (index == -1)
+                {
+                    DataRow newRow = dvRes.Table.NewRow();
+                    newRow["res"] = "999";
+                    newRow["res_name"] = searchstr;
+                    newRow["shall"] = cbHall.SelectedValue.ToString();
+                    dvRes.Table.Rows.InsertAt(newRow, 0);
+                }
+               
+              
+            }
+            if (cbHall.SelectedIndex == 0)
+            {
+                DataRow newRow = dvRes.Table.NewRow();
+                newRow["res"] = "999";
+                newRow["res_name"] = "All Residences";
+                newRow["shall"] = cbHall.SelectedValue.ToString();
+                dvRes.Table.Rows.InsertAt(newRow, 0);
+                
+                cbHouse.Enabled = false;
+            }
+
+            bsHouse.DataSource = dvRes;
+            cbHouse.SelectedIndex = 0;
+                
+        }
+
+        private void btn_proceed_Click(object sender, EventArgs e)
+        {
+            NS_Conference.StrongTypesNS.ds_rooms_reportDataSet ds_report = Proxy.ConferenceSystem.conference_rooms_discrepancies(cbHall.SelectedValue.ToString(), int.Parse(cbHouse.SelectedValue.ToString()));
+            if (ds_report.tt_rooms_report.Rows.Count > 0)
+            {
+                DataView dvReport = new DataView(ds_report.tt_rooms_report);
+                ConferenceSys.Reports frmReports = new ConferenceSys.Reports("Discrepancies", dvReport, "Conference Rooms - Bed Discrepancies");
+                frmReports.Show();
+            }
+            else MessageBox.Show("There were no bed discrepancies to display", "No Discrepancies", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }       
+    }
+}

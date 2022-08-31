@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using NS_Conference.StrongTypesNS;
+using NS_System.StrongTypesNS;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceWardens
+{
+    public partial class ConferenceBuildings : Form
+    {
+        public NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet ds_build;
+        public bool Proceed;
+
+        public ConferenceBuildings()
+        {
+            InitializeComponent();
+        }    
+
+        private void ConferenceBuildings_Load(object sender, EventArgs e)
+        {
+            DataView DV_Halls = new DataView(Global.Global.ds_conf_codes.tt_conf_hall);
+            DV_Halls.Sort = "hallname";
+            bsHall.DataSource = DV_Halls;
+            if (cbHall.SelectedIndex > -1) get_buildings();
+        }
+
+        private void cbHall_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbHall.SelectedIndex > -1) get_buildings();
+        }
+
+        private void get_buildings()
+        {
+            if (cbHall.SelectedIndex > -1)
+            {
+                DataView dv_buildings = new DataView(Global.Global.ds_conf_codes.TT_CONF_BUILDING);
+                dv_buildings.RowFilter = "hall = '" + cbHall.SelectedValue.ToString() + "'";
+                bsBuilding.DataSource = dv_buildings;
+            }
+        }
+      
+        private void btn_check_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dg_buildings.Rows)
+            {
+                DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)row.Cells[cn_checked.Name];
+                if (checkCell.Value == null || !(bool)checkCell.Value) checkCell.Value = true;
+            }
+            dg_buildings.ClearSelection();
+        }
+
+        private void btn_uncheck_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dg_buildings.Rows)
+            {
+                DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)row.Cells[cn_checked.Name];
+                if (checkCell.Value != null && (bool)checkCell.Value) checkCell.Value = false;
+            }
+            dg_buildings.ClearSelection();
+        }
+
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+            ds_build = new NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet();
+            bool CheckedOne = false;
+
+            foreach (DataGridViewRow row in dg_buildings.Rows)
+            {
+                DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)row.Cells[cn_checked.Name];
+                if (checkCell.Value != null && (bool)checkCell.Value)
+                {
+                    CheckedOne = true;
+                    DataRow newrow = ds_build.tt_conf_build.NewRow();
+                    newrow["building"] = row.Cells[cn_building.Name].Value.ToString();
+                    newrow["building_descrip"] = row.Cells[cn_buildingname.Name].Value.ToString();
+                    ds_build.tt_conf_build.Rows.InsertAt(newrow, 0);
+                }
+            }
+
+            if (CheckedOne == false) MessageBox.Show("There is no building selected, select a building or click cancel to exit", "Error No Building", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                Proceed = true;
+                this.Close();                
+            }
+        }       
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            Proceed = false;
+            this.Close();
+        }
+       
+    }
+}

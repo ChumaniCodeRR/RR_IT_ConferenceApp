@@ -1,0 +1,305 @@
+﻿namespace ConferenceSys.ConferenceAdmin
+{
+    partial class ConfBuildings
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.bs_building1 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_buildings = new System.Windows.Forms.BindingSource(this.components);
+            this.dS_CCODEDataSet = new NS_ConfAdmin.StrongTypesNS.DS_CCODEDataSet();
+            this.btnUncheckAll = new System.Windows.Forms.Button();
+            this.btnCheckAll = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chk_allow_split = new System.Windows.Forms.CheckBox();
+            this.btnProceed = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.pnl_gender = new System.Windows.Forms.Panel();
+            this.rb_female = new System.Windows.Forms.RadioButton();
+            this.rb_male = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgBuildings = new CustomDataGridView();
+            this.ckCopy = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buildingdescripDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ccodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cnbuilding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.largeDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tcodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genderDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_building1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_buildings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dS_CCODEDataSet)).BeginInit();
+            this.pnl_gender.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBuildings)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // bs_building1
+            // 
+            this.bs_building1.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet.tt_conf_buildDataTable);
+            // 
+            // bs_buildings
+            // 
+            this.bs_buildings.DataMember = "tt_ccode_build";
+            this.bs_buildings.DataSource = this.dS_CCODEDataSet;
+            // 
+            // dS_CCODEDataSet
+            // 
+            this.dS_CCODEDataSet.DataSetName = "DS_CCODEDataSet";
+            this.dS_CCODEDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // btnUncheckAll
+            // 
+            this.btnUncheckAll.Location = new System.Drawing.Point(85, 12);
+            this.btnUncheckAll.Name = "btnUncheckAll";
+            this.btnUncheckAll.Size = new System.Drawing.Size(75, 23);
+            this.btnUncheckAll.TabIndex = 27;
+            this.btnUncheckAll.Text = "Uncheck All";
+            this.btnUncheckAll.UseVisualStyleBackColor = true;
+            this.btnUncheckAll.Click += new System.EventHandler(this.btnUncheckAll_Click);
+            // 
+            // btnCheckAll
+            // 
+            this.btnCheckAll.Location = new System.Drawing.Point(4, 12);
+            this.btnCheckAll.Name = "btnCheckAll";
+            this.btnCheckAll.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckAll.TabIndex = 26;
+            this.btnCheckAll.Text = "Check All";
+            this.btnCheckAll.UseVisualStyleBackColor = true;
+            this.btnCheckAll.Click += new System.EventHandler(this.btnCheckAll_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 300);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(127, 13);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Allow booking to be split?";
+            // 
+            // chk_allow_split
+            // 
+            this.chk_allow_split.AutoSize = true;
+            this.chk_allow_split.Location = new System.Drawing.Point(133, 300);
+            this.chk_allow_split.Name = "chk_allow_split";
+            this.chk_allow_split.Size = new System.Drawing.Size(15, 14);
+            this.chk_allow_split.TabIndex = 29;
+            this.chk_allow_split.UseVisualStyleBackColor = true;
+            // 
+            // btnProceed
+            // 
+            this.btnProceed.Location = new System.Drawing.Point(208, 320);
+            this.btnProceed.Name = "btnProceed";
+            this.btnProceed.Size = new System.Drawing.Size(75, 23);
+            this.btnProceed.TabIndex = 30;
+            this.btnProceed.Text = "Proceed";
+            this.btnProceed.UseVisualStyleBackColor = true;
+            this.btnProceed.Click += new System.EventHandler(this.btnProceed_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(289, 320);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 31;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // pnl_gender
+            // 
+            this.pnl_gender.Controls.Add(this.rb_female);
+            this.pnl_gender.Controls.Add(this.rb_male);
+            this.pnl_gender.Controls.Add(this.label2);
+            this.pnl_gender.Location = new System.Drawing.Point(154, 296);
+            this.pnl_gender.Name = "pnl_gender";
+            this.pnl_gender.Size = new System.Drawing.Size(417, 23);
+            this.pnl_gender.TabIndex = 32;
+            // 
+            // rb_female
+            // 
+            this.rb_female.AutoSize = true;
+            this.rb_female.Location = new System.Drawing.Point(244, 2);
+            this.rb_female.Name = "rb_female";
+            this.rb_female.Size = new System.Drawing.Size(59, 17);
+            this.rb_female.TabIndex = 2;
+            this.rb_female.TabStop = true;
+            this.rb_female.Text = "Female";
+            this.rb_female.UseVisualStyleBackColor = true;
+            this.rb_female.CheckedChanged += new System.EventHandler(this.rb_female_CheckedChanged);
+            // 
+            // rb_male
+            // 
+            this.rb_male.AutoSize = true;
+            this.rb_male.Location = new System.Drawing.Point(190, 3);
+            this.rb_male.Name = "rb_male";
+            this.rb_male.Size = new System.Drawing.Size(48, 17);
+            this.rb_male.TabIndex = 1;
+            this.rb_male.TabStop = true;
+            this.rb_male.Text = "Male";
+            this.rb_male.UseVisualStyleBackColor = true;
+            this.rb_male.CheckedChanged += new System.EventHandler(this.rb_male_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(181, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "This is a gender specific conference:";
+            // 
+            // dgBuildings
+            // 
+            this.dgBuildings.AllowUserToAddRows = false;
+            this.dgBuildings.AllowUserToDeleteRows = false;
+            this.dgBuildings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgBuildings.AutoGenerateColumns = false;
+            this.dgBuildings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBuildings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ckCopy,
+            this.buildingdescripDataGridViewTextBoxColumn,
+            this.ccodeDataGridViewTextBoxColumn,
+            this.cnbuilding,
+            this.largeDataGridViewCheckBoxColumn,
+            this.tcodeDataGridViewTextBoxColumn,
+            this.genderDataGridViewCheckBoxColumn});
+            this.dgBuildings.DataSource = this.bs_building1;
+            this.dgBuildings.Location = new System.Drawing.Point(3, 41);
+            this.dgBuildings.MultiSelect = false;
+            this.dgBuildings.Name = "dgBuildings";
+            this.dgBuildings.RowHeadersVisible = false;
+            this.dgBuildings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgBuildings.Size = new System.Drawing.Size(568, 252);
+            this.dgBuildings.TabIndex = 24;
+            // 
+            // ckCopy
+            // 
+            this.ckCopy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ckCopy.HeaderText = "";
+            this.ckCopy.Name = "ckCopy";
+            this.ckCopy.Width = 5;
+            // 
+            // buildingdescripDataGridViewTextBoxColumn
+            // 
+            this.buildingdescripDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.buildingdescripDataGridViewTextBoxColumn.DataPropertyName = "building_descrip";
+            this.buildingdescripDataGridViewTextBoxColumn.HeaderText = "Building";
+            this.buildingdescripDataGridViewTextBoxColumn.Name = "buildingdescripDataGridViewTextBoxColumn";
+            // 
+            // ccodeDataGridViewTextBoxColumn
+            // 
+            this.ccodeDataGridViewTextBoxColumn.DataPropertyName = "ccode";
+            this.ccodeDataGridViewTextBoxColumn.HeaderText = "ccode";
+            this.ccodeDataGridViewTextBoxColumn.Name = "ccodeDataGridViewTextBoxColumn";
+            this.ccodeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cnbuilding
+            // 
+            this.cnbuilding.DataPropertyName = "building";
+            this.cnbuilding.HeaderText = "building";
+            this.cnbuilding.Name = "cnbuilding";
+            this.cnbuilding.Visible = false;
+            // 
+            // largeDataGridViewCheckBoxColumn
+            // 
+            this.largeDataGridViewCheckBoxColumn.DataPropertyName = "large";
+            this.largeDataGridViewCheckBoxColumn.HeaderText = "large";
+            this.largeDataGridViewCheckBoxColumn.Name = "largeDataGridViewCheckBoxColumn";
+            this.largeDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // tcodeDataGridViewTextBoxColumn
+            // 
+            this.tcodeDataGridViewTextBoxColumn.DataPropertyName = "tcode";
+            this.tcodeDataGridViewTextBoxColumn.HeaderText = "tcode";
+            this.tcodeDataGridViewTextBoxColumn.Name = "tcodeDataGridViewTextBoxColumn";
+            this.tcodeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // genderDataGridViewCheckBoxColumn
+            // 
+            this.genderDataGridViewCheckBoxColumn.DataPropertyName = "gender";
+            this.genderDataGridViewCheckBoxColumn.HeaderText = "gender";
+            this.genderDataGridViewCheckBoxColumn.Name = "genderDataGridViewCheckBoxColumn";
+            this.genderDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // ConfBuildings
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(572, 349);
+            this.Controls.Add(this.pnl_gender);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnProceed);
+            this.Controls.Add(this.chk_allow_split);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnUncheckAll);
+            this.Controls.Add(this.btnCheckAll);
+            this.Controls.Add(this.dgBuildings);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ConfBuildings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Conference Buildings";
+            this.Load += new System.EventHandler(this.ConfBuildings_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.bs_building1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_buildings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dS_CCODEDataSet)).EndInit();
+            this.pnl_gender.ResumeLayout(false);
+            this.pnl_gender.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBuildings)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private CustomDataGridView dgBuildings;
+        private System.Windows.Forms.Button btnUncheckAll;
+        private System.Windows.Forms.Button btnCheckAll;
+        private System.Windows.Forms.BindingSource bs_buildings;
+        private NS_ConfAdmin.StrongTypesNS.DS_CCODEDataSet dS_CCODEDataSet;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chk_allow_split;
+        private System.Windows.Forms.Button btnProceed;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Panel pnl_gender;
+        private System.Windows.Forms.RadioButton rb_female;
+        private System.Windows.Forms.RadioButton rb_male;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.BindingSource bs_building1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ckCopy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn buildingdescripDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ccodeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cnbuilding;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn largeDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tcodeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn genderDataGridViewCheckBoxColumn;
+    }
+}

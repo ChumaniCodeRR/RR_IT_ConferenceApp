@@ -1,0 +1,398 @@
+﻿namespace ConferenceSys
+{
+    partial class MainForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conferenceWardensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.availableRoomsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mealReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printFolioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conferenceOfficeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageConferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageReservationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageRoomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateSRCListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blockedRoomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conferenceRoomsReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.financialReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guestsByDinningHallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mattressReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.roomsDiscrepanciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.studentBookingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.housekeepersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alphaListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.arrivalDepartureListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.queryByResidenceRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip.SuspendLayout();
+            this.statusStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.conferenceWardensToolStripMenuItem,
+            this.conferenceOfficeToolStripMenuItem,
+            this.housekeepersToolStripMenuItem,
+            this.hToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(995, 24);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // conferenceWardensToolStripMenuItem
+            // 
+            this.conferenceWardensToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.availableRoomsListToolStripMenuItem,
+            this.mealReportToolStripMenuItem,
+            this.registerToolStripMenuItem,
+            this.printFolioToolStripMenuItem});
+            this.conferenceWardensToolStripMenuItem.Name = "conferenceWardensToolStripMenuItem";
+            this.conferenceWardensToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
+            this.conferenceWardensToolStripMenuItem.Text = "Conference Wardens";
+            this.conferenceWardensToolStripMenuItem.Visible = false;
+            // 
+            // availableRoomsListToolStripMenuItem
+            // 
+            this.availableRoomsListToolStripMenuItem.Name = "availableRoomsListToolStripMenuItem";
+            this.availableRoomsListToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.availableRoomsListToolStripMenuItem.Text = "Available Rooms List";
+            this.availableRoomsListToolStripMenuItem.Click += new System.EventHandler(this.availableRoomsListToolStripMenuItem_Click);
+            // 
+            // mealReportToolStripMenuItem
+            // 
+            this.mealReportToolStripMenuItem.Name = "mealReportToolStripMenuItem";
+            this.mealReportToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.mealReportToolStripMenuItem.Text = "Meals Report";
+            this.mealReportToolStripMenuItem.Click += new System.EventHandler(this.mealReportToolStripMenuItem_Click);
+            // 
+            // registerToolStripMenuItem
+            // 
+            this.registerToolStripMenuItem.Name = "registerToolStripMenuItem";
+            this.registerToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.registerToolStripMenuItem.Text = "Register";
+            this.registerToolStripMenuItem.Click += new System.EventHandler(this.registerToolStripMenuItem_Click);
+            // 
+            // printFolioToolStripMenuItem
+            // 
+            this.printFolioToolStripMenuItem.Name = "printFolioToolStripMenuItem";
+            this.printFolioToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.printFolioToolStripMenuItem.Text = "Register By Folio";
+            this.printFolioToolStripMenuItem.Click += new System.EventHandler(this.printFolioToolStripMenuItem_Click);
+            // 
+            // conferenceOfficeToolStripMenuItem
+            // 
+            this.conferenceOfficeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageConferenceToolStripMenuItem,
+            this.manageReservationsToolStripMenuItem,
+            this.utilitiesToolStripMenuItem,
+            this.reportsToolStripMenuItem});
+            this.conferenceOfficeToolStripMenuItem.Name = "conferenceOfficeToolStripMenuItem";
+            this.conferenceOfficeToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
+            this.conferenceOfficeToolStripMenuItem.Text = "Conference Office";
+            this.conferenceOfficeToolStripMenuItem.Visible = false;
+            // 
+            // manageConferenceToolStripMenuItem
+            // 
+            this.manageConferenceToolStripMenuItem.Name = "manageConferenceToolStripMenuItem";
+            this.manageConferenceToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.manageConferenceToolStripMenuItem.Text = "Manage Conference";
+            this.manageConferenceToolStripMenuItem.Click += new System.EventHandler(this.manageConferenceToolStripMenuItem_Click);
+            // 
+            // manageReservationsToolStripMenuItem
+            // 
+            this.manageReservationsToolStripMenuItem.Name = "manageReservationsToolStripMenuItem";
+            this.manageReservationsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.manageReservationsToolStripMenuItem.Text = "Manage Reservations";
+            this.manageReservationsToolStripMenuItem.Click += new System.EventHandler(this.manageReservationsToolStripMenuItem_Click);
+            // 
+            // utilitiesToolStripMenuItem
+            // 
+            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageRoomsToolStripMenuItem,
+            this.updateSRCListToolStripMenuItem});
+            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
+            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.utilitiesToolStripMenuItem.Text = "Utilities";
+            // 
+            // manageRoomsToolStripMenuItem
+            // 
+            this.manageRoomsToolStripMenuItem.Name = "manageRoomsToolStripMenuItem";
+            this.manageRoomsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.manageRoomsToolStripMenuItem.Text = "Manage Rooms";
+            this.manageRoomsToolStripMenuItem.Click += new System.EventHandler(this.manageRoomsToolStripMenuItem_Click);
+            // 
+            // updateSRCListToolStripMenuItem
+            // 
+            this.updateSRCListToolStripMenuItem.Name = "updateSRCListToolStripMenuItem";
+            this.updateSRCListToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.updateSRCListToolStripMenuItem.Text = "Manage SRC List";
+            this.updateSRCListToolStripMenuItem.Click += new System.EventHandler(this.updateSRCListToolStripMenuItem_Click);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.roomsDiscrepanciesToolStripMenuItem,
+            this.blockedRoomsToolStripMenuItem,
+            this.conferenceRoomsReportToolStripMenuItem,
+            this.financialReportToolStripMenuItem,
+            this.guestsByDinningHallToolStripMenuItem,
+            this.mattressReportToolStripMenuItem,
+            this.studentBookingsToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // blockedRoomsToolStripMenuItem
+            // 
+            this.blockedRoomsToolStripMenuItem.Name = "blockedRoomsToolStripMenuItem";
+            this.blockedRoomsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.blockedRoomsToolStripMenuItem.Text = "Blocked Rooms";
+            this.blockedRoomsToolStripMenuItem.Click += new System.EventHandler(this.blockedRoomsToolStripMenuItem_Click);
+            // 
+            // conferenceRoomsReportToolStripMenuItem
+            // 
+            this.conferenceRoomsReportToolStripMenuItem.Name = "conferenceRoomsReportToolStripMenuItem";
+            this.conferenceRoomsReportToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.conferenceRoomsReportToolStripMenuItem.Text = "Conference Rooms";
+            this.conferenceRoomsReportToolStripMenuItem.Click += new System.EventHandler(this.conferenceRoomsReportToolStripMenuItem_Click);
+            // 
+            // financialReportToolStripMenuItem
+            // 
+            this.financialReportToolStripMenuItem.Name = "financialReportToolStripMenuItem";
+            this.financialReportToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.financialReportToolStripMenuItem.Text = "Financial Report";
+            this.financialReportToolStripMenuItem.Click += new System.EventHandler(this.financialReportToolStripMenuItem_Click);
+            // 
+            // guestsByDinningHallToolStripMenuItem
+            // 
+            this.guestsByDinningHallToolStripMenuItem.Name = "guestsByDinningHallToolStripMenuItem";
+            this.guestsByDinningHallToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.guestsByDinningHallToolStripMenuItem.Text = "Guests By Dining Hall";
+            this.guestsByDinningHallToolStripMenuItem.Click += new System.EventHandler(this.guestsByDinningHallToolStripMenuItem_Click);
+            // 
+            // mattressReportToolStripMenuItem
+            // 
+            this.mattressReportToolStripMenuItem.Name = "mattressReportToolStripMenuItem";
+            this.mattressReportToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.mattressReportToolStripMenuItem.Text = "Mattress Report";
+            this.mattressReportToolStripMenuItem.Click += new System.EventHandler(this.mattressReportToolStripMenuItem_Click);
+            // 
+            // roomsDiscrepanciesToolStripMenuItem
+            // 
+            this.roomsDiscrepanciesToolStripMenuItem.Name = "roomsDiscrepanciesToolStripMenuItem";
+            this.roomsDiscrepanciesToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.roomsDiscrepanciesToolStripMenuItem.Text = "Bed Discrepancies";
+            this.roomsDiscrepanciesToolStripMenuItem.Click += new System.EventHandler(this.roomsDiscrepanciesToolStripMenuItem_Click);
+            // 
+            // studentBookingsToolStripMenuItem
+            // 
+            this.studentBookingsToolStripMenuItem.Name = "studentBookingsToolStripMenuItem";
+            this.studentBookingsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.studentBookingsToolStripMenuItem.Text = "Student Bookings";
+            this.studentBookingsToolStripMenuItem.Click += new System.EventHandler(this.studentBookingsToolStripMenuItem_Click);
+            // 
+            // housekeepersToolStripMenuItem
+            // 
+            this.housekeepersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alphaListToolStripMenuItem1,
+            this.arrivalDepartureListToolStripMenuItem1,
+            this.queryByResidenceRoomToolStripMenuItem});
+            this.housekeepersToolStripMenuItem.Name = "housekeepersToolStripMenuItem";
+            this.housekeepersToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.housekeepersToolStripMenuItem.Text = "Housekeepers";
+            // 
+            // alphaListToolStripMenuItem1
+            // 
+            this.alphaListToolStripMenuItem1.Name = "alphaListToolStripMenuItem1";
+            this.alphaListToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
+            this.alphaListToolStripMenuItem1.Text = "Alpha List";
+            this.alphaListToolStripMenuItem1.Click += new System.EventHandler(this.alphaListToolStripMenuItem1_Click);
+            // 
+            // arrivalDepartureListToolStripMenuItem1
+            // 
+            this.arrivalDepartureListToolStripMenuItem1.Name = "arrivalDepartureListToolStripMenuItem1";
+            this.arrivalDepartureListToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
+            this.arrivalDepartureListToolStripMenuItem1.Text = "Arrival/Departure List";
+            this.arrivalDepartureListToolStripMenuItem1.Click += new System.EventHandler(this.arrivalDepartureListToolStripMenuItem1_Click);
+            // 
+            // queryByResidenceRoomToolStripMenuItem
+            // 
+            this.queryByResidenceRoomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2});
+            this.queryByResidenceRoomToolStripMenuItem.Name = "queryByResidenceRoomToolStripMenuItem";
+            this.queryByResidenceRoomToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.queryByResidenceRoomToolStripMenuItem.Text = "Query";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(212, 22);
+            this.toolStripMenuItem3.Text = "By Folio";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click_1);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(212, 22);
+            this.toolStripMenuItem1.Text = "By Residence/Room";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click_1);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(212, 22);
+            this.toolStripMenuItem2.Text = "By Surname/Name/Group";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click_1);
+            // 
+            // hToolStripMenuItem
+            // 
+            this.hToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.hToolStripMenuItem.Name = "hToolStripMenuItem";
+            this.hToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.hToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 609);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(995, 22);
+            this.statusStrip.TabIndex = 1;
+            this.statusStrip.Text = "statusStrip";
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(80, 17);
+            this.toolStripStatusLabel.Text = "Logged in as: ";
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(995, 631);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip;
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Rhodes University - Conference System";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripMenuItem hToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem conferenceWardensToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printFolioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem availableRoomsListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mealReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem conferenceOfficeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageConferenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageReservationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem utilitiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageRoomsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem guestsByDinningHallToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem studentBookingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mattressReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem financialReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem housekeepersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alphaListToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem arrivalDepartureListToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem queryByResidenceRoomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem conferenceRoomsReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateSRCListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blockedRoomsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem roomsDiscrepanciesToolStripMenuItem;
+    }
+}
+

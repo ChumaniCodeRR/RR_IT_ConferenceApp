@@ -1,0 +1,176 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin.ConferenceUpdate
+{
+    public partial class FullConferences : Form
+    {
+
+
+        bool AddDelete;
+        string tempconf;
+        int temptype;
+        DateTime tempdte;
+
+        public FullConferences()
+        {
+            InitializeComponent();
+        }
+
+        private void FullConferences_Load(object sender, EventArgs e)
+        {
+            dte_conf_dte.MinDate = DateTime.Today;
+            dte_conf_dte.Value = DateTime.Today;
+            refresh_screen();
+        }
+
+        private void refresh_screen()
+        {
+            try
+            {
+                NS_ConfAdmin.StrongTypesNS.ds_conf_fullDataSet ds_full = Proxy.ConferenceAdmin.get_conf_full();
+                bs_full.DataSource = ds_full.tt_conf_full;
+                sc_conferences.Panel1.Enabled = true;
+                sc_conferences.Panel2Collapsed = true;
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+     
+        private void btn_search_conf_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConferenceSys.ConferenceWardens.SearchConference frm_search = new ConferenceSys.ConferenceWardens.SearchConference();
+                frm_search.ShowDialog();
+
+                if (frm_search.conference != "")
+                {
+                    DateTime ConfStart; DateTime ConfEnd;
+
+                    string feedback = Proxy.ConferenceSystem.validate_conference(frm_search.conference, out ConfStart, out ConfEnd);
+                    if (!feedback.Contains("Error"))
+                    {
+
+                        dte_conf_dte.MinDate = DateTimePicker.MinimumDateTime;
+                        dte_conf_dte.MaxDate = DateTimePicker.MaximumDateTime;
+
+                        dte_conf_dte.MinDate = ConfStart;
+                        dte_conf_dte.MaxDate = ConfEnd;
+                        
+                        txt_conf_code.Text = frm_search.conference;  txt_conf_descrip.Text = frm_search.descrip;
+                        NS_ConfAdmin.StrongTypesNS.ds_conf_infoDataSet ds_types = Proxy.ConferenceAdmin.get_conference_types(frm_search.conference.ToString());
+                        bs_types.DataSource = ds_types.tt_conf_type;
+
+                        dte_conf_dte.Enabled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show(feedback, "Error Conference", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txt_conf_code.Text = "";
+                        txt_conf_descrip.Text = "";
+                        txt_conf_code.Focus();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            AddDelete = true;
+            dte_conf_dte.Enabled = false;
+            txt_conf_code.Text = string.Empty; txt_conf_descrip.Text = string.Empty;
+            cb_type.SelectedIndex = -1; 
+            sc_conferences.Panel1.Enabled = false;
+            sc_conferences.Panel2Collapsed = false;
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            if (dg_conferences.SelectedRows.Count > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to remove " + dg_conferences.SelectedRows[0].Cells[cn_conference.Name].Value.ToString() + " " + dg_conferences.SelectedRows[0].Cells[cn_typedescrip.Name].Value.ToString() + " from full list?", "Remove Full", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    AddDelete = false;
+                    tempconf = dg_conferences.SelectedRows[0].Cells[cn_ccode.Name].Value.ToString();
+                    temptype = int.Parse(dg_conferences.SelectedRows[0].Cells[cn_tcode.Name].Value.ToString());
+                    tempdte = DateTime.Parse(dg_conferences.SelectedRows[0].Cells[cn_confdte.Name].Value.ToString());
+                    AddDelete_conf_full();
+                }
+            }
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            sc_conferences.Panel1.Enabled = true;
+            sc_conferences.Panel2Collapsed = true;
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            if (txt_conf_code.Text == string.Empty) MessageBox.Show("Please select Conference to continue", "Erorr Conference", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (cb_type.SelectedIndex == -1) MessageBox.Show("Please select Conference Type to continue", "Erorr Type", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                tempconf = txt_conf_code.Text.ToString();
+                temptype = int.Parse(cb_type.SelectedValue.ToString());
+                tempdte = dte_conf_dte.Value;
+                AddDelete_conf_full();
+            }
+        }
+
+        private void AddDelete_conf_full()
+        {
+            try
+            {
+                string feedback = Proxy.ConferenceAdmin.update_conf_full(AddDelete, tempconf, temptype, tempdte);
+                if (feedback.Contains("Error")) MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    MessageBox.Show(feedback, "Add/Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    refresh_screen();
+                }
+            }
+              catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+
+        }
+
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            if (dg_conferences.SelectedRows.Count > 0)
+            {
+                tempconf = dg_conferences.SelectedRows[0].Cells[cn_ccode.Name].Value.ToString();
+                temptype = int.Parse(dg_conferences.SelectedRows[0].Cells[cn_tcode.Name].Value.ToString());
+                tempdte = DateTime.Parse(dg_conferences.SelectedRows[0].Cells[cn_confdte.Name].Value.ToString());
+                    
+                NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_report = Proxy.ConferenceAdmin.unbooked_reservations(tempconf, temptype, tempdte);
+
+                if (ds_report.tt_reservations.Count > 0)
+                {
+                    string tempstring = dg_conferences.SelectedRows[0].Cells[cn_conference.Name].Value.ToString() + " unbooked reservation on " + tempdte.ToShortDateString();
+                    DataView dv_report = new DataView(ds_report.tt_reservations);
+                    ConferenceSys.Reports frmReport = new ConferenceSys.Reports(false, "UnbookedReservations", dv_report, tempstring);
+                    frmReport.Show();
+                }
+                else MessageBox.Show("There were no unbooked reservations to print", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+    }
+}

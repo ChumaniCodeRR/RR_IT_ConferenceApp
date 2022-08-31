@@ -1,0 +1,242 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin
+{
+    public partial class GroupReservations : Form
+    {
+        bool AddNew;
+        string ConfCode;
+        string Folio;
+        string ParentFolio;
+        public GroupReservations(string _ConfCode,string _ParentFolio)
+        {
+            InitializeComponent();
+            ConfCode = _ConfCode;
+            ParentFolio = _ParentFolio;
+        }
+
+        private void GroupReservations_Load(object sender, EventArgs e)
+        {
+            refresh_data();
+        }
+
+        private void refresh_data()
+        {
+            try
+            {
+                NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_reservations = Proxy.ConferenceAdmin.get_group_reservations(ParentFolio);
+                if (ds_reservations.tt_reservations.Rows.Count < 1) this.Close();
+                bs_reservations.DataSource = ds_reservations.tt_reservations;
+                dg_conferences.ClearSelection();
+                txt_total_guests.Text = ds_reservations.tt_reservations.Rows.Count.ToString();
+
+                foreach (DataGridViewRow row in dg_conferences.Rows)
+                {
+                    if (row.Cells[cn_folio.Name].Value.ToString() == row.Cells[cn_parentfolio.Name].Value.ToString()) row.DefaultCellStyle.BackColor = Color.LightGray;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }         
+            
+        }
+
+        private void dg_conferences_DoubleClick(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btn_add_guest_Click(object sender, EventArgs e)
+        {
+            AddNew = true;
+        }
+
+        private void dg_conferences_DoubleClick_1(object sender, EventArgs e)
+        {
+            if (dg_conferences.SelectedRows.Count > 0)
+            {
+                AddNew = false;
+                ConfCode = dg_conferences.SelectedRows[0].Cells[cn_ccode.Name].Value.ToString();
+                ParentFolio = dg_conferences.SelectedRows[0].Cells[cn_parentfolio.Name].Value.ToString();
+                Folio = dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString();
+                UpdateReserv frmUpdateReserv = new UpdateReserv(AddNew, ConfCode, ParentFolio, Folio);
+                frmUpdateReserv.ShowDialog();
+                refresh_data();
+            }
+        }
+
+        private void btn_add_guest_Click_1(object sender, EventArgs e)
+        {
+            AddNew = true;
+            UpdateReserv frmUpdateReserv = new UpdateReserv(AddNew, ConfCode, ParentFolio, "0");
+            frmUpdateReserv.ShowDialog();
+            refresh_data();
+           
+        }
+        /*
+        private void btn_del_guest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dg_conferences.SelectedRows.Count > 0)
+                {
+                    if (MessageBox.Show("Are you sure you want to cancel " + dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString() + " " + dg_conferences.SelectedRows[0].Cells[cn_surn.Name].Value.ToString() + "?", "Cancel Reservation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        ConfCode = dg_conferences.SelectedRows[0].Cells[cn_ccode.Name].Value.ToString();
+                        ParentFolio = dg_conferences.SelectedRows[0].Cells[cn_parentfolio.Name].Value.ToString();
+                        Folio = dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString();
+                        string newMain = "0";                 
+
+                        string cancel_single = Proxy.ConferenceAdmin.cancel_reservations(false, ParentFolio, Folio);
+                        if (cancel_single != "") MessageBox.Show(cancel_single, "Cancel Reservations", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        refresh_data();
+                    }
+
+                }
+            }
+             catch (Exception ex)
+                {
+                    Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+                }         
+            }
+        */
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dg_conferences.SelectedRows.Count > 0)
+                {
+                    NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_report = Proxy.ConferenceAdmin.reservation_report(true, dg_conferences.SelectedRows[0].Cells[cn_folio.Name].Value.ToString());
+                    if (ds_report.tt_reservations.Rows.Count > 0)
+                    {
+                        Reports frmReport = new Reports("ReservationReport", ds_report);
+                        frmReport.Show();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }         
+        }
+
+        private void btnAddMultiple_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            MultipleAdd frmMulti = new MultipleAdd();
+            frmMulti.ShowDialog();
+            if (frmMulti.proceed)
+            {
+                string feedback = Proxy.ConferenceAdmin.create_multiple_reservations(ParentFolio, frmMulti.tot_num);
+                if (feedback != "") MessageBox.Show(feedback, "Add Multiple", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            refresh_data();
+            }
+             catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }         
+        }
+
+        private void btnMultiCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int count = 0;
+                bool selected = false;
+                foreach (DataGridViewRow row in dg_conferences.Rows)
+                {
+                    if (row.Cells[ckCopy.Name].Value != null && (bool)row.Cells[ckCopy.Name].Value)
+                    {
+                        selected = true;
+                        count = count + 1;
+                    }
+                }
+
+                if (!selected) MessageBox.Show("There are no reservations selected", "Cancel Multiple", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    if (MessageBox.Show("Are you sure you want to cancel selected reservation(s)?", "Multiple Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+
+                        NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_cancellations = new NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet();
+                        foreach (DataGridViewRow row in dg_conferences.Rows)
+                        {
+                            if (row.Cells[ckCopy.Name].Value != null && (bool)row.Cells[ckCopy.Name].Value)
+                            {
+                                DataRow newrow = ds_cancellations.tt_reservations.NewRow();
+                                newrow["folio"] = row.Cells[cn_folio.Name].Value.ToString();
+                                ds_cancellations.tt_reservations.Rows.Add(newrow);
+                            }
+                        }
+
+                        string feedback = Proxy.ConferenceAdmin.cancel_multi_reservations(ds_cancellations);
+                        MessageBox.Show(feedback, "Multiple Cancel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        refresh_data();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException("DMU", ex);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                int count = 0;
+                bool selected = false;
+                foreach (DataGridViewRow row in dg_conferences.Rows)
+                {
+                    if (row.Cells[ckCopy.Name].Value != null && (bool)row.Cells[ckCopy.Name].Value)
+                    {
+                        selected = true;
+                        count = count + 1;
+                    }
+                }
+
+                if (!selected) MessageBox.Show("There are no reservations selected", "Uncancel Multiple", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    if (MessageBox.Show("Are you sure you want to uncancel selected reservation(s)?", "Multiple Uncancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+
+                        NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_uncancells = new NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet();
+                        foreach (DataGridViewRow row in dg_conferences.Rows)
+                        {
+                            if (row.Cells[ckCopy.Name].Value != null && (bool)row.Cells[ckCopy.Name].Value)
+                            {
+                                DataRow newrow = ds_uncancells.tt_reservations.NewRow();
+                                newrow["folio"] = row.Cells[cn_folio.Name].Value.ToString();
+                                ds_uncancells.tt_reservations.Rows.Add(newrow);
+                            }
+                        }
+
+                        string feedback = Proxy.ConferenceAdmin.uncancel_multi_reservations(ds_uncancells);
+                        MessageBox.Show(feedback, "Multiple Uncancel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        refresh_data();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException("DMU", ex);
+            }
+        }      
+    }
+}

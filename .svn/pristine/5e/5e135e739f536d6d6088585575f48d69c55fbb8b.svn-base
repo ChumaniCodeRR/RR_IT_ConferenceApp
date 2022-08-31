@@ -1,0 +1,661 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using NS_Conference.StrongTypesNS;
+using NS_System.StrongTypesNS;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin
+{
+    public partial class UpdateReserv : Form
+    {
+        bool AddNew;
+        string ParentFolio;
+        string Folio;
+        string ConfCode;
+        int totnum;
+        int booktrs;
+
+        DateTime prevstart;
+        DateTime prevend;
+
+        bool update_details;
+        bool LeavePage;
+        //int TabIndex;
+
+
+        bool BookingAddNew;
+
+        string ConfDescrip = "";
+        string feedback = "";
+
+        NS_ConfAdmin.StrongTypesNS.ds_roomsDataSet ds_rooms;
+        NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet ds_reserv;
+        NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet ds_booking;
+        NS_ConfAdmin.StrongTypesNS.DS_CCODEDataSet ds_ccode;
+
+        public UpdateReserv(bool _AddNew, string _ConfCode, string _ParentFolio, string _folio)
+        {
+            InitializeComponent();
+            AddNew = _AddNew;
+            ConfCode = _ConfCode;
+            ParentFolio = _ParentFolio;
+            Folio = _folio;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void UpdateReserv_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                Dte_start.Value = DateTime.Today;
+                dte_end.Value = DateTime.Today;
+
+                dteBookStart.Value = DateTime.Today;
+                dteBookEnd.Value = DateTime.Today;
+
+                txt_guests.Text = "1";
+                if (ParentFolio == "0") pnl_guests.Visible = true;
+                else pnl_guests.Visible = false;
+
+                if (AddNew == true) update_details = true;
+                else
+                {
+                    update_details = false;
+                    cb_type.Enabled = false;
+                    btnsearch.Enabled = false;
+                    txt_titl.Enabled = false;
+                    txt_name.Enabled = false;
+                    txt_surn.Enabled = false;
+                    txt_staff_stuno_other.Enabled = false;
+                }
+
+
+                cb_type.Items.Add(new Item("Student", "S"));
+                cb_type.Items.Add(new Item("Staff", "R"));
+                cb_type.Items.Add(new Item("Other", "O"));
+                cb_type.SelectedIndex = 0;
+                
+                ds_ccode = Proxy.ConferenceAdmin.get_conf_halls(ConfCode);
+                if (ds_ccode.tt_ccode_hall.Rows.Count <= 0)
+                {
+                    MessageBox.Show("You must first allocate buildings to this conference, before trying to update reservations/bookings", "Setup Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    this.Close();
+                }
+                else
+                {
+
+                    DataView DV_Halls = new DataView(ds_ccode.tt_ccode_hall);
+                    DV_Halls.Sort = "descrip";
+                    bsHall.DataSource = DV_Halls;
+                    cbHall.SelectedIndex = 0;
+
+                    FilterResidence();
+
+                    NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet ds_conf_types = Proxy.ConferenceAdmin.get_conference_types(ConfCode);
+                    bs_conf_types.DataSource = ds_conf_types.tt_conf_type;
+
+                    NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet ds_diets = Proxy.ConferenceAdmin.get_diets();
+                    bs_diets.DataSource = ds_diets.tt_diets;
+
+
+
+                    sc_bookings.Panel1.Enabled = true;
+                    sc_bookings.Panel2Collapsed = true;
+
+                    get_reservation();
+
+                    cbHouse_SelectedIndexChanged(sender, e);
+
+                    this.cb_type.Focus();
+                    this.cb_type.Select();
+
+                    //this.txt_email.Select();
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        void FilterResidence()
+        {
+            if (cbHall.SelectedIndex == -1) cbHall.SelectedIndex = 0;
+
+            DataView dvRes = new DataView(ds_ccode.tt_ccode_res);
+            dvRes.RowFilter = string.Format("shall = '{0}'", cbHall.SelectedValue.ToString());
+            bsHouse.DataSource = dvRes;         
+        }
+
+        private void set_fields()
+        {
+            if (update_details == true)
+            {
+                pnl_details.Enabled = true;
+                pnl_booking.Enabled = true;
+                btn_save_details.Text = "Save Details";
+                TabIndex = Int32.Parse(tb_reservation.SelectedIndex.ToString());
+
+            }
+            else
+            {
+                pnl_details.Enabled = false;
+                pnl_booking.Enabled = false;
+                btn_save_details.Text = "Update Details";
+                LeavePage = true;
+            }
+        }
+
+        private void get_reservation()
+        {
+            try
+            {
+                ds_reserv = Proxy.ConferenceAdmin.get_a_reservation(AddNew, ConfCode, ParentFolio, Folio, out ConfDescrip, out feedback);
+                if (feedback != "")
+                {
+                    MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+                else
+                {
+                    txtConference.Text = ConfDescrip;
+                    NS_Conference.StrongTypesNS.ds_mealsDataSet ds_meals = Proxy.ConferenceSystem.Get_Reservation_Meals(ds_reserv.tt_reservations[0].folio);
+                    
+                    dgvMeals.DataSource = ds_meals.TT_MEALS;
+                    bs_resrvation.DataSource = ds_reserv.tt_reservations;
+                    bs_bookings.DataSource = ds_reserv.tt_bookings;
+                    set_fields();
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }         
+
+        }
+               
+        private void cb_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        } 
+          
+        bool ValidDetails()
+        {
+
+            bool valid = true;
+
+            if (cb_type.SelectedIndex < 0)
+            {
+                valid = false;
+                errorProvider.SetError(cb_type, "Please select guest type to continue");
+            }
+
+            if (((Item)cb_type.SelectedItem).Value.ToString() != "O" && txt_staff_stuno_other.Text.Trim().Length == 0)
+            {
+                valid = false;
+                errorProvider.SetError(txt_staff_stuno_other, "Please select staff/student number to continue");
+            }
+
+            if (txt_surn.Text.Trim().Length.Equals(0))
+            {
+                valid = false;
+                errorProvider.SetError(txt_surn, "Guest surname cannot be blank");
+            }
+            if (txt_guests.Text.Trim().Length > 0)
+            {
+                bool proceed = int.TryParse(txt_guests.Text.ToString(), out totnum);
+
+                if (proceed == false)
+                {
+                    valid = false;
+                    errorProvider.SetError(txt_guests, "Please enter a number");
+                }
+            }
+
+            if (cb_conf_type.SelectedIndex < 0)
+            {
+                valid = false;
+                errorProvider.SetError(cb_conf_type, "Please select book type to continue");
+            }
+
+    
+            return valid;
+        }
+        
+        bool ValidBooking()
+        {
+            bool valid = true;
+            
+            //if (cb_conf_type.SelectedIndex < 0)
+            //{
+            //    valid = false;
+            //    errorProvider.SetError(cb_conf_type, "Please select book type to continue");
+            //}
+            
+
+            if (cb_diet.SelectedIndex < 0)
+            {
+                valid = false;
+                errorProvider.SetError(cb_diet, "Please select diet to continue");
+            }           
+
+            if (chk_tax_invoice.Checked == true && txt_tax_addr.Text == "") 
+            {
+                valid = false;
+                errorProvider.SetError(txt_tax_addr, "Please enter tax invoice address");
+            }    
+
+            return valid;
+        }
+              
+        private void btn_save_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (btn_save_details.Text == "Save Details")
+                {
+                    if (cb_type.SelectedIndex == -1) MessageBox.Show("Please select Guest Type to continue", "Guest Type", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        errorProvider.Clear();
+                        if (ValidDetails())
+                        {
+                            string NewParent = "";
+                            string NewFolio = "";
+
+                            string feedback = Proxy.ConferenceAdmin.update_reservation(AddNew, ParentFolio, totnum, ds_reserv,out NewParent,out NewFolio);
+                            MessageBox.Show(feedback, "Update Reservation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (!feedback.Contains("Error"))
+                            {
+                                update_details = false;
+                                LeavePage = true;
+                                AddNew = false; 
+                                ParentFolio = NewParent;
+                                Folio = NewFolio;
+                                get_reservation();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    update_details = true;
+                    LeavePage = false;
+                    set_fields();
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }         
+        }
+
+        private void btn_save_booking_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TabIndex = Int32.Parse(tb_reservation.SelectedIndex.ToString());
+                if (btn_save_booking.Text == "Save Booking")
+                {
+                    if (cb_type.SelectedIndex == -1) MessageBox.Show("Please select Guest Type to continue", "Guest Type", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        errorProvider.Clear();
+                        if (ValidBooking())
+                        {
+                            string NewParent = "";
+                            string NewFolio = "";
+
+                            string feedback = Proxy.ConferenceAdmin.update_reservation(AddNew, ParentFolio, totnum, ds_reserv, out NewParent,out NewFolio);
+                            MessageBox.Show(feedback, "Update Reservation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (!feedback.Contains("Error"))
+                            {
+                                LeavePage = true;
+                                pnl_booking.Enabled = false;
+                                btn_save_booking.Text = "Update Booking";
+                                ParentFolio = NewParent;
+                                Folio = NewFolio;
+                                get_reservation();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    LeavePage = false;
+                    pnl_booking.Enabled = true;
+                    btn_save_booking.Text = "Save Booking";
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }         
+        }
+
+        private void tb_reservation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!LeavePage)
+            {
+                if (tb_reservation.SelectedIndex != TabIndex)
+                {
+                    MessageBox.Show("Error - Please save information before leaving this page", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tb_reservation.SelectedIndex = TabIndex;
+                }
+            }     
+        }
+
+        private void btnsearch_Click(object sender, EventArgs e)
+        {
+            if (((Item)cb_type.SelectedItem).Value.ToString() == "S")
+            {
+                Search_Grid_Students.Search_Grid_Students frmStuSearch = new Search_Grid_Students.Search_Grid_Students(true);
+                frmStuSearch.ShowDialog();
+                if (frmStuSearch.Stuno != "")
+                {
+                    txt_staff_stuno_other.Text = frmStuSearch.Stuno;
+                    Load_Complainant();
+                }
+
+            }
+            if (((Item)cb_type.SelectedItem).Value.ToString() == "R")
+            {
+                NS_System.StrongTypesNS.DS_ISD_DATADataSet ds_empnos = new NS_System.StrongTypesNS.DS_ISD_DATADataSet();
+                SearchEmployee.Search_Protea_Users frm_search_users = new SearchEmployee.Search_Protea_Users(true, ds_empnos);
+                frm_search_users.ShowDialog();
+                if (frm_search_users.UserId != "")
+                {
+                    txt_staff_stuno_other.Text = frm_search_users.UserId;
+                    Load_Complainant();
+                }
+            }
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            BookingAddNew = true;
+            booktrs = 0;
+            cbHall.SelectedIndex = 0;
+            string feedback = Proxy.ConferenceAdmin.get_a_booking(BookingAddNew, ds_reserv.tt_reservations[0].folio, 0, out ds_booking);
+            if (feedback != "") MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                FilterResidence();
+                sc_bookings.Panel1.Enabled = false;
+                sc_bookings.Panel2Collapsed = false;
+                bs_book_update.DataSource = ds_booking.tt_bookings;
+                LeavePage = false;
+                TabIndex = Int32.Parse(tb_reservation.SelectedIndex.ToString());
+                lbl_rooms.Text = "Available Rooms:";
+                cbRooms.Visible = true;
+                txt_booked_room.Visible = false;
+            }
+        }
+
+        private void cbHouse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filter_buildings();
+        }
+
+        private void filter_buildings()
+        {
+            if (cbHouse.SelectedIndex == -1) cbHouse.SelectedIndex = 0;
+
+            DataView dvBuilding = new DataView(ds_ccode.tt_ccode_build);
+            dvBuilding.RowFilter = string.Format("res = '{0}'", cbHouse.SelectedValue.ToString());
+            bsBuilding.DataSource = dvBuilding;         
+
+            /*
+            try
+            {
+                if (cbHouse.SelectedIndex >= 0)
+                {
+                    DS_BUILDINGSDataSet ds_buildings = Proxy.System.Get_Res_Buildings(
+                        int.Parse(cbHouse.SelectedValue.ToString()), Proxy.BuildingTypeEnum.Conference.ToString());
+
+                    cbBuilding.DataSource = ds_buildings.TT_BUILDING;
+                    cbBuilding.DisplayMember = "building_name";
+                    cbBuilding.ValueMember = "building";
+                    cbBuilding.SelectedIndex = 0;
+                    //bsBuilding.DataSource = ds_buildings.TT_BUILDING;
+                    //if (cbBuilding.Items.Count > 0 && cbBuilding.SelectedIndex != 0) cbBuilding.SelectedIndex = 0;
+
+                }
+                else
+                {
+                    //bsBuilding.DataSource = null;
+                }
+                if (ds_rooms != null) ds_rooms.tt_rooms.Clear();
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+             */
+        }
+
+        private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ds_rooms != null) ds_rooms.tt_rooms.Clear();
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            if (Dte_start.Value > dte_end.Value) MessageBox.Show("Error - Start date cannot be after end date", "Error Dates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (cbHall.SelectedIndex == -1) MessageBox.Show("Error - Please select a hall to proceed", "Error Hall", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (cbHouse.SelectedIndex == -1) MessageBox.Show("Error - Please select a residence to proceed", "Error Res", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (cbBuilding.SelectedIndex == -1) MessageBox.Show("Error - Please select a building to proceed", "Error Building", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (txt_booked_room.Text == "") MessageBox.Show("Error - Please select a room to proceed", "Error Room", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                string room_num = txt_booked_room.Text;
+                if (txt_booked_room.Visible == false) room_num = cbRooms.SelectedValue.ToString();
+                string feedback = Proxy.ConferenceAdmin.update_a_booking(BookingAddNew, ds_reserv.tt_reservations[0].folio, booktrs, Int32.Parse(cbHouse.SelectedValue.ToString()), cbBuilding.SelectedValue.ToString(), room_num, dteBookStart.Value, dteBookEnd.Value);
+                MessageBox.Show(feedback, "Update Bookings", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!feedback.Contains("Error"))
+                {
+                    string folio_num = ds_reserv.tt_reservations[0].folio;
+                    bool ch_dhall = false;
+                    string tempdhall = cbHall.SelectedValue.ToString();
+                    bool proceed = true;
+
+                    if (MessageBox.Show("Note: Answering No will result in no changes to the meals for this person. Answering Yes will cause meals to be reset to the default conference meal settings. Reset Meals?", "Reset Meals", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        if (MessageBox.Show("Change Default Dining Hall?", "Default Hall", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            ch_dhall = true;
+                            DefaultHall frmHall = new DefaultHall();
+                            frmHall.ShowDialog();
+                            if (frmHall.proceed) tempdhall = frmHall.temphall;
+                            else proceed = false;
+                        }
+
+                        if (proceed == true)
+                        {
+
+                            string reset_mealsfeedback = Proxy.ConferenceAdmin.reset_meals(folio_num, ch_dhall, tempdhall, prevstart, prevend);
+                            MessageBox.Show(reset_mealsfeedback, "Reset Meals", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
+                    }
+                    sc_bookings.Panel1.Enabled = true;
+                    sc_bookings.Panel2Collapsed = true;
+                    LeavePage = true;
+                    get_reservation();
+                }
+            }
+        }
+
+        private void dg_bookings_DoubleClick(object sender, EventArgs e)
+        {
+            if (dg_bookings.SelectedRows.Count > 0)
+            {
+                BookingAddNew = false;
+                booktrs = Int32.Parse(dg_bookings.SelectedRows[0].Cells[cn_booktrs.Name].Value.ToString());
+                
+                string feedback = Proxy.ConferenceAdmin.get_a_booking(BookingAddNew, ds_reserv.tt_reservations[0].folio,booktrs, out ds_booking);
+                if (feedback != "") MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    sc_bookings.Panel1.Enabled = false;
+                    sc_bookings.Panel2Collapsed = false;
+                    bs_book_update.DataSource = ds_booking.tt_bookings;
+
+                    prevstart = DateTime.Parse(ds_booking.tt_bookings[0]["start_dte"].ToString());
+                    prevend = DateTime.Parse(ds_booking.tt_bookings[0]["end_dte"].ToString());
+
+                    lbl_rooms.Text = "Booked Room:";
+                    cbRooms.Visible = false;
+                    txt_booked_room.Visible = true;
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            LeavePage = true;
+            sc_bookings.Panel1.Enabled = true;
+            sc_bookings.Panel2Collapsed = true;
+        }
+
+        private void cbHall_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterResidence();
+            filter_buildings();            
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dg_bookings.SelectedRows.Count > 0)
+                {
+                    if (MessageBox.Show("Are you sure you want to delete this booking?", "Delete Booking ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        string folio = ds_reserv.tt_reservations[0].folio.ToString();
+                        int booktrs = Int32.Parse(dg_bookings.SelectedRows[0].Cells[cn_booktrs.Name].Value.ToString());
+                        string hallcode = dg_bookings.SelectedRows[0].Cells[cn_hallcode.Name].Value.ToString();
+                        string feedback = Proxy.ConferenceAdmin.delete_booking(folio, booktrs, hallcode);
+                        MessageBox.Show(feedback, "Delete Booking", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (!feedback.Contains("Error")) get_reservation(); 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+        }
+
+        private void Load_Complainant()
+        {
+            try
+            {
+                string name1 = "";
+                string email = "";
+                string contact_no = "";
+                string title = "";
+                string surname = Proxy.CPU.get_personal_details(((Item)cb_type.SelectedItem).Value.ToString(), txt_staff_stuno_other.Text, out name1, out email, out contact_no, out title);
+                txt_surn.Text = surname;
+                txt_name.Text = name1;
+                txt_contact_no.Text = contact_no;
+                txt_email.Text = email;
+                txt_titl.Text = title;              
+
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.CPU, ex);
+            }
+        }
+
+        private void btn_close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cb_type_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (cb_type.SelectedIndex != -1)
+            {
+                if (((Item)cb_type.SelectedItem).Value.ToString() == "S" | ((Item)cb_type.SelectedItem).Value.ToString() == "R")
+                {
+                    btnsearch.Enabled = true;
+                    txt_titl.Enabled = false;
+                    txt_name.Enabled = false;
+                    txt_surn.Enabled = false;
+                    txt_staff_stuno_other.Enabled = false;
+                    txt_staff_stuno_other.Visible = true;
+                    btnsearch.Visible = true;
+                }
+                else
+                {                   
+                    txt_titl.Enabled = true;
+                    txt_name.Enabled = true;
+                    txt_surn.Enabled = true;
+                    txt_staff_stuno_other.Visible = false;
+                    btnsearch.Visible = false;                  
+                }
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet ds_report = Proxy.ConferenceAdmin.reservation_report(false, ds_reserv.tt_reservations[0].folio.ToString());
+            if (ds_report.tt_reservations.Rows.Count > 0)
+            {
+                Reports frmReport = new Reports("ReservationReport", ds_report);
+                frmReport.Show();
+            }            
+        }
+
+        private void btn_chk_available_Click(object sender, EventArgs e)
+         {                        
+            if (dteBookStart.Value > dteBookEnd.Value) MessageBox.Show("Error start date cannot be after end date", "Error Dates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                if (cbBuilding.SelectedIndex > -1)
+                {
+                    string ownroom = string.Empty;
+                    string otherfolio = string.Empty;
+                    ds_rooms = Proxy.ConferenceAdmin.check_available_rooms(ds_reserv.tt_reservations[0].folio.ToString(),cbBuilding.SelectedValue.ToString(), dteBookStart.Value, dteBookEnd.Value, out ownroom,out otherfolio);
+                    if (ownroom != string.Empty && otherfolio == string.Empty)
+                    {
+                        MessageBox.Show("This student resides in this building in room " + ownroom + ". Room has been automatically selected.", "Room Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txt_booked_room.Visible = true;
+                        txt_booked_room.Text = ownroom;
+                        cbRooms.Visible = false;
+                    }
+                    else
+                    {
+                        if (ownroom != string.Empty && otherfolio != string.Empty) MessageBox.Show("This student lives in the building in room " + ownroom + " but there is a guest (Folio: " + otherfolio + ") already booked into their room.", "Room Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (ds_rooms.tt_rooms.Rows.Count < 1) MessageBox.Show("There are no available rooms in " + cbBuilding.Text.ToString() + " please select another residence to continue.", "No Rooms", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        else
+                        {
+                            DataView dvRooms = new DataView(ds_rooms.tt_rooms);
+                            dvRooms.Sort = "sort_field";
+                            bs_rooms.DataSource = dvRooms;
+                            cbRooms.Visible = true;
+                            txt_booked_room.Visible = false;
+                        }
+                    }
+                }
+                else MessageBox.Show("Please select a building to continue", "Error Building", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void cbRooms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbRooms.SelectedIndex > -1) txt_booked_room.Text = cbRooms.SelectedValue.ToString();
+        }
+    }
+}

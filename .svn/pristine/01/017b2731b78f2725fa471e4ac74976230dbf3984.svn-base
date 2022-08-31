@@ -1,0 +1,255 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
+using System.IO;
+
+
+namespace ConferenceSys
+{
+    public partial class Reports : Form
+    {
+
+        DataView dv_report;
+
+        NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_conf_admin;
+        NS_Conference.StrongTypesNS.ds_registerDataSet ds_register;
+        public string action;
+        public string title;
+        
+
+        ReportDataSource rds_bookings;
+
+        public Microsoft.Reporting.WinForms.ReportParameter[] p;
+        int parameters;
+        
+        public Reports(string dowhat,NS_Conference.StrongTypesNS.ds_registerDataSet _ds_register,string _title)
+        {
+            InitializeComponent();
+            action = dowhat;
+            ds_register = _ds_register;
+            title = _title;        
+        }
+
+        public Reports(string dowhat, NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet _ds_conf_admin)
+        {
+            InitializeComponent();
+            action = dowhat;
+            ds_conf_admin = _ds_conf_admin;
+        }
+
+        public Reports(string dowhat, DataView _dv_report, string _title)
+        {
+            InitializeComponent();
+            action = dowhat;
+            dv_report = _dv_report;
+            title = _title;
+        }
+       
+
+        private void Reports_Load(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string rootNamespace = System.Reflection.Assembly.GetEntryAssembly().EntryPoint.DeclaringType.Namespace;
+                if (rootNamespace == "ResOps") rootNamespace = "IOPS";
+                Microsoft.Reporting.WinForms.ReportDataSource rds = new
+                Microsoft.Reporting.WinForms.ReportDataSource();
+
+                Microsoft.Reporting.WinForms.ReportDataSource rds1 = new
+                Microsoft.Reporting.WinForms.ReportDataSource();
+
+                parameters = 1;
+
+                p = new Microsoft.Reporting.WinForms.ReportParameter[parameters];
+                reportViewer1.LocalReport.DataSources.Clear();
+
+                if (action == "OverrideList")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.OverridePayments1.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+
+                if (action == "Discrepancies")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.Discrepancies.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+
+                if (action == "RoomsReport" | action == "BlockedReport")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = dv_report;
+                    if (action == "RoomsReport") reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.RoomsStats.rdlc");
+                    if (action == "BlockedReport") reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.BlockedRooms.rdlc");
+
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "SRCList")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.SrcList.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "GuestsByHall")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.GuestsByHall.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "StuBookings")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.StuBookings.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+
+                if (action == "Mattress")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.Mattress.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "UnbookedReservations")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.UnbookedReservations.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "Register")
+                {
+                    rds.Name = "ds_register";
+                    rds.Value = ds_register.TT_REGISTER;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.ConferenceRegister.rdlc");                    
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title",title);
+                }
+
+                if (action == "AvailableRooms")
+                {
+                    rds.Name = "ds_available_rooms";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.AvailableRooms.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+
+                if (action == "ConferenceRooms")
+                {
+                    rds.Name = "ds_available_rooms";
+                    rds.Value = dv_report;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.ConferenceAvailableRooms.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+                if (action == "ArrivalDeparture")
+                {
+                    rds.Name = "ds_arrivals";
+                    rds.Value = ds_register.tt_arrivals;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.ArrivalDeparture.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+
+                if (action == "AlphaList")
+                {
+                    rds.Name = "ds_alpha";
+                    rds.Value = ds_register.tt_aplha_list;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.AlphaList.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "MealsReport")
+                {
+                    rds.Name = "ds_meals";
+                    rds.Value = ds_register.tt_meals;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.MealsReport.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "QueryResRoom")
+                {
+                    rds.Name = "ds_register";
+                    rds.Value = ds_register.TT_REGISTER;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.QueryResRoom.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "QuerySurnName")
+                {
+                    rds.Name = "ds_register";
+                    rds.Value = ds_register.TT_REGISTER;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.QuerySurnName.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+                }
+
+                if (action == "ReservationReport")
+                {
+                    rds.Name = "ds_report";
+                    rds.Value = ds_conf_admin.tt_reservations;
+                    reportViewer1.LocalReport.ReportEmbeddedResource = string.Concat(rootNamespace, ".Reports.ConferenceWardens.ReserevationPrint.rdlc");
+                    p[0] = new Microsoft.Reporting.WinForms.ReportParameter("title", title);
+
+
+                    rds_bookings = new ReportDataSource("ds_bookings", (DataTable) ds_conf_admin.tt_bookings);
+                    reportViewer1.LocalReport.DataSources.Add(rds_bookings);
+                    StreamReader subReport = new StreamReader(System.Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream(
+                    string.Format(string.Concat(rootNamespace, ".Reports.ConferenceWardens.BookingsSubreport.rdlc"))));
+                    reportViewer1.LocalReport.LoadSubreportDefinition("BookingsSubreport", subReport);
+                }
+                                  
+          
+                rds1.Name = "DS_PHOTODataSet_TT_PHOTO";
+                rds1.Value = Global.Global.ds_logo.TT_PHOTO;
+
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.LocalReport.DataSources.Add(rds1);
+
+                reportViewer1.LocalReport.EnableExternalImages = true;
+                this.reportViewer1.LocalReport.SetParameters(p);
+                this.reportViewer1.RefreshReport();
+               
+            }
+            catch (Exception ex)
+            {
+             Utilities.Utils.HandleException(Utilities.ExceptionSource.DMU, ex);
+            }
+        }
+        
+        void LocalReport_SubreportProcessing(object sender, Microsoft.Reporting.WinForms.SubreportProcessingEventArgs e)
+        {
+            if (e.ReportPath.Equals("BookingsSubreport")) { e.DataSources.Add(rds_bookings); }
+        }
+        
+        //void reportViewer1_ReportError(object sender, Microsoft.Reporting.WinForms.ReportErrorEventArgs e)
+        //{
+        //    MessageBox.Show(e.Exception.ToString());
+        //}
+
+        ////private void reportViewer1_Load(object sender, EventArgs e)
+        ////{
+          
+        //}
+    }
+}

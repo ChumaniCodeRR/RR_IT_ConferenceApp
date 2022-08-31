@@ -1,0 +1,173 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using ConferenceSys.ConferenceWardens;
+using Utilities;
+
+namespace ResOps.ConferenceAdmin.ConferenceUpdate
+{
+    public partial class ConferenceTypes : Form
+    {
+        NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet ds_conference;
+        
+       
+
+        public ConferenceTypes(NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet _ds_conference)
+        {
+            InitializeComponent();
+            ds_conference = _ds_conference;
+        
+        }
+
+        private void MaintainDegrees_Load(object sender, EventArgs e)
+        {
+
+            bs_rates.DataSource = ds_conference.tt_conf_type;
+
+            pnl_detail.Enabled = true;
+            cb_start_meal.Items.Add(new Item("Breakfast", "L"));
+            cb_start_meal.Items.Add(new Item("Lunch", "L"));
+            cb_start_meal.Items.Add(new Item("Supper", "S"));
+            cb_start_meal.SelectedIndex = 0;
+
+            cb_end_meal.Items.Add(new Item("Breakfast", "B"));
+            cb_end_meal.Items.Add(new Item("Lunch", "L"));
+            cb_end_meal.Items.Add(new Item("Supper", "S"));
+            cb_end_meal.SelectedIndex = 0;
+               
+                
+           
+        }
+
+
+
+      
+
+   
+
+        private void MaintainSubjects_Load(object sender, EventArgs e)
+        {
+            pnl_detail.Enabled = true;
+            
+        }
+
+                   
+
+     
+        
+
+                private void btn_continue_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+               
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+        }
+
+       
+
+        private void btn_cancel_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
+
+            }
+             catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+        }
+
+        private void bnt_search_protea_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+        }
+
+        private void btn_add_adm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+            }
+             catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+        }
+
+        private void btn_remove_adm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                   
+             }
+             catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+
+        }
+
+        private void btn_save_type_Click(object sender, EventArgs e)
+        {
+            try
+            {
+             
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+        }
+
+    
+        private void btn_save_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txt_descrip.Text == "") MessageBox.Show("Type description cannot be blank", "Name", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    string feedback = Proxy.ConferenceAdmin.update_conference_types(ds_conference);
+                    if (feedback != "") MessageBox.Show(feedback, "Update Type", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else this.Close();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ResOps, ex);
+            }
+          
+
+        }
+
+     
+      
+  
+
+     
+
+     
+
+     
+
+    }
+}

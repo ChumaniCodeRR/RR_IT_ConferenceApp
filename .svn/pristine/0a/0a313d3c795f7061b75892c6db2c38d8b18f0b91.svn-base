@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys.ConferenceWardens
+{
+    public partial class SearchGroups : Form
+    {
+        string _group;
+        string _descrip;
+        DataView dv_groups;
+
+        //public NS_Conference.StrongTypesNS .ds_conf_groupsDataSet ds_droups = new NS_Conference.StrongTypesNS.ds_conf_groupsDataSet();
+
+        string tconf;
+        public SearchGroups(string _tconf)
+        {
+            InitializeComponent();
+            tconf = _tconf;
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        public string group
+        {
+            get { return _group; }
+            set { _group = value; }
+        }
+
+        public string descrip
+        {
+            get { return _descrip; }
+            set { _descrip = value; }
+        }
+
+
+        private void SearchFolio_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                //ds_droups = Proxy.ConferenceSystem.get_groups_by_conference(tconf);
+                //dv_groups = new DataView(ds_droups.tt_group);
+                //bs_groups.DataSource = dv_groups;
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void filter()
+        {
+            try
+            {
+                dv_groups.RowFilter = "group_name like '*" + txt_reference.Text + "*'";
+                bs_groups.DataSource = dv_groups;
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void dg_folios_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dg_groups.RowCount > 0)
+                {
+
+                    _group = dg_groups.SelectedRows[0].Cells[cn_group.Name].Value.ToString();
+                    _descrip = dg_groups.SelectedRows[0].Cells[cn_grp_descrip.Name].Value.ToString();
+                    this.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Utilities.Utils.HandleException(Utilities.ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+                
+        private void txt_surn_TextChanged_1(object sender, EventArgs e)
+        {
+            filter();
+        }
+
+
+
+    }
+}

@@ -1,0 +1,282 @@
+﻿namespace ConferenceSys.ConferenceAdmin
+{
+    partial class RoomBeds
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.pnl_header = new System.Windows.Forms.Panel();
+            this.btn_proceed = new System.Windows.Forms.Button();
+            this.cbBuilding = new System.Windows.Forms.ComboBox();
+            this.bsBuilding = new System.Windows.Forms.BindingSource(this.components);
+            this.lblBuilding = new System.Windows.Forms.Label();
+            this.lblHouse = new System.Windows.Forms.Label();
+            this.cbHouse = new System.Windows.Forms.ComboBox();
+            this.bsHouse = new System.Windows.Forms.BindingSource(this.components);
+            this.cbHall = new System.Windows.Forms.ComboBox();
+            this.bsHall = new System.Windows.Forms.BindingSource(this.components);
+            this.lblHall = new System.Windows.Forms.Label();
+            this.pnl_rooms = new System.Windows.Forms.Panel();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.btn_next = new System.Windows.Forms.Button();
+            this.dv_rooms = new CustomDataGridView();
+            this.cn_roomno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_bedsconf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs_rooms = new System.Windows.Forms.BindingSource(this.components);
+            this.pnl_header.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsBuilding)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHouse)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHall)).BeginInit();
+            this.pnl_rooms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dv_rooms)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_rooms)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // pnl_header
+            // 
+            this.pnl_header.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_header.Controls.Add(this.btn_proceed);
+            this.pnl_header.Controls.Add(this.cbBuilding);
+            this.pnl_header.Controls.Add(this.lblBuilding);
+            this.pnl_header.Controls.Add(this.lblHouse);
+            this.pnl_header.Controls.Add(this.cbHouse);
+            this.pnl_header.Controls.Add(this.cbHall);
+            this.pnl_header.Controls.Add(this.lblHall);
+            this.pnl_header.Location = new System.Drawing.Point(2, 3);
+            this.pnl_header.Name = "pnl_header";
+            this.pnl_header.Size = new System.Drawing.Size(413, 90);
+            this.pnl_header.TabIndex = 0;
+            // 
+            // btn_proceed
+            // 
+            this.btn_proceed.Location = new System.Drawing.Point(167, 60);
+            this.btn_proceed.Name = "btn_proceed";
+            this.btn_proceed.Size = new System.Drawing.Size(75, 23);
+            this.btn_proceed.TabIndex = 34;
+            this.btn_proceed.Text = "Proceed";
+            this.btn_proceed.UseVisualStyleBackColor = true;
+            this.btn_proceed.Click += new System.EventHandler(this.btn_proceed_Click);
+            // 
+            // cbBuilding
+            // 
+            this.cbBuilding.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbBuilding.DataSource = this.bsBuilding;
+            this.cbBuilding.DisplayMember = "building_name";
+            this.cbBuilding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBuilding.FormattingEnabled = true;
+            this.cbBuilding.Location = new System.Drawing.Point(60, 34);
+            this.cbBuilding.Name = "cbBuilding";
+            this.cbBuilding.Size = new System.Drawing.Size(246, 21);
+            this.cbBuilding.TabIndex = 33;
+            this.cbBuilding.ValueMember = "building";
+            // 
+            // bsBuilding
+            // 
+            this.bsBuilding.DataSource = typeof(NS_Conference.StrongTypesNS.ds_conf_codesDataSet.TT_CONF_BUILDINGDataTable);
+            // 
+            // lblBuilding
+            // 
+            this.lblBuilding.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblBuilding.AutoSize = true;
+            this.lblBuilding.Location = new System.Drawing.Point(10, 37);
+            this.lblBuilding.Name = "lblBuilding";
+            this.lblBuilding.Size = new System.Drawing.Size(44, 13);
+            this.lblBuilding.TabIndex = 32;
+            this.lblBuilding.Text = "Building";
+            // 
+            // lblHouse
+            // 
+            this.lblHouse.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblHouse.AutoSize = true;
+            this.lblHouse.Location = new System.Drawing.Point(219, 10);
+            this.lblHouse.Name = "lblHouse";
+            this.lblHouse.Size = new System.Drawing.Size(26, 13);
+            this.lblHouse.TabIndex = 31;
+            this.lblHouse.Text = "Res";
+            // 
+            // cbHouse
+            // 
+            this.cbHouse.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbHouse.DataSource = this.bsHouse;
+            this.cbHouse.DisplayMember = "resname";
+            this.cbHouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHouse.FormattingEnabled = true;
+            this.cbHouse.Location = new System.Drawing.Point(251, 7);
+            this.cbHouse.Name = "cbHouse";
+            this.cbHouse.Size = new System.Drawing.Size(152, 21);
+            this.cbHouse.TabIndex = 30;
+            this.cbHouse.ValueMember = "res";
+            this.cbHouse.SelectedIndexChanged += new System.EventHandler(this.cbHouse_SelectedIndexChanged);
+            // 
+            // bsHouse
+            // 
+            this.bsHouse.DataSource = typeof(NS_Conference.StrongTypesNS.ds_conf_codesDataSet.tt_conf_resDataTable);
+            // 
+            // cbHall
+            // 
+            this.cbHall.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbHall.DataSource = this.bsHall;
+            this.cbHall.DisplayMember = "hallname";
+            this.cbHall.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHall.FormattingEnabled = true;
+            this.cbHall.Location = new System.Drawing.Point(61, 7);
+            this.cbHall.Name = "cbHall";
+            this.cbHall.Size = new System.Drawing.Size(152, 21);
+            this.cbHall.TabIndex = 29;
+            this.cbHall.ValueMember = "hall";
+            this.cbHall.SelectedIndexChanged += new System.EventHandler(this.cbHall_SelectedIndexChanged);
+            // 
+            // bsHall
+            // 
+            this.bsHall.DataSource = typeof(NS_Conference.StrongTypesNS.ds_conf_codesDataSet.tt_conf_hallDataTable);
+            // 
+            // lblHall
+            // 
+            this.lblHall.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblHall.AutoSize = true;
+            this.lblHall.Location = new System.Drawing.Point(29, 10);
+            this.lblHall.Name = "lblHall";
+            this.lblHall.Size = new System.Drawing.Size(25, 13);
+            this.lblHall.TabIndex = 28;
+            this.lblHall.Text = "Hall";
+            // 
+            // pnl_rooms
+            // 
+            this.pnl_rooms.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnl_rooms.Controls.Add(this.btn_save);
+            this.pnl_rooms.Controls.Add(this.btn_next);
+            this.pnl_rooms.Controls.Add(this.dv_rooms);
+            this.pnl_rooms.Location = new System.Drawing.Point(2, 99);
+            this.pnl_rooms.Name = "pnl_rooms";
+            this.pnl_rooms.Size = new System.Drawing.Size(413, 473);
+            this.pnl_rooms.TabIndex = 1;
+            // 
+            // btn_save
+            // 
+            this.btn_save.Location = new System.Drawing.Point(62, 438);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(139, 23);
+            this.btn_save.TabIndex = 458;
+            this.btn_save.Text = "Save Changes";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // btn_next
+            // 
+            this.btn_next.Location = new System.Drawing.Point(207, 438);
+            this.btn_next.Name = "btn_next";
+            this.btn_next.Size = new System.Drawing.Size(139, 23);
+            this.btn_next.TabIndex = 457;
+            this.btn_next.Text = "Next Building Dont Save";
+            this.btn_next.UseVisualStyleBackColor = true;
+            this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
+            // 
+            // dv_rooms
+            // 
+            this.dv_rooms.AllowUserToAddRows = false;
+            this.dv_rooms.AllowUserToDeleteRows = false;
+            this.dv_rooms.AutoGenerateColumns = false;
+            this.dv_rooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dv_rooms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cn_roomno,
+            this.cn_bedsconf});
+            this.dv_rooms.DataSource = this.bs_rooms;
+            this.dv_rooms.Location = new System.Drawing.Point(3, 3);
+            this.dv_rooms.MultiSelect = false;
+            this.dv_rooms.Name = "dv_rooms";
+            this.dv_rooms.RowHeadersVisible = false;
+            this.dv_rooms.Size = new System.Drawing.Size(402, 429);
+            this.dv_rooms.TabIndex = 456;
+            // 
+            // cn_roomno
+            // 
+            this.cn_roomno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_roomno.DataPropertyName = "room_no";
+            this.cn_roomno.HeaderText = "Room Number";
+            this.cn_roomno.Name = "cn_roomno";
+            this.cn_roomno.ReadOnly = true;
+            // 
+            // cn_bedsconf
+            // 
+            this.cn_bedsconf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_bedsconf.DataPropertyName = "beds_conf";
+            this.cn_bedsconf.HeaderText = "Beds";
+            this.cn_bedsconf.Name = "cn_bedsconf";
+            // 
+            // bs_rooms
+            // 
+            this.bs_rooms.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_roomsDataSet.tt_roomsDataTable);
+            // 
+            // RoomBeds
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(417, 574);
+            this.Controls.Add(this.pnl_rooms);
+            this.Controls.Add(this.pnl_header);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "RoomBeds";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Room Bed Numbers";
+            this.Load += new System.EventHandler(this.RoomBeds_Load);
+            this.pnl_header.ResumeLayout(false);
+            this.pnl_header.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsBuilding)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHouse)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHall)).EndInit();
+            this.pnl_rooms.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dv_rooms)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_rooms)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel pnl_header;
+        private System.Windows.Forms.Button btn_proceed;
+        private System.Windows.Forms.ComboBox cbBuilding;
+        private System.Windows.Forms.Label lblBuilding;
+        private System.Windows.Forms.Label lblHouse;
+        private System.Windows.Forms.ComboBox cbHouse;
+        private System.Windows.Forms.ComboBox cbHall;
+        private System.Windows.Forms.Label lblHall;
+        private System.Windows.Forms.Panel pnl_rooms;
+        private System.Windows.Forms.Button btn_next;
+        private CustomDataGridView dv_rooms;
+        private System.Windows.Forms.BindingSource bs_rooms;
+        private System.Windows.Forms.BindingSource bsHall;
+        private System.Windows.Forms.BindingSource bsHouse;
+        private System.Windows.Forms.BindingSource bsBuilding;
+        private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_roomno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_bedsconf;
+    }
+}

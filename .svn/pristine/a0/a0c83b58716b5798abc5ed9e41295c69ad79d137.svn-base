@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ConferenceSys.ConferenceAdmin
+{
+    public partial class ChangeMain : Form
+    {
+        NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_main;
+        public string newMain;
+        public bool proceed = false;
+
+
+        public ChangeMain(NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet _ds_main)
+        {
+            InitializeComponent();
+            ds_main = _ds_main;
+        }
+
+        bool ValidMain()
+        {
+            bool valid = true;
+
+            if (dgMains.Rows.Count > 0)
+            {
+                bool selected = false;
+                int cnt = 0;
+                foreach (DataGridViewRow row in dgMains.Rows)
+                {
+                    if (row.Cells[ckCopy.Name].Value != null && (bool)row.Cells[ckCopy.Name].Value)
+                    {
+                        cnt = cnt + 1;
+                        selected = true; 
+                    }
+                }
+
+                if (!selected)
+                {
+                    valid = false;
+                    string msg = "There is no reservation selected, please select one";
+                    MessageBox.Show(msg, "Check Main", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    if (cnt > 1)
+                    {
+                        valid = false;
+                        string msg = "Please select only one folio to proceed";
+                        MessageBox.Show(msg, "Add Check Main", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        foreach (DataGridViewRow row in dgMains.Rows)
+                        {
+                            DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)row.Cells[ckCopy.Name];
+                            if (checkCell.Value != null && (bool)checkCell.Value) checkCell.Value = false;
+                        }
+                        dgMains.ClearSelection();
+                    }
+
+                }
+           }
+
+            return valid;
+        }
+
+
+
+        private void btnProceed_Click(object sender, EventArgs e)
+        {
+            if (ValidMain())
+            {
+                foreach (DataGridViewRow row in dgMains.Rows)
+                {
+                    if (row.Cells[ckCopy.Name].Value != null && (bool)row.Cells[ckCopy.Name].Value)
+                    {
+                        newMain = row.Cells[cn_folio.Name].Value.ToString();
+                        break;
+                    }
+                }
+                proceed = true;
+                this.Close();
+            }
+        }
+
+        private void ChangeMain_Load(object sender, EventArgs e)
+        {
+            bs_main_list.DataSource = ds_main.tt_reservations;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

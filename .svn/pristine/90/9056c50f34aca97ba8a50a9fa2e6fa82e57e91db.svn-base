@@ -1,0 +1,291 @@
+﻿namespace ConferenceSys.ConferenceAdmin
+{
+    partial class GroupReservations
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.bs_reservations = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_del_guest = new System.Windows.Forms.Button();
+            this.btn_add_guest = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt_total_guests = new System.Windows.Forms.TextBox();
+            this.dg_conferences = new CustomDataGridView();
+            this.cn_folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_surn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_startdte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_enddte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typedescripDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bookedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.paidDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.mealsdoneDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.guestsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_ccode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_parentfolio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.institutionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_reservations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_conferences)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // bs_reservations
+            // 
+            this.bs_reservations.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet.tt_reservationsDataTable);
+            // 
+            // btn_del_guest
+            // 
+            this.btn_del_guest.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btn_del_guest.Location = new System.Drawing.Point(353, 351);
+            this.btn_del_guest.Name = "btn_del_guest";
+            this.btn_del_guest.Size = new System.Drawing.Size(109, 23);
+            this.btn_del_guest.TabIndex = 101;
+            this.btn_del_guest.Text = "Cancel Guest";
+            this.btn_del_guest.UseVisualStyleBackColor = true;
+            this.btn_del_guest.Click += new System.EventHandler(this.btn_del_guest_Click);
+            // 
+            // btn_add_guest
+            // 
+            this.btn_add_guest.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btn_add_guest.Location = new System.Drawing.Point(238, 351);
+            this.btn_add_guest.Name = "btn_add_guest";
+            this.btn_add_guest.Size = new System.Drawing.Size(109, 23);
+            this.btn_add_guest.TabIndex = 100;
+            this.btn_add_guest.Text = "Add Guest";
+            this.btn_add_guest.UseVisualStyleBackColor = true;
+            this.btn_add_guest.Click += new System.EventHandler(this.btn_add_guest_Click_1);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 326);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(70, 13);
+            this.label9.TabIndex = 99;
+            this.label9.Text = "Total Guests:";
+            // 
+            // txt_total_guests
+            // 
+            this.txt_total_guests.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txt_total_guests.Location = new System.Drawing.Point(86, 323);
+            this.txt_total_guests.Name = "txt_total_guests";
+            this.txt_total_guests.ReadOnly = true;
+            this.txt_total_guests.Size = new System.Drawing.Size(84, 20);
+            this.txt_total_guests.TabIndex = 98;
+            // 
+            // dg_conferences
+            // 
+            this.dg_conferences.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dg_conferences.AllowUserToAddRows = false;
+            this.dg_conferences.AllowUserToDeleteRows = false;
+            this.dg_conferences.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.dg_conferences.AutoGenerateColumns = false;
+            this.dg_conferences.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dg_conferences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_conferences.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cn_folio,
+            this.cn_surn,
+            this.cn_startdte,
+            this.cn_enddte,
+            this.typedescripDataGridViewTextBoxColumn,
+            this.bookedDataGridViewCheckBoxColumn,
+            this.paidDataGridViewCheckBoxColumn,
+            this.mealsdoneDataGridViewCheckBoxColumn,
+            this.typeDataGridViewTextBoxColumn,
+            this.guestsDataGridViewTextBoxColumn,
+            this.cn_ccode,
+            this.cn_parentfolio,
+            this.institutionDataGridViewTextBoxColumn});
+            this.dg_conferences.DataSource = this.bs_reservations;
+            this.dg_conferences.Location = new System.Drawing.Point(11, 2);
+            this.dg_conferences.MultiSelect = false;
+            this.dg_conferences.Name = "dg_conferences";
+            this.dg_conferences.ReadOnly = true;
+            this.dg_conferences.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg_conferences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dg_conferences.Size = new System.Drawing.Size(678, 315);
+            this.dg_conferences.TabIndex = 97;
+            this.dg_conferences.DoubleClick += new System.EventHandler(this.dg_conferences_DoubleClick_1);
+            // 
+            // cn_folio
+            // 
+            this.cn_folio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cn_folio.DataPropertyName = "folio";
+            this.cn_folio.HeaderText = "Folio";
+            this.cn_folio.Name = "cn_folio";
+            this.cn_folio.ReadOnly = true;
+            this.cn_folio.Width = 54;
+            // 
+            // cn_surn
+            // 
+            this.cn_surn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_surn.DataPropertyName = "surn";
+            this.cn_surn.HeaderText = "Surname";
+            this.cn_surn.Name = "cn_surn";
+            this.cn_surn.ReadOnly = true;
+            // 
+            // cn_startdte
+            // 
+            this.cn_startdte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cn_startdte.DataPropertyName = "start_dte";
+            this.cn_startdte.HeaderText = "Start Date";
+            this.cn_startdte.Name = "cn_startdte";
+            this.cn_startdte.ReadOnly = true;
+            this.cn_startdte.Width = 80;
+            // 
+            // cn_enddte
+            // 
+            this.cn_enddte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cn_enddte.DataPropertyName = "end_dte";
+            this.cn_enddte.HeaderText = "End Date";
+            this.cn_enddte.Name = "cn_enddte";
+            this.cn_enddte.ReadOnly = true;
+            this.cn_enddte.Width = 77;
+            // 
+            // typedescripDataGridViewTextBoxColumn
+            // 
+            this.typedescripDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.typedescripDataGridViewTextBoxColumn.DataPropertyName = "type_descrip";
+            this.typedescripDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typedescripDataGridViewTextBoxColumn.Name = "typedescripDataGridViewTextBoxColumn";
+            this.typedescripDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // bookedDataGridViewCheckBoxColumn
+            // 
+            this.bookedDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.bookedDataGridViewCheckBoxColumn.DataPropertyName = "booked";
+            this.bookedDataGridViewCheckBoxColumn.HeaderText = "Booked";
+            this.bookedDataGridViewCheckBoxColumn.Name = "bookedDataGridViewCheckBoxColumn";
+            this.bookedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.bookedDataGridViewCheckBoxColumn.Width = 50;
+            // 
+            // paidDataGridViewCheckBoxColumn
+            // 
+            this.paidDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.paidDataGridViewCheckBoxColumn.DataPropertyName = "paid";
+            this.paidDataGridViewCheckBoxColumn.HeaderText = "Paid";
+            this.paidDataGridViewCheckBoxColumn.Name = "paidDataGridViewCheckBoxColumn";
+            this.paidDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.paidDataGridViewCheckBoxColumn.Width = 34;
+            // 
+            // mealsdoneDataGridViewCheckBoxColumn
+            // 
+            this.mealsdoneDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.mealsdoneDataGridViewCheckBoxColumn.DataPropertyName = "meals_done";
+            this.mealsdoneDataGridViewCheckBoxColumn.HeaderText = "Meals";
+            this.mealsdoneDataGridViewCheckBoxColumn.Name = "mealsdoneDataGridViewCheckBoxColumn";
+            this.mealsdoneDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.mealsdoneDataGridViewCheckBoxColumn.Width = 41;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.typeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // guestsDataGridViewTextBoxColumn
+            // 
+            this.guestsDataGridViewTextBoxColumn.DataPropertyName = "guests";
+            this.guestsDataGridViewTextBoxColumn.HeaderText = "guests";
+            this.guestsDataGridViewTextBoxColumn.Name = "guestsDataGridViewTextBoxColumn";
+            this.guestsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.guestsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cn_ccode
+            // 
+            this.cn_ccode.DataPropertyName = "ccode";
+            this.cn_ccode.HeaderText = "ccode";
+            this.cn_ccode.Name = "cn_ccode";
+            this.cn_ccode.ReadOnly = true;
+            this.cn_ccode.Visible = false;
+            // 
+            // cn_parentfolio
+            // 
+            this.cn_parentfolio.DataPropertyName = "parentfolio";
+            this.cn_parentfolio.HeaderText = "parentfolio";
+            this.cn_parentfolio.Name = "cn_parentfolio";
+            this.cn_parentfolio.ReadOnly = true;
+            this.cn_parentfolio.Visible = false;
+            // 
+            // institutionDataGridViewTextBoxColumn
+            // 
+            this.institutionDataGridViewTextBoxColumn.DataPropertyName = "institution";
+            this.institutionDataGridViewTextBoxColumn.HeaderText = "institution";
+            this.institutionDataGridViewTextBoxColumn.Name = "institutionDataGridViewTextBoxColumn";
+            this.institutionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.institutionDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // GroupReservations
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(701, 386);
+            this.Controls.Add(this.btn_del_guest);
+            this.Controls.Add(this.btn_add_guest);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txt_total_guests);
+            this.Controls.Add(this.dg_conferences);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "GroupReservations";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Group Reservations";
+            this.Load += new System.EventHandler(this.GroupReservations_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.bs_reservations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_conferences)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.BindingSource bs_reservations;
+        private System.Windows.Forms.Button btn_del_guest;
+        private System.Windows.Forms.Button btn_add_guest;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txt_total_guests;
+        private CustomDataGridView dg_conferences;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_folio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_surn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_startdte;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_enddte;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typedescripDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn bookedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn paidDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn mealsdoneDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn guestsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_ccode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_parentfolio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn institutionDataGridViewTextBoxColumn;
+    }
+}

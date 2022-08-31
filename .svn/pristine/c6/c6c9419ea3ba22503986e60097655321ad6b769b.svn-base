@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin
+{
+    public partial class ResetBookDates : Form
+    {
+
+        string ConferenceCode;
+        string MainFolio;
+
+        string OldStart = string.Empty;
+        string OldEnd = string.Empty;
+     
+        
+        public ResetBookDates(string _ConferenceCode, string _MainFolio)
+        {
+            InitializeComponent();
+            ConferenceCode = _ConferenceCode;
+            MainFolio = _MainFolio;
+        }
+
+        private void ResetBookDates_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                string feedback = Proxy.ConferenceAdmin.get_original_dates(MainFolio, out OldStart, out OldEnd);               
+               
+                if (feedback != "")
+                {
+                    MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+                else
+                {
+                    dte_old_start.Value = DateTime.Parse(OldStart);
+                    dte_new_start.Value = DateTime.Parse(OldStart);
+
+                    dte_old_end.Value = DateTime.Parse(OldEnd);
+                    dte_new_end.Value =  DateTime.Parse(OldEnd);
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }
+
+        private void btnProceed_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string feedback = Proxy.ConferenceAdmin.reset_group_dates(ConferenceCode, MainFolio, chk_recreate.Checked,dte_new_start.Value, dte_new_end.Value, dte_old_start.Value, dte_old_end.Value);
+                if (feedback != "") MessageBox.Show(feedback, "Reset Dates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else this.Close(); 
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

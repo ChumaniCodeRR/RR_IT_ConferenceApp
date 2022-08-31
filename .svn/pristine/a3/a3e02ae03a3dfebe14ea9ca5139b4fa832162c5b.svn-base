@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Utilities;
+
+namespace ConferenceSys.ConferenceAdmin.ConferenceUpdate
+{
+    public partial class ApproveOverride : Form
+    {
+
+
+        bool AddDelete;
+        string tempconf;
+        int temptype;
+        DateTime tempdte;
+
+        public ApproveOverride()
+        {
+            InitializeComponent();
+        }
+
+        private void ApproveOverride_Load(object sender, EventArgs e)
+        {
+            refresh_screen();
+        }
+
+        private void refresh_screen()
+        {
+            try
+            {
+                NS_ConfAdmin.StrongTypesNS.ds_reservationDataSet ds_requests = Proxy.ConferenceAdmin.get_payments_override_requests();
+                bs_requests.DataSource = ds_requests.tt_reservations;
+            }
+            catch (Exception ex)
+            {
+                Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+            }
+        }     
+
+        private void dg_requests_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (dg_requests.SelectedRows.Count > 0)
+                {
+                    
+                    DialogResult result = MessageBox.Show("Do you want to Approve/Decline  " + dg_requests.SelectedRows[0].Cells[cn_folio.Name].Value.ToString() + " " +
+                    dg_requests.SelectedRows[0].Cells[cn_names.Name].Value.ToString() + " payment override request? Click 'Yes' to Aprrove 'No' to Decline", "Approve/Decline Override", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if(result == DialogResult.Yes | result == DialogResult.No) 
+                    {
+                        bool ApproveDecline = true;                      
+                       if (result == DialogResult.No) ApproveDecline = false;
+                        
+                    
+                        string feedback = Proxy.ConferenceAdmin.update_payment_override(ApproveDecline, dg_requests.SelectedRows[0].Cells[cn_folio.Name].Value.ToString());
+                        if (feedback.Contains("Error")) MessageBox.Show(feedback, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else
+                        {
+                            MessageBox.Show(feedback, "Approve Override", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            refresh_screen();
+                        }
+                    }
+              
+                }
+            }
+             catch (Exception ex)
+             {
+                 Utils.HandleException(ExceptionSource.ConferenceSystem, ex);
+             }
+        }
+    }
+}

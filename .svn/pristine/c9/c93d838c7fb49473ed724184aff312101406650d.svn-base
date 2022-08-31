@@ -1,0 +1,377 @@
+﻿namespace ConferenceSys.ConferenceAdmin
+{
+    partial class ChangeMain
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.bs_main_list = new System.Windows.Forms.BindingSource(this.components);
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnProceed = new System.Windows.Forms.Button();
+            this.dgMains = new CustomDataGridView();
+            this.ckCopy = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cn_folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_surn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_names = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cn_institution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.booktypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ccodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cellphoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dietDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enddteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.matressbookingDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.paidDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.parentfolioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.staffstuotherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startdteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.xldteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typedescripDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.guestsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bookedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.mealsdoneDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.maindetailsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_main_list)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMains)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(536, 23);
+            this.lblTitle.TabIndex = 18;
+            this.lblTitle.Text = "Select Reservation To Make Main";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // bs_main_list
+            // 
+            this.bs_main_list.DataSource = typeof(NS_ConfAdmin.StrongTypesNS.ds_conference_adminDataSet.tt_reservationsDataTable);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(271, 236);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 21;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnProceed
+            // 
+            this.btnProceed.Location = new System.Drawing.Point(190, 236);
+            this.btnProceed.Name = "btnProceed";
+            this.btnProceed.Size = new System.Drawing.Size(75, 23);
+            this.btnProceed.TabIndex = 20;
+            this.btnProceed.Text = "Proceed";
+            this.btnProceed.UseVisualStyleBackColor = true;
+            this.btnProceed.Click += new System.EventHandler(this.btnProceed_Click);
+            // 
+            // dgMains
+            // 
+            this.dgMains.AllowUserToAddRows = false;
+            this.dgMains.AllowUserToDeleteRows = false;
+            this.dgMains.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgMains.AutoGenerateColumns = false;
+            this.dgMains.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgMains.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ckCopy,
+            this.cn_folio,
+            this.cn_surn,
+            this.cn_names,
+            this.cn_institution,
+            this.booktypeDataGridViewTextBoxColumn,
+            this.ccodeDataGridViewTextBoxColumn,
+            this.cellphoneDataGridViewTextBoxColumn,
+            this.dietDataGridViewTextBoxColumn,
+            this.discountDataGridViewTextBoxColumn,
+            this.emailDataGridViewTextBoxColumn,
+            this.enddteDataGridViewTextBoxColumn,
+            this.matressbookingDataGridViewCheckBoxColumn,
+            this.paidDataGridViewCheckBoxColumn,
+            this.parentfolioDataGridViewTextBoxColumn,
+            this.staffstuotherDataGridViewTextBoxColumn,
+            this.startdteDataGridViewTextBoxColumn,
+            this.titlDataGridViewTextBoxColumn,
+            this.typeDataGridViewTextBoxColumn,
+            this.xldteDataGridViewTextBoxColumn,
+            this.typedescripDataGridViewTextBoxColumn,
+            this.guestsDataGridViewTextBoxColumn,
+            this.bookedDataGridViewCheckBoxColumn,
+            this.mealsdoneDataGridViewCheckBoxColumn,
+            this.maindetailsDataGridViewTextBoxColumn});
+            this.dgMains.DataSource = this.bs_main_list;
+            this.dgMains.Location = new System.Drawing.Point(4, 26);
+            this.dgMains.MultiSelect = false;
+            this.dgMains.Name = "dgMains";
+            this.dgMains.RowHeadersVisible = false;
+            this.dgMains.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgMains.Size = new System.Drawing.Size(520, 204);
+            this.dgMains.TabIndex = 19;
+            // 
+            // ckCopy
+            // 
+            this.ckCopy.HeaderText = "";
+            this.ckCopy.Name = "ckCopy";
+            this.ckCopy.Width = 30;
+            // 
+            // cn_folio
+            // 
+            this.cn_folio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cn_folio.DataPropertyName = "folio";
+            this.cn_folio.HeaderText = "Folio";
+            this.cn_folio.Name = "cn_folio";
+            this.cn_folio.Width = 54;
+            // 
+            // cn_surn
+            // 
+            this.cn_surn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_surn.DataPropertyName = "surn";
+            this.cn_surn.HeaderText = "Surname";
+            this.cn_surn.Name = "cn_surn";
+            // 
+            // cn_names
+            // 
+            this.cn_names.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_names.DataPropertyName = "names";
+            this.cn_names.HeaderText = "Names";
+            this.cn_names.Name = "cn_names";
+            // 
+            // cn_institution
+            // 
+            this.cn_institution.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cn_institution.DataPropertyName = "institution";
+            this.cn_institution.HeaderText = "Institution";
+            this.cn_institution.Name = "cn_institution";
+            // 
+            // booktypeDataGridViewTextBoxColumn
+            // 
+            this.booktypeDataGridViewTextBoxColumn.DataPropertyName = "book_type";
+            this.booktypeDataGridViewTextBoxColumn.HeaderText = "book_type";
+            this.booktypeDataGridViewTextBoxColumn.Name = "booktypeDataGridViewTextBoxColumn";
+            this.booktypeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // ccodeDataGridViewTextBoxColumn
+            // 
+            this.ccodeDataGridViewTextBoxColumn.DataPropertyName = "ccode";
+            this.ccodeDataGridViewTextBoxColumn.HeaderText = "ccode";
+            this.ccodeDataGridViewTextBoxColumn.Name = "ccodeDataGridViewTextBoxColumn";
+            this.ccodeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cellphoneDataGridViewTextBoxColumn
+            // 
+            this.cellphoneDataGridViewTextBoxColumn.DataPropertyName = "cell_phone";
+            this.cellphoneDataGridViewTextBoxColumn.HeaderText = "cell_phone";
+            this.cellphoneDataGridViewTextBoxColumn.Name = "cellphoneDataGridViewTextBoxColumn";
+            this.cellphoneDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // dietDataGridViewTextBoxColumn
+            // 
+            this.dietDataGridViewTextBoxColumn.DataPropertyName = "diet";
+            this.dietDataGridViewTextBoxColumn.HeaderText = "diet";
+            this.dietDataGridViewTextBoxColumn.Name = "dietDataGridViewTextBoxColumn";
+            this.dietDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // discountDataGridViewTextBoxColumn
+            // 
+            this.discountDataGridViewTextBoxColumn.DataPropertyName = "discount";
+            this.discountDataGridViewTextBoxColumn.HeaderText = "discount";
+            this.discountDataGridViewTextBoxColumn.Name = "discountDataGridViewTextBoxColumn";
+            this.discountDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            this.emailDataGridViewTextBoxColumn.DataPropertyName = "email";
+            this.emailDataGridViewTextBoxColumn.HeaderText = "email";
+            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            this.emailDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // enddteDataGridViewTextBoxColumn
+            // 
+            this.enddteDataGridViewTextBoxColumn.DataPropertyName = "end_dte";
+            this.enddteDataGridViewTextBoxColumn.HeaderText = "end_dte";
+            this.enddteDataGridViewTextBoxColumn.Name = "enddteDataGridViewTextBoxColumn";
+            this.enddteDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // matressbookingDataGridViewCheckBoxColumn
+            // 
+            this.matressbookingDataGridViewCheckBoxColumn.DataPropertyName = "matress_booking";
+            this.matressbookingDataGridViewCheckBoxColumn.HeaderText = "matress_booking";
+            this.matressbookingDataGridViewCheckBoxColumn.Name = "matressbookingDataGridViewCheckBoxColumn";
+            this.matressbookingDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // paidDataGridViewCheckBoxColumn
+            // 
+            this.paidDataGridViewCheckBoxColumn.DataPropertyName = "paid";
+            this.paidDataGridViewCheckBoxColumn.HeaderText = "paid";
+            this.paidDataGridViewCheckBoxColumn.Name = "paidDataGridViewCheckBoxColumn";
+            this.paidDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // parentfolioDataGridViewTextBoxColumn
+            // 
+            this.parentfolioDataGridViewTextBoxColumn.DataPropertyName = "parentfolio";
+            this.parentfolioDataGridViewTextBoxColumn.HeaderText = "parentfolio";
+            this.parentfolioDataGridViewTextBoxColumn.Name = "parentfolioDataGridViewTextBoxColumn";
+            this.parentfolioDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // staffstuotherDataGridViewTextBoxColumn
+            // 
+            this.staffstuotherDataGridViewTextBoxColumn.DataPropertyName = "staff_stu_other";
+            this.staffstuotherDataGridViewTextBoxColumn.HeaderText = "staff_stu_other";
+            this.staffstuotherDataGridViewTextBoxColumn.Name = "staffstuotherDataGridViewTextBoxColumn";
+            this.staffstuotherDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // startdteDataGridViewTextBoxColumn
+            // 
+            this.startdteDataGridViewTextBoxColumn.DataPropertyName = "start_dte";
+            this.startdteDataGridViewTextBoxColumn.HeaderText = "start_dte";
+            this.startdteDataGridViewTextBoxColumn.Name = "startdteDataGridViewTextBoxColumn";
+            this.startdteDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // titlDataGridViewTextBoxColumn
+            // 
+            this.titlDataGridViewTextBoxColumn.DataPropertyName = "titl";
+            this.titlDataGridViewTextBoxColumn.HeaderText = "titl";
+            this.titlDataGridViewTextBoxColumn.Name = "titlDataGridViewTextBoxColumn";
+            this.titlDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // xldteDataGridViewTextBoxColumn
+            // 
+            this.xldteDataGridViewTextBoxColumn.DataPropertyName = "xl_dte";
+            this.xldteDataGridViewTextBoxColumn.HeaderText = "xl_dte";
+            this.xldteDataGridViewTextBoxColumn.Name = "xldteDataGridViewTextBoxColumn";
+            this.xldteDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // typedescripDataGridViewTextBoxColumn
+            // 
+            this.typedescripDataGridViewTextBoxColumn.DataPropertyName = "type_descrip";
+            this.typedescripDataGridViewTextBoxColumn.HeaderText = "type_descrip";
+            this.typedescripDataGridViewTextBoxColumn.Name = "typedescripDataGridViewTextBoxColumn";
+            this.typedescripDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // guestsDataGridViewTextBoxColumn
+            // 
+            this.guestsDataGridViewTextBoxColumn.DataPropertyName = "guests";
+            this.guestsDataGridViewTextBoxColumn.HeaderText = "guests";
+            this.guestsDataGridViewTextBoxColumn.Name = "guestsDataGridViewTextBoxColumn";
+            this.guestsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // bookedDataGridViewCheckBoxColumn
+            // 
+            this.bookedDataGridViewCheckBoxColumn.DataPropertyName = "booked";
+            this.bookedDataGridViewCheckBoxColumn.HeaderText = "booked";
+            this.bookedDataGridViewCheckBoxColumn.Name = "bookedDataGridViewCheckBoxColumn";
+            this.bookedDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // mealsdoneDataGridViewCheckBoxColumn
+            // 
+            this.mealsdoneDataGridViewCheckBoxColumn.DataPropertyName = "meals_done";
+            this.mealsdoneDataGridViewCheckBoxColumn.HeaderText = "meals_done";
+            this.mealsdoneDataGridViewCheckBoxColumn.Name = "mealsdoneDataGridViewCheckBoxColumn";
+            this.mealsdoneDataGridViewCheckBoxColumn.Visible = false;
+            // 
+            // maindetailsDataGridViewTextBoxColumn
+            // 
+            this.maindetailsDataGridViewTextBoxColumn.DataPropertyName = "main_details";
+            this.maindetailsDataGridViewTextBoxColumn.HeaderText = "main_details";
+            this.maindetailsDataGridViewTextBoxColumn.Name = "maindetailsDataGridViewTextBoxColumn";
+            this.maindetailsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // ChangeMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(536, 267);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnProceed);
+            this.Controls.Add(this.dgMains);
+            this.Controls.Add(this.lblTitle);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ChangeMain";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ChangeMain Folio Number";
+            this.Load += new System.EventHandler(this.ChangeMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.bs_main_list)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMains)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lblTitle;
+        private CustomDataGridView dgMains;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ckCopy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_folio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_surn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_names;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cn_institution;
+        private System.Windows.Forms.DataGridViewTextBoxColumn booktypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ccodeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cellphoneDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dietDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn enddteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn matressbookingDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn paidDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parentfolioDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn staffstuotherDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startdteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titlDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn xldteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typedescripDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn guestsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn bookedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn mealsdoneDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn maindetailsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource bs_main_list;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnProceed;
+    }
+}

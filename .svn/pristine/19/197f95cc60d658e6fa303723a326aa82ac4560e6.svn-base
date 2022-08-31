@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="ConferenceSys.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <userSettings>
+        <ConferenceSys.Properties.Settings>
+            <setting name="LastHall" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="LastStartDate" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="LastEndDate" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="LastChangeDate" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="LastHour" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="LastMinutes" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="LastConference" serializeAs="String">
+                <value />
+            </setting>
+        </ConferenceSys.Properties.Settings>
+    </userSettings>
+</configuration>
